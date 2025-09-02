@@ -1,0 +1,98 @@
+{
+  "1": [
+    "Bietet das Unternehmen preisgünstige Produkte oder Dienstleistungen an, die speziell für einkommensschwache Bevölkerungsgruppen entwickelt wurden (z. B. Überbrückung der digitalen Kluft, Telekommunikation, günstige Autos und Mikrofinanzdienstleistungen)?",
+    "Gesamtsumme der gemeinwohlorientierten Kredite, Finanzierungen und Investitionen, die nicht als Spenden gelten."
+  ],
+  "2": [
+    "Gibt das Unternehmen an, dem Risiko von Fettleibigkeit entgegenzuwirken?"
+  ],
+  "3": [
+    "Verfügt das Unternehmen über eine Richtlinie zur Verbesserung der Arbeitssicherheit und des Gesundheitsschutzes?",
+    "Verfügt das Unternehmen über eine Richtlinie zur Verbesserung der Arbeitssicherheit und des Gesundheitsschutzes in der Lieferkette?",
+    "Schult das Unternehmen seine Führungskräfte oder Schlüsselmitarbeitenden in Arbeitssicherheit und Gesundheitsschutz?",
+    "Schult das Unternehmen seine Führungskräfte oder Schlüsselmitarbeitenden in Arbeitssicherheit und Gesundheitsschutz in der Lieferkette?",
+    "Berichtet das Unternehmen über Richtlinien oder Programme zu HIV/Aids für den Arbeitsplatz oder darüber hinaus?"
+  ],
+  "4": [
+    "Die Kategorie Personalentwicklung misst das Engagement und die Wirksamkeit eines Unternehmens bei der Bereitstellung von Schulungs- und Entwicklungsmaßnahmen (Bildung) für seine Belegschaft.",
+    "Verfügt das Unternehmen über eine Richtlinie zur Verbesserung der Fach- und Kompetenzschulungen seiner Mitarbeitenden?",
+    "Verfügt das Unternehmen über eine Richtlinie zur Verbesserung der Karriereentwicklungspfade seiner Mitarbeitenden?",
+    "Schulungskosten pro Mitarbeitendem in US-Dollar.",
+    "Anteil der Mitarbeitenden mit Behinderungen oder besonderen Bedürfnissen."
+  ],
+  "5": [
+    "Die Kategorie Diversität misst das Engagement und die Wirksamkeit eines Unternehmens bei der Aufrechterhaltung einer geschlechterdiversen Belegschaft und der kulturellen Vielfalt im Vorstand.",
+    "Die Kategorie Inklusion misst das Engagement und die Wirksamkeit eines Unternehmens in Bezug auf Work-Life-Balance, Familienfreundlichkeit und Inklusion von Menschen mit Behinderungen.",
+    "Verfügt das Unternehmen über eine Richtlinie zur Förderung von Diversität und Chancengleichheit?",
+    "Hat das Unternehmen Zielwerte oder Vorgaben für Diversität und Chancengleichheit festgelegt?",
+    "Verfügt das Unternehmen über eine Richtlinie zum Ausschluss von Kinder-, Zwangs- oder Pflichtarbeit oder zur Gewährleistung der Vereinigungsfreiheit, die unabhängig von lokalen Gesetzen universell gilt?"
+  ],
+  "6": [
+    "Verfügt das Unternehmen über eine Richtlinie zur Verbesserung seiner Wassereffizienz?",
+    "Hat das Unternehmen Ziele oder Vorgaben zur Verbesserung der Wassereffizienz festgelegt?",
+    "Berichtet das Unternehmen über Initiativen zur Reduktion, Wiederverwendung, Substitution oder Ausphasung toxischer Chemikalien oder Stoffe?",
+    "Gesamte Wasserentnahme in Kubikmetern geteilt durch Nettoumsatz bzw. Erlöse in US-Dollar.",
+    "Gesamtgewicht der Wasser-Schadstoffemissionen in Tonnen geteilt durch Nettoumsatz bzw. Erlöse in US-Dollar.",
+    "Berichtet das Unternehmen über Initiativen zum Recyceln, Reduzieren, Wiederverwenden, Substituieren, Behandeln oder Ausphasen des Gesamtabfalls?",
+    "Gesamtmenge des recycelten und wiederverwendeten Abfalls in Tonnen geteilt durch die insgesamt erzeugte Abfallmenge in Tonnen.",
+    "Berichtet das Unternehmen über seine Auswirkungen auf die Biodiversität oder über Aktivitäten zur Verringerung der Auswirkungen auf heimische Ökosysteme und Arten sowie auf die Biodiversität in geschützten und sensiblen Gebieten?",
+    "Entwickelt das Unternehmen Produkte oder Technologien für die Wasseraufbereitung bzw. -reinigung oder zur Verbesserung der Wassernutzungseffizienz?"
+  ],
+  "7": [
+    "Verfügt das Unternehmen über eine Richtlinie zur Verbesserung seiner Energieeffizienz?",
+    "Gesamt erzeugte Energie aus primären erneuerbaren Energiequellen geteilt durch die Gesamtenergie.",
+    "Entwickelt das Unternehmen Produkte oder Technologien für den Einsatz im Bereich sauberer, erneuerbarer Energien (z. B. Wind-, Solar-, Wasser-, Geothermie- und Biomassekraft)?",
+    "Berichtet das Unternehmen über Produkteigenschaften und Anwendungen bzw. Dienstleistungen, die einen verantwortungsvollen, effizienten, kostengünstigen und umweltverträglichen Einsatz fördern?"
+  ],
+  "8": [
+    "Verfügt das Unternehmen über eine Richtlinie zum Ausschluss von Kinder-, Zwangs- oder Pflichtarbeit oder zur Gewährleistung der Vereinigungsfreiheit, die unabhängig von lokalen Gesetzen universell gilt?",
+    "Verfügt das Unternehmen über eine Richtlinie zur Vermeidung von Kinderarbeit?",
+    "Verfügt das Unternehmen über eine Richtlinie zur Vermeidung von Zwangsarbeit?",
+    "Verfügt das Unternehmen über eine Richtlinie zur allgemeinen Achtung der Menschenrechte?",
+    "Anteil der Mitarbeitenden mit Behinderungen oder besonderen Bedürfnissen."
+  ],
+  "9": [
+    "Die Kategorie Umweltinnovation spiegelt die Fähigkeit eines Unternehmens wider, die Umweltkosten und -belastungen für seine Kundschaft zu verringern und dadurch durch neue Umwelttechnologien und -prozesse oder ökologisch gestaltete Produkte neue Marktchancen zu schaffen.",
+    "Gesamtsumme der gemeinwohlorientierten Kredite, Finanzierungen und Investitionen, die nicht als Spenden gelten.",
+    "Verkauft das Unternehmen in Schwellenländern bestimmte Produkte oder Dienstleistungen mit Preisnachlass gegenüber den üblichen Einzelhandelspreisen?"
+  ],
+  "10": [
+    "Die Kategorie Diversität misst das Engagement und die Wirksamkeit eines Unternehmens bei der Aufrechterhaltung einer geschlechterdiversen Belegschaft und der kulturellen Vielfalt im Vorstand.",
+    "Die Kategorie Inklusion misst das Engagement und die Wirksamkeit eines Unternehmens in Bezug auf Work-Life-Balance, Familienfreundlichkeit und Inklusion von Menschen mit Behinderungen."
+  ],
+  "11": [
+    "Bietet das Unternehmen preisgünstige Produkte oder Dienstleistungen an, die speziell für einkommensschwache Bevölkerungsgruppen entwickelt wurden (z. B. Überbrückung der digitalen Kluft, Telekommunikation, günstige Autos und Mikrofinanzdienstleistungen)?"
+  ],
+  "12": [
+    "Die Kategorie Ressourcenverbrauch spiegelt die Leistung und Fähigkeit eines Unternehmens wider, den Einsatz von Materialien, Energie oder Wasser zu reduzieren und durch Verbesserungen im Lieferkettenmanagement ökoeffizientere Lösungen zu finden.",
+    "Die Kategorie Emissionen misst das Engagement und die Wirksamkeit eines Unternehmens bei der Verringerung von Umweltemissionen in Produktions- und Betriebsprozessen.",
+    "Gibt das Unternehmen an, Umweltkriterien (z. B. Lebenszyklusanalyse) zur Beschaffung oder Eliminierung von Materialien zu verwenden?",
+    "Verfügt das Unternehmen über eine Richtlinie zur Verbesserung seiner Wassereffizienz?",
+    "Verfügt das Unternehmen über eine Richtlinie zur Verbesserung seiner Energieeffizienz?",
+    "Verfügt das Unternehmen über eine Richtlinie zur Verbesserung des Einsatzes nachhaltiger Verpackungen?",
+    "Verfügt das Unternehmen über eine Richtlinie, seine Lieferkette in die Bemühungen zur Verringerung der gesamten Umweltwirkungen des Unternehmens einzubeziehen?",
+    "Berichtet das Unternehmen über Rücknahmeverfahren und Recyclingprogramme, um potenzielle Risiken durch das Eindringen von Produkten in die Umwelt zu reduzieren?",
+    "Die vom Unternehmen gemeldete Abfallrecyclingquote.",
+    "Berichtet das Unternehmen über Initiativen zum Recyceln, Reduzieren, Wiederverwenden, Substituieren, Behandeln oder Ausphasen des Gesamtabfalls?",
+    "Veröffentlicht das Unternehmen einen separaten CSR/Arbeitssicherheit/Nachhaltigkeitsbericht oder einen entsprechenden Abschnitt im Jahres-/Geschäftsbericht zu CSR/Arbeitssicherheit/Nachhaltigkeit?"
+  ],
+  "13": [
+    "Ist sich das Unternehmen bewusst, dass der Klimawandel geschäftliche Risiken und/oder Chancen darstellen kann?"
+  ],
+  "14": [
+    "Berichtet das Unternehmen darüber, die Ozeane, Meere und Meeresressourcen zum Zweck der nachhaltigen Entwicklung zu erhalten und nachhaltig zu nutzen?"
+  ],
+  "15": [
+    "Berichtet das Unternehmen über seine Auswirkungen auf die Biodiversität oder über Aktivitäten zur Verringerung der Auswirkungen auf heimische Ökosysteme und Arten sowie auf die Biodiversität in geschützten und sensiblen Gebieten?",
+    "Gibt das Unternehmen an, Projekte auch auf Grundlage von Umwelt- bzw. Biodiversitätsrisiken zu bewerten?"
+  ],
+  "16": [
+    "Verfügt das Unternehmen über eine Richtlinie zum Ausschluss von Kinder-, Zwangs- oder Pflichtarbeit oder zur Gewährleistung der Vereinigungsfreiheit, die unabhängig von lokalen Gesetzen universell gilt?",
+    "Verfügt das Unternehmen über eine Richtlinie zur Vermeidung von Kinderarbeit?",
+    "Gibt das Unternehmen an, die grundlegenden Menschenrechtsabkommen der IAO einzuhalten oder die UN-Menschenrechtserklärung zu unterstützen?",
+    "Beschreibt das Unternehmen im Verhaltenskodex, dass es danach strebt, Bestechung und Korruption in allen Geschäftsbereichen zu vermeiden?"
+  ],
+  "17": [
+    "Bietet das Unternehmen preisgünstige Produkte oder Dienstleistungen an, die speziell für einkommensschwache Bevölkerungsgruppen entwickelt wurden (z. B. Überbrückung der digitalen Kluft, Telekommunikation, günstige Autos und Mikrofinanzdienstleistungen)?"
+  ]
+}

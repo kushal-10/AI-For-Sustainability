@@ -1,0 +1,1421 @@
+company,year,tokens
+1&1,2014,67260
+1&1,2015,77254
+1&1,2016,115398
+1&1,2017,97892
+1&1,2018,116131
+1&1,2019,106178
+1&1,2020,105826
+1&1,2021,116266
+1&1,2022,125165
+1&1,2023,128840
+1.sap_$240.94 b_information tech,2014,192410
+1.sap_$240.94 b_information tech,2015,191967
+1.sap_$240.94 b_information tech,2016,222105
+1.sap_$240.94 b_information tech,2017,226086
+1.sap_$240.94 b_information tech,2018,254326
+1.sap_$240.94 b_information tech,2019,251877
+1.sap_$240.94 b_information tech,2020,254591
+1.sap_$240.94 b_information tech,2021,222032
+1.sap_$240.94 b_information tech,2022,215711
+1.sap_$240.94 b_information tech,2023,222691
+11.volkswagen_$52.66 b_consumer discretionary,2014,240225
+11.volkswagen_$52.66 b_consumer discretionary,2015,253413
+11.volkswagen_$52.66 b_consumer discretionary,2016,261038
+11.volkswagen_$52.66 b_consumer discretionary,2017,240765
+11.volkswagen_$52.66 b_consumer discretionary,2018,252105
+11.volkswagen_$52.66 b_consumer discretionary,2019,250215
+11.volkswagen_$52.66 b_consumer discretionary,2020,264772
+11.volkswagen_$52.66 b_consumer discretionary,2021,293081
+11.volkswagen_$52.66 b_consumer discretionary,2022,314713
+11.volkswagen_$52.66 b_consumer discretionary,2023,310133
+12.dhl group_$49.82 b_industrials,2014,168741
+12.dhl group_$49.82 b_industrials,2015,157490
+12.dhl group_$49.82 b_industrials,2016,150188
+12.dhl group_$49.82 b_industrials,2017,148956
+12.dhl group_$49.82 b_industrials,2018,152997
+12.dhl group_$49.82 b_industrials,2019,147918
+12.dhl group_$49.82 b_industrials,2020,155438
+12.dhl group_$49.82 b_industrials,2021,139716
+12.dhl group_$49.82 b_industrials,2022,154766
+12.dhl group_$49.82 b_industrials,2023,155877
+13.adidas_$244.57_consumer discretionary,2014,180368
+13.adidas_$244.57_consumer discretionary,2015,180894
+13.adidas_$244.57_consumer discretionary,2016,179666
+13.adidas_$244.57_consumer discretionary,2017,227735
+13.adidas_$244.57_consumer discretionary,2018,222024
+13.adidas_$244.57_consumer discretionary,2019,217698
+13.adidas_$244.57_consumer discretionary,2020,206625
+13.adidas_$244.57_consumer discretionary,2021,228617
+13.adidas_$244.57_consumer discretionary,2022,208483
+13.adidas_$244.57_consumer discretionary,2023,206765
+14.basf_$42.93 b_industrials,2014,209489
+14.basf_$42.93 b_industrials,2015,209292
+14.basf_$42.93 b_industrials,2016,209705
+14.basf_$42.93 b_industrials,2017,218979
+14.basf_$42.93 b_industrials,2018,246205
+14.basf_$42.93 b_industrials,2019,252807
+14.basf_$42.93 b_industrials,2020,277332
+14.basf_$42.93 b_industrials,2021,243656
+14.basf_$42.93 b_industrials,2022,249758
+14.basf_$42.93 b_industrials,2023,264280
+15.deutsche börse_$41.91 b_financial service,2014,211841
+15.deutsche börse_$41.91 b_financial service,2015,208307
+15.deutsche börse_$41.91 b_financial service,2016,196199
+15.deutsche börse_$41.91 b_financial service,2017,213821
+15.deutsche börse_$41.91 b_financial service,2018,241164
+15.deutsche börse_$41.91 b_financial service,2019,183353
+15.deutsche börse_$41.91 b_financial service,2020,187035
+15.deutsche börse_$41.91 b_financial service,2021,195141
+15.deutsche börse_$41.91 b_financial service,2022,187066
+15.deutsche börse_$41.91 b_financial service,2023,219356
+16.infineon_$41.66 b_industrials,2014,200519
+16.infineon_$41.66 b_industrials,2015,208362
+16.infineon_$41.66 b_industrials,2016,140972
+16.infineon_$41.66 b_industrials,2017,144387
+16.infineon_$41.66 b_industrials,2018,139310
+16.infineon_$41.66 b_industrials,2019,158893
+16.infineon_$41.66 b_industrials,2020,184557
+16.infineon_$41.66 b_industrials,2021,180986
+16.infineon_$41.66 b_industrials,2022,122999
+16.infineon_$41.66 b_industrials,2023,128006
+17.e.on_$38.46 b_energy,2014,190629
+17.e.on_$38.46 b_energy,2015,189446
+17.e.on_$38.46 b_energy,2016,177044
+17.e.on_$38.46 b_energy,2017,173289
+17.e.on_$38.46 b_energy,2018,188817
+17.e.on_$38.46 b_energy,2019,210728
+17.e.on_$38.46 b_energy,2020,224797
+17.e.on_$38.46 b_energy,2021,262965
+17.e.on_$38.46 b_energy,2022,307226
+17.e.on_$38.46 b_energy,2023,282875
+18.henkel_$35.64 b_consumer staplers,2014,159452
+18.henkel_$35.64 b_consumer staplers,2015,163043
+18.henkel_$35.64 b_consumer staplers,2016,158427
+18.henkel_$35.64 b_consumer staplers,2017,150228
+18.henkel_$35.64 b_consumer staplers,2018,180024
+18.henkel_$35.64 b_consumer staplers,2019,192204
+18.henkel_$35.64 b_consumer staplers,2020,188718
+18.henkel_$35.64 b_consumer staplers,2021,167851
+18.henkel_$35.64 b_consumer staplers,2022,183570
+18.henkel_$35.64 b_consumer staplers,2023,189201
+19.hannover rück_$33.67 b_financial service,2014,193932
+19.hannover rück_$33.67 b_financial service,2015,193127
+19.hannover rück_$33.67 b_financial service,2016,197650
+19.hannover rück_$33.67 b_financial service,2017,212240
+19.hannover rück_$33.67 b_financial service,2018,226220
+19.hannover rück_$33.67 b_financial service,2019,224180
+19.hannover rück_$33.67 b_financial service,2020,223550
+19.hannover rück_$33.67 b_financial service,2021,231128
+19.hannover rück_$33.67 b_financial service,2022,233992
+19.hannover rück_$33.67 b_financial service,2023,198887
+2.siemens_$135.42 b_industrials,2014,261469
+2.siemens_$135.42 b_industrials,2015,135125
+2.siemens_$135.42 b_industrials,2016,134453
+2.siemens_$135.42 b_industrials,2017,154834
+2.siemens_$135.42 b_industrials,2018,154834
+2.siemens_$135.42 b_industrials,2019,169725
+2.siemens_$135.42 b_industrials,2020,172899
+2.siemens_$135.42 b_industrials,2021,186317
+2.siemens_$135.42 b_industrials,2022,191804
+2.siemens_$135.42 b_industrials,2023,195099
+20.beiersdorf_$32.13 b_consumer staplers,2014,81063
+20.beiersdorf_$32.13 b_consumer staplers,2015,80941
+20.beiersdorf_$32.13 b_consumer staplers,2016,85514
+20.beiersdorf_$32.13 b_consumer staplers,2017,93591
+20.beiersdorf_$32.13 b_consumer staplers,2018,101050
+20.beiersdorf_$32.13 b_consumer staplers,2019,106517
+20.beiersdorf_$32.13 b_consumer staplers,2020,152260
+20.beiersdorf_$32.13 b_consumer staplers,2021,176245
+20.beiersdorf_$32.13 b_consumer staplers,2022,192030
+20.beiersdorf_$32.13 b_consumer staplers,2023,191046
+21.bayer,2014,263052
+21.bayer,2015,254337
+21.bayer,2016,237220
+21.bayer,2017,245049
+21.bayer,2018,210922
+21.bayer,2019,183416
+21.bayer,2020,199610
+21.bayer,2021,202603
+21.bayer,2022,211875
+21.bayer,2023,210893
+22.airbus,2014,109060
+22.airbus,2015,90980
+22.airbus,2016,88249
+22.airbus,2017,267825
+22.airbus,2018,270524
+22.airbus,2019,275452
+22.airbus,2020,292368
+22.airbus,2021,212146
+22.airbus,2022,344479
+22.airbus,2023,373527
+23.brenntag,2014,138421
+23.brenntag,2015,166912
+23.brenntag,2016,171549
+23.brenntag,2017,171150
+23.brenntag,2018,161133
+23.brenntag,2019,174773
+23.brenntag,2020,184685
+23.brenntag,2021,190819
+23.brenntag,2022,221663
+23.brenntag,2023,230565
+24.commerzbank,2014,279829
+24.commerzbank,2015,285610
+24.commerzbank,2016,271371
+24.commerzbank,2017,249265
+24.commerzbank,2018,279785
+24.commerzbank,2019,261780
+24.commerzbank,2020,292316
+24.commerzbank,2021,272228
+24.commerzbank,2022,259879
+24.commerzbank,2023,346118
+25.continental,2014,200342
+25.continental,2015,196395
+25.continental,2016,196270
+25.continental,2017,186726
+25.continental,2018,198830
+25.continental,2019,195283
+25.continental,2020,207045
+25.continental,2021,200522
+25.continental,2022,201258
+25.continental,2023,202527
+26.deutschebank,2014,513601
+26.deutschebank,2015,400425
+26.deutschebank,2016,421883
+26.deutschebank,2017,376900
+26.deutschebank,2018,403148
+26.deutschebank,2019,428380
+26.deutschebank,2020,448954
+26.deutschebank,2021,449747
+26.deutschebank,2022,454723
+26.deutschebank,2023,449596
+27.fresenius,2014,170426
+27.fresenius,2015,164077
+27.fresenius,2016,171924
+27.fresenius,2017,206112
+27.fresenius,2018,228501
+27.fresenius,2019,260602
+27.fresenius,2020,300367
+27.fresenius,2021,350951
+27.fresenius,2022,367412
+27.fresenius,2023,327950
+28.freseniusmedicalcare,2014,201802
+28.freseniusmedicalcare,2015,172052
+28.freseniusmedicalcare,2016,185054
+28.freseniusmedicalcare,2017,221434
+28.freseniusmedicalcare,2018,237733
+28.freseniusmedicalcare,2019,256375
+28.freseniusmedicalcare,2020,254339
+28.freseniusmedicalcare,2021,277895
+28.freseniusmedicalcare,2022,280983
+28.freseniusmedicalcare,2023,293481
+29.heidelbergmaterials,2014,228073
+29.heidelbergmaterials,2015,217453
+29.heidelbergmaterials,2016,226766
+29.heidelbergmaterials,2017,223545
+29.heidelbergmaterials,2018,228438
+29.heidelbergmaterials,2019,205724
+29.heidelbergmaterials,2020,214299
+29.heidelbergmaterials,2021,220881
+29.heidelbergmaterials,2022,292229
+29.heidelbergmaterials,2023,311127
+3.deutsche telekom_$130.56 b_communication services,2014,291536
+3.deutsche telekom_$130.56 b_communication services,2015,280179
+3.deutsche telekom_$130.56 b_communication services,2016,262341
+3.deutsche telekom_$130.56 b_communication services,2017,282586
+3.deutsche telekom_$130.56 b_communication services,2018,299654
+3.deutsche telekom_$130.56 b_communication services,2019,270781
+3.deutsche telekom_$130.56 b_communication services,2020,287061
+3.deutsche telekom_$130.56 b_communication services,2021,298262
+3.deutsche telekom_$130.56 b_communication services,2022,310818
+3.deutsche telekom_$130.56 b_communication services,2023,311686
+30.qiagen,2014,127171
+30.qiagen,2015,134875
+30.qiagen,2016,134895
+30.qiagen,2017,122396
+30.qiagen,2018,150502
+30.qiagen,2019,130172
+30.qiagen,2020,135026
+30.qiagen,2021,152165
+30.qiagen,2022,157264
+30.qiagen,2023,185094
+31.rheinmetall,2014,130266
+31.rheinmetall,2015,116659
+31.rheinmetall,2016,121348
+31.rheinmetall,2017,142034
+31.rheinmetall,2018,144237
+31.rheinmetall,2019,154781
+31.rheinmetall,2020,168530
+31.rheinmetall,2021,195133
+31.rheinmetall,2022,210428
+31.rheinmetall,2023,214272
+32.rwe,2014,178546
+32.rwe,2015,156155
+32.rwe,2016,167706
+32.rwe,2017,168331
+32.rwe,2018,171142
+32.rwe,2019,163977
+32.rwe,2020,169080
+32.rwe,2021,164919
+32.rwe,2022,196801
+32.rwe,2023,213448
+33.symrise,2014,109166
+33.symrise,2015,110967
+33.symrise,2016,120280
+33.symrise,2017,121744
+33.symrise,2018,126717
+33.symrise,2019,119792
+33.symrise,2020,130117
+33.symrise,2021,122994
+33.symrise,2022,137741
+33.symrise,2023,140626
+34.vonovia,2015,160731
+34.vonovia,2016,169082
+34.vonovia,2017,187953
+34.vonovia,2018,203798
+34.vonovia,2019,208782
+34.vonovia,2020,215501
+34.vonovia,2021,231659
+34.vonovia,2022,231996
+34.vonovia,2023,234086
+35.zalando,2014,106396
+35.zalando,2015,112827
+35.zalando,2016,112881
+35.zalando,2017,95854
+35.zalando,2018,128878
+35.zalando,2019,133291
+35.zalando,2020,124191
+35.zalando,2021,143201
+35.zalando,2022,159147
+35.zalando,2023,161505
+36.bmw_$55.03 b_industrials,2014,190692
+36.bmw_$55.03 b_industrials,2015,177813
+36.bmw_$55.03 b_industrials,2016,159573
+36.bmw_$55.03 b_industrials,2017,174252
+36.bmw_$55.03 b_industrials,2018,181779
+36.bmw_$55.03 b_industrials,2019,184165
+36.bmw_$55.03 b_industrials,2020,245702
+36.bmw_$55.03 b_industrials,2021,286413
+36.bmw_$55.03 b_industrials,2022,281419
+36.bmw_$55.03 b_industrials,2023,280421
+4.allianz_$106.68 b_financials,2014,260826
+4.allianz_$106.68 b_financials,2015,244498
+4.allianz_$106.68 b_financials,2016,166946
+4.allianz_$106.68 b_financials,2017,175486
+4.allianz_$106.68 b_financials,2018,190133
+4.allianz_$106.68 b_financials,2019,193157
+4.allianz_$106.68 b_financials,2020,207334
+4.allianz_$106.68 b_financials,2021,214480
+4.allianz_$106.68 b_financials,2022,234414
+4.allianz_$106.68 b_financials,2023,293009
+5.merck_$78.90 b_health care,2014,192822
+5.merck_$78.90 b_health care,2015,196778
+5.merck_$78.90 b_health care,2016,197160
+5.merck_$78.90 b_health care,2017,217833
+5.merck_$78.90 b_health care,2018,234073
+5.merck_$78.90 b_health care,2019,207442
+5.merck_$78.90 b_health care,2020,223548
+5.merck_$78.90 b_health care,2021,233337
+5.merck_$78.90 b_health care,2022,240287
+5.merck_$78.90 b_health care,2023,242887
+6.mercedes-benz_$68.14 b_consumer discretionary,2014,239527
+6.mercedes-benz_$68.14 b_consumer discretionary,2015,249674
+6.mercedes-benz_$68.14 b_consumer discretionary,2016,246426
+6.mercedes-benz_$68.14 b_consumer discretionary,2017,283953
+6.mercedes-benz_$68.14 b_consumer discretionary,2018,295576
+6.mercedes-benz_$68.14 b_consumer discretionary,2019,294133
+6.mercedes-benz_$68.14 b_consumer discretionary,2020,247445
+6.mercedes-benz_$68.14 b_consumer discretionary,2021,234426
+6.mercedes-benz_$68.14 b_consumer discretionary,2022,235714
+6.mercedes-benz_$68.14 b_consumer discretionary,2023,248447
+7.porsche_$67.40 b_consumer discretionary,2014,58251
+7.porsche_$67.40 b_consumer discretionary,2015,57222
+7.porsche_$67.40 b_consumer discretionary,2016,58995
+7.porsche_$67.40 b_consumer discretionary,2017,76832
+7.porsche_$67.40 b_consumer discretionary,2018,99679
+7.porsche_$67.40 b_consumer discretionary,2019,111449
+7.porsche_$67.40 b_consumer discretionary,2020,124198
+7.porsche_$67.40 b_consumer discretionary,2021,149511
+7.porsche_$67.40 b_consumer discretionary,2022,279308
+7.porsche_$67.40 b_consumer discretionary,2023,291499
+8.munich re_$63.39_financials,2014,213744
+8.munich re_$63.39_financials,2015,206538
+8.munich re_$63.39_financials,2016,156383
+8.munich re_$63.39_financials,2017,163487
+8.munich re_$63.39_financials,2018,159009
+8.munich re_$63.39_financials,2019,166470
+8.munich re_$63.39_financials,2020,186621
+8.munich re_$63.39_financials,2021,190549
+8.munich re_$63.39_financials,2022,213854
+8.munich re_$63.39_financials,2023,268657
+9.siemens healthineers_$58.91 b_health care,2014,41654
+9.siemens healthineers_$58.91 b_health care,2015,41654
+9.siemens healthineers_$58.91 b_health care,2016,41654
+9.siemens healthineers_$58.91 b_health care,2017,17344
+9.siemens healthineers_$58.91 b_health care,2018,17344
+9.siemens healthineers_$58.91 b_health care,2019,19090
+9.siemens healthineers_$58.91 b_health care,2020,116457
+9.siemens healthineers_$58.91 b_health care,2021,116334
+9.siemens healthineers_$58.91 b_health care,2022,109282
+9.siemens healthineers_$58.91 b_health care,2023,113803
+Covestro AG,2015,137331
+Covestro AG,2016,134748
+Covestro AG,2017,160964
+Covestro AG,2018,162339
+Covestro AG,2019,154301
+Covestro AG,2020,188279
+Covestro AG,2021,203324
+Covestro AG,2022,226074
+Covestro AG,2023,227651
+Daimler Truck Holding AG,2021,228151
+Daimler Truck Holding AG,2022,241991
+Daimler Truck Holding AG,2023,248080
+MTU Aero Engines AG,2014,157278
+MTU Aero Engines AG,2015,154827
+MTU Aero Engines AG,2016,134164
+MTU Aero Engines AG,2017,157078
+MTU Aero Engines AG,2018,168895
+MTU Aero Engines AG,2019,157139
+MTU Aero Engines AG,2020,155865
+MTU Aero Engines AG,2021,185723
+MTU Aero Engines AG,2022,203648
+MTU Aero Engines AG,2023,202231
+Porsche SE,2014,108282
+Porsche SE,2015,116072
+Porsche SE,2016,122399
+Porsche SE,2017,126013
+Porsche SE,2018,97944
+Porsche SE,2019,86210
+Porsche SE,2020,88659
+Porsche SE,2021,104973
+Porsche SE,2022,134736
+Porsche SE,2023,173558
+Sartorius AG,2014,116965
+Sartorius AG,2015,119452
+Sartorius AG,2016,123318
+Sartorius AG,2017,136907
+Sartorius AG,2018,127952
+Sartorius AG,2019,123438
+Sartorius AG,2020,131305
+Sartorius AG,2021,137987
+Sartorius AG,2022,143039
+Sartorius AG,2023,153134
+Siemens Energy AG,2020,137954
+Siemens Energy AG,2021,157445
+Siemens Energy AG,2022,174979
+Siemens Energy AG,2023,201678
+Sto SE & Co KgaA,2014,98906
+Sto SE & Co KgaA,2015,100987
+Sto SE & Co KgaA,2016,109054
+Sto SE & Co KgaA,2017,111293
+Sto SE & Co KgaA,2018,114428
+Sto SE & Co KgaA,2019,126749
+Sto SE & Co KgaA,2020,132756
+Sto SE & Co KgaA,2021,132615
+Sto SE & Co KgaA,2022,119570
+Sto SE & Co KgaA,2023,117932
+Varta AG,2017,69970
+Varta AG,2018,81905
+Varta AG,2019,86999
+Varta AG,2020,100871
+Varta AG,2021,98710
+Varta AG,2022,113808
+Varta AG,2023,169583
+adesso se,2014,73518
+adesso se,2015,73658
+adesso se,2016,81387
+adesso se,2017,95334
+adesso se,2018,96552
+adesso se,2019,103483
+adesso se,2020,103794
+adesso se,2021,106248
+adesso se,2022,107758
+adesso se,2023,106186
+adtran holdings,2014,48315
+adtran holdings,2015,47932
+adtran holdings,2016,50195
+adtran holdings,2017,52677
+adtran holdings,2018,59853
+adtran holdings,2019,53733
+adtran holdings,2020,95665
+adtran holdings,2021,102628
+adtran holdings,2022,154349
+adtran holdings,2023,137413
+adtran networks,2015,108227
+adtran networks,2016,94157
+adtran networks,2017,105910
+adtran networks,2018,106106
+adtran networks,2019,107988
+adtran networks,2020,110216
+adtran networks,2021,122280
+adtran networks,2022,125126
+adtran networks,2023,87547
+aixtron se,2020,91433
+aixtron se,2021,94288
+aixtron se,2022,90728
+aixtron se,2023,91136
+amadeus fire ag,2014,63636
+amadeus fire ag,2015,65217
+amadeus fire ag,2016,62360
+amadeus fire ag,2017,65816
+amadeus fire ag,2018,71748
+amadeus fire ag,2019,91354
+amadeus fire ag,2020,103858
+amadeus fire ag,2021,107824
+amadeus fire ag,2022,115563
+amadeus fire ag,2023,113935
+aroundtown sa,2014,33310
+aroundtown sa,2015,40563
+aroundtown sa,2016,56783
+aroundtown sa,2017,73600
+aroundtown sa,2018,93726
+aroundtown sa,2019,99487
+aroundtown sa,2020,109956
+aroundtown sa,2021,120610
+aroundtown sa,2022,125178
+aroundtown sa,2023,172306
+atoss software se,2015,62880
+atoss software se,2016,65461
+atoss software se,2017,65556
+atoss software se,2018,71274
+atoss software se,2019,76221
+atoss software se,2020,83002
+atoss software se,2021,103176
+atoss software se,2022,119826
+atoss software se,2023,121562
+aurubis ag,2014,114219
+aurubis ag,2015,126277
+aurubis ag,2016,119706
+aurubis ag,2017,134170
+aurubis ag,2018,153022
+aurubis ag,2019,157867
+aurubis ag,2020,171881
+aurubis ag,2021,180938
+aurubis ag,2022,195147
+aurubis ag,2023,214207
+auto1 group se,2018,39097
+auto1 group se,2019,28369
+auto1 group se,2020,61837
+auto1 group se,2021,66906
+auto1 group se,2022,68519
+auto1 group se,2023,74326
+baywa ag,2014,86916
+baywa ag,2015,89984
+baywa ag,2016,95995
+baywa ag,2017,107398
+baywa ag,2018,103302
+baywa ag,2019,98472
+baywa ag,2020,109270
+baywa ag,2021,113777
+baywa ag,2022,121350
+baywa ag,2023,125688
+bechtle ag,2014,160832
+bechtle ag,2015,149165
+bechtle ag,2016,139501
+bechtle ag,2017,141682
+bechtle ag,2018,144204
+bechtle ag,2019,146978
+bechtle ag,2020,148608
+bechtle ag,2021,166520
+bechtle ag,2022,177219
+bechtle ag,2023,176303
+bilfinger,2014,132441
+bilfinger,2015,135996
+bilfinger,2016,172048
+bilfinger,2017,184400
+bilfinger,2018,193585
+bilfinger,2019,210775
+bilfinger,2020,230431
+bilfinger,2021,236471
+bilfinger,2022,262576
+bilfinger,2023,199644
+borussia dortmund gmbh & co kgaa,2014,94892
+borussia dortmund gmbh & co kgaa,2015,102259
+borussia dortmund gmbh & co kgaa,2016,102425
+borussia dortmund gmbh & co kgaa,2017,115145
+borussia dortmund gmbh & co kgaa,2018,118768
+borussia dortmund gmbh & co kgaa,2019,129219
+borussia dortmund gmbh & co kgaa,2020,133748
+borussia dortmund gmbh & co kgaa,2021,135267
+borussia dortmund gmbh & co kgaa,2022,154872
+borussia dortmund gmbh & co kgaa,2023,124891
+cancom,2014,107736
+cancom,2015,105125
+cancom,2016,115330
+cancom,2017,130951
+cancom,2018,143153
+cancom,2019,176720
+cancom,2020,162237
+cancom,2021,164750
+cancom,2022,168163
+cancom,2023,179941
+carl zeiss meditec ag,2014,86194
+carl zeiss meditec ag,2015,91129
+carl zeiss meditec ag,2016,95960
+carl zeiss meditec ag,2017,93156
+carl zeiss meditec ag,2018,95448
+carl zeiss meditec ag,2019,95976
+carl zeiss meditec ag,2020,72564
+carl zeiss meditec ag,2021,97200
+carl zeiss meditec ag,2022,73852
+carl zeiss meditec ag,2023,71248
+ceconomy,2014,263201
+ceconomy,2015,250699
+ceconomy,2016,255251
+ceconomy,2017,242700
+ceconomy,2018,237305
+ceconomy,2019,244310
+ceconomy,2020,169366
+ceconomy,2021,184573
+ceconomy,2022,193682
+ceconomy,2023,194878
+cewe,2014,155933
+cewe,2015,158158
+cewe,2016,154371
+cewe,2017,147397
+cewe,2018,151315
+cewe,2019,142516
+cewe,2020,142200
+cewe,2021,149567
+cewe,2022,160775
+cewe,2023,162660
+compugroup medical se & co kgaa,2014,143128
+compugroup medical se & co kgaa,2015,148613
+compugroup medical se & co kgaa,2016,154930
+compugroup medical se & co kgaa,2017,149340
+compugroup medical se & co kgaa,2018,161153
+compugroup medical se & co kgaa,2019,156518
+compugroup medical se & co kgaa,2020,139233
+compugroup medical se & co kgaa,2021,134427
+compugroup medical se & co kgaa,2022,133542
+compugroup medical se & co kgaa,2023,133560
+cts eventim ag & co kgaa,2014,106848
+cts eventim ag & co kgaa,2015,110283
+cts eventim ag & co kgaa,2016,118550
+cts eventim ag & co kgaa,2017,114219
+cts eventim ag & co kgaa,2018,116168
+cts eventim ag & co kgaa,2019,124052
+cts eventim ag & co kgaa,2020,145020
+cts eventim ag & co kgaa,2021,143976
+cts eventim ag & co kgaa,2022,136073
+cts eventim ag & co kgaa,2023,130495
+delivery hero,2016,86252
+delivery hero,2017,129320
+delivery hero,2018,123198
+delivery hero,2019,122860
+delivery hero,2020,158456
+delivery hero,2021,186517
+delivery hero,2022,197482
+delivery hero,2023,202673
+dermapharm holding se,2016,50686
+dermapharm holding se,2017,82068
+dermapharm holding se,2018,101888
+dermapharm holding se,2019,108092
+dermapharm holding se,2020,107451
+dermapharm holding se,2021,119723
+dermapharm holding se,2022,125580
+dermapharm holding se,2023,169583
+deutsche beteiligungs,2015,139317
+deutsche beteiligungs,2016,134033
+deutsche beteiligungs,2017,163803
+deutsche beteiligungs,2018,146017
+deutsche beteiligungs,2019,163139
+deutsche beteiligungs,2020,126065
+deutsche beteiligungs,2021,147912
+deutsche beteiligungs,2022,134125
+deutsche beteiligungs,2023,134034
+deutsche lufthansa ag,2014,222092
+deutsche lufthansa ag,2015,184411
+deutsche lufthansa ag,2016,192090
+deutsche lufthansa ag,2017,206608
+deutsche lufthansa ag,2018,216108
+deutsche lufthansa ag,2019,231409
+deutsche lufthansa ag,2020,268549
+deutsche lufthansa ag,2021,289568
+deutsche lufthansa ag,2022,297369
+deutsche lufthansa ag,2023,302994
+deutsche pfandbriefbank ag,2014,126299
+deutsche pfandbriefbank ag,2015,140960
+deutsche pfandbriefbank ag,2016,155901
+deutsche pfandbriefbank ag,2017,170967
+deutsche pfandbriefbank ag,2018,183643
+deutsche pfandbriefbank ag,2019,162565
+deutsche pfandbriefbank ag,2020,168270
+deutsche pfandbriefbank ag,2021,130986
+deutsche pfandbriefbank ag,2022,134808
+deutsche pfandbriefbank ag,2023,133833
+deutsche wohnen se,2014,103219
+deutsche wohnen se,2015,112142
+deutsche wohnen se,2016,119898
+deutsche wohnen se,2017,131933
+deutsche wohnen se,2018,135189
+deutsche wohnen se,2019,144995
+deutsche wohnen se,2020,149118
+deutsche wohnen se,2021,134491
+deutsche wohnen se,2022,128636
+deutsche wohnen se,2023,130050
+deutz,2014,119180
+deutz,2015,119725
+deutz,2016,117857
+deutz,2017,139587
+deutz,2018,15359
+deutz,2019,159756
+deutz,2020,167677
+deutz,2021,198521
+deutz,2022,211094
+deutz,2023,219545
+draegerwerk,2014,140284
+draegerwerk,2015,135061
+draegerwerk,2016,135557
+draegerwerk,2017,124508
+draegerwerk,2018,128986
+draegerwerk,2019,131876
+draegerwerk,2020,133454
+draegerwerk,2021,124761
+draegerwerk,2022,131220
+draegerwerk,2023,131843
+dws group gmbh & co kgaa,2018,140470
+dws group gmbh & co kgaa,2019,147839
+dws group gmbh & co kgaa,2020,219572
+dws group gmbh & co kgaa,2021,220900
+dws group gmbh & co kgaa,2022,208962
+dws group gmbh & co kgaa,2023,225174
+eckert & ziegler se,2014,92328
+eckert & ziegler se,2015,85117
+eckert & ziegler se,2016,85466
+eckert & ziegler se,2017,93359
+eckert & ziegler se,2018,91862
+eckert & ziegler se,2019,93647
+eckert & ziegler se,2020,96206
+eckert & ziegler se,2021,99687
+eckert & ziegler se,2022,91696
+eckert & ziegler se,2023,103814
+elmos semiconductor,2014,89175
+elmos semiconductor,2015,91035
+elmos semiconductor,2016,84598
+elmos semiconductor,2017,63194
+elmos semiconductor,2018,62463
+elmos semiconductor,2019,65728
+elmos semiconductor,2020,69091
+elmos semiconductor,2021,71668
+elmos semiconductor,2022,77936
+elmos semiconductor,2023,83219
+energiekontor ag,2014,36203
+energiekontor ag,2015,40407
+energiekontor ag,2016,42905
+energiekontor ag,2017,59904
+energiekontor ag,2018,145595
+energiekontor ag,2019,156438
+energiekontor ag,2020,174359
+energiekontor ag,2021,165474
+energiekontor ag,2022,172120
+energiekontor ag,2023,169431
+evonik,2014,163954
+evonik,2015,154056
+evonik,2016,153999
+evonik,2017,140056
+evonik,2018,148981
+evonik,2019,156013
+evonik,2020,165394
+evonik,2021,161975
+evonik,2022,188926
+evonik,2023,197934
+evotec se,2014,122144
+evotec se,2015,108994
+evotec se,2016,110305
+evotec se,2017,117722
+evotec se,2018,129044
+evotec se,2019,118631
+evotec se,2020,131604
+evotec se,2021,136380
+evotec se,2022,141405
+evotec se,2023,123344
+fielmann,2014,82181
+fielmann,2015,84713
+fielmann,2016,85547
+fielmann,2017,91019
+fielmann,2018,101222
+fielmann,2019,111532
+fielmann,2020,115135
+fielmann,2021,109054
+fielmann,2022,99874
+fielmann,2023,101775
+flatexdegiro ag,2015,66896
+flatexdegiro ag,2016,72403
+flatexdegiro ag,2017,66672
+flatexdegiro ag,2018,71838
+flatexdegiro ag,2019,69669
+flatexdegiro ag,2020,87811
+flatexdegiro ag,2021,94452
+flatexdegiro ag,2022,102760
+flatexdegiro ag,2023,108903
+fraport frankfurt airport services worldwide ag,2014,159810
+fraport frankfurt airport services worldwide ag,2015,164243
+fraport frankfurt airport services worldwide ag,2016,166197
+fraport frankfurt airport services worldwide ag,2017,190463
+fraport frankfurt airport services worldwide ag,2018,197652
+fraport frankfurt airport services worldwide ag,2019,192710
+fraport frankfurt airport services worldwide ag,2020,203307
+fraport frankfurt airport services worldwide ag,2021,195890
+fraport frankfurt airport services worldwide ag,2022,197724
+fraport frankfurt airport services worldwide ag,2023,199509
+freenet ag,2015,131763
+freenet ag,2016,144460
+freenet ag,2017,161603
+freenet ag,2018,167209
+freenet ag,2019,160332
+freenet ag,2020,166120
+freenet ag,2021,164371
+freenet ag,2022,174885
+freenet ag,2023,176966
+fuchs se,2014,111553
+fuchs se,2015,109589
+fuchs se,2016,102244
+fuchs se,2017,108763
+fuchs se,2018,112478
+fuchs se,2019,108738
+fuchs se,2020,124882
+fuchs se,2021,128251
+fuchs se,2022,141981
+fuchs se,2023,143067
+gea group ag,2014,150310
+gea group ag,2015,145682
+gea group ag,2016,145112
+gea group ag,2017,158920
+gea group ag,2018,187721
+gea group ag,2019,206299
+gea group ag,2020,164877
+gea group ag,2021,201320
+gea group ag,2022,216015
+gea group ag,2023,232320
+gerresheimer ag,2014,112994
+gerresheimer ag,2015,119559
+gerresheimer ag,2016,126726
+gerresheimer ag,2017,140396
+gerresheimer ag,2018,155513
+gerresheimer ag,2019,152188
+gerresheimer ag,2020,135758
+gerresheimer ag,2021,90162
+gerresheimer ag,2022,99664
+gerresheimer ag,2023,100716
+gft technologies se,2014,92158
+gft technologies se,2015,101079
+gft technologies se,2016,94356
+gft technologies se,2017,97958
+gft technologies se,2018,110950
+gft technologies se,2019,109827
+gft technologies se,2020,107181
+gft technologies se,2021,111122
+gft technologies se,2022,114022
+gft technologies se,2023,114872
+grand city properties sa,2014,54581
+grand city properties sa,2015,52591
+grand city properties sa,2016,55513
+grand city properties sa,2017,70701
+grand city properties sa,2018,82574
+grand city properties sa,2019,86887
+grand city properties sa,2020,92555
+grand city properties sa,2021,95031
+grand city properties sa,2022,94171
+grand city properties sa,2023,140092
+grenke ag,2014,137203
+grenke ag,2015,146527
+grenke ag,2016,129936
+grenke ag,2017,165928
+grenke ag,2018,186957
+grenke ag,2019,171708
+grenke ag,2020,218178
+grenke ag,2021,281670
+grenke ag,2022,305813
+grenke ag,2023,319763
+hamborner reit ag,2014,67163
+hamborner reit ag,2015,69346
+hamborner reit ag,2016,71071
+hamborner reit ag,2017,75785
+hamborner reit ag,2018,76759
+hamborner reit ag,2019,77715
+hamborner reit ag,2020,92583
+hamborner reit ag,2021,80559
+hamborner reit ag,2022,80239
+hamborner reit ag,2023,84971
+heidelberger druckmaschinen,2014,115598
+heidelberger druckmaschinen,2015,116540
+heidelberger druckmaschinen,2016,119547
+heidelberger druckmaschinen,2017,126057
+heidelberger druckmaschinen,2018,128182
+heidelberger druckmaschinen,2019,142501
+heidelberger druckmaschinen,2020,135516
+heidelberger druckmaschinen,2021,143474
+heidelberger druckmaschinen,2022,143557
+heidelberger druckmaschinen,2023,136210
+hella,2014,55771
+hella,2015,113981
+hella,2016,124344
+hella,2017,136939
+hella,2018,159666
+hella,2019,165349
+hella,2020,166864
+hella,2021,160112
+hella,2022,141998
+hella,2023,168972
+hello fresh,2017,63776
+hello fresh,2018,68980
+hello fresh,2019,70756
+hello fresh,2020,78119
+hello fresh,2021,79266
+hello fresh,2022,82024
+hello fresh,2023,83455
+hensoldt,2020,103734
+hensoldt,2021,186325
+hensoldt,2022,220426
+hensoldt,2023,127342
+hochtief ag,2014,185787
+hochtief ag,2015,184336
+hochtief ag,2016,180925
+hochtief ag,2017,179960
+hochtief ag,2018,177424
+hochtief ag,2019,184552
+hochtief ag,2020,203839
+hochtief ag,2021,211034
+hochtief ag,2022,254239
+hochtief ag,2023,255738
+hornbach holding ag & co kgaa,2015,125340
+hornbach holding ag & co kgaa,2016,121019
+hornbach holding ag & co kgaa,2017,122001
+hornbach holding ag & co kgaa,2018,134824
+hornbach holding ag & co kgaa,2019,141773
+hornbach holding ag & co kgaa,2020,141773
+hornbach holding ag & co kgaa,2021,145667
+hornbach holding ag & co kgaa,2022,133256
+hornbach holding ag & co kgaa,2023,139360
+hugo boss ag,2014,145749
+hugo boss ag,2015,150036
+hugo boss ag,2016,120195
+hugo boss ag,2017,126976
+hugo boss ag,2018,136206
+hugo boss ag,2019,133375
+hugo boss ag,2020,150043
+hugo boss ag,2021,178458
+hugo boss ag,2022,180936
+hugo boss ag,2023,192438
+hypoport se,2014,69307
+hypoport se,2015,62889
+hypoport se,2016,68059
+hypoport se,2017,76781
+hypoport se,2018,83164
+hypoport se,2019,81191
+hypoport se,2020,87536
+hypoport se,2021,83784
+hypoport se,2022,87930
+hypoport se,2023,82944
+indus holding ag,2014,115878
+indus holding ag,2015,123175
+indus holding ag,2016,123783
+indus holding ag,2017,135760
+indus holding ag,2018,140075
+indus holding ag,2019,157914
+indus holding ag,2020,153751
+indus holding ag,2021,139622
+indus holding ag,2022,119070
+indus holding ag,2023,115512
+ionos group se,2019,56911
+ionos group se,2020,48895
+ionos group se,2021,52069
+ionos group se,2022,53062
+ionos group se,2023,127589
+jenoptik ag,2014,143932
+jenoptik ag,2015,152980
+jenoptik ag,2016,156854
+jenoptik ag,2017,163336
+jenoptik ag,2018,179514
+jenoptik ag,2019,184112
+jenoptik ag,2020,208468
+jenoptik ag,2021,220503
+jenoptik ag,2022,175086
+jenoptik ag,2023,174524
+jost werke se,2016,38809
+jost werke se,2017,83124
+jost werke se,2018,92726
+jost werke se,2019,101017
+jost werke se,2020,105164
+jost werke se,2021,117098
+jost werke se,2022,124231
+jost werke se,2023,128587
+jungheinrich ag,2014,89230
+jungheinrich ag,2015,85576
+jungheinrich ag,2016,97461
+jungheinrich ag,2017,96848
+jungheinrich ag,2018,114497
+jungheinrich ag,2019,119871
+jungheinrich ag,2020,128678
+jungheinrich ag,2021,145541
+jungheinrich ag,2022,152816
+jungheinrich ag,2023,163237
+k+s ag,2015,167923
+k+s ag,2016,168017
+k+s ag,2017,178264
+k+s ag,2018,186297
+k+s ag,2019,186817
+k+s ag,2020,200004
+k+s ag,2021,216085
+k+s ag,2022,220232
+k+s ag,2023,229710
+kion,2014,161528
+kion,2015,154783
+kion,2016,156689
+kion,2017,156258
+kion,2018,168265
+kion,2019,155326
+kion,2020,176673
+kion,2021,170067
+kion,2022,173700
+kion,2023,176385
+kloeckner & co se,2014,116604
+kloeckner & co se,2015,126204
+kloeckner & co se,2016,133432
+kloeckner & co se,2017,149208
+kloeckner & co se,2018,151161
+kloeckner & co se,2019,159422
+kloeckner & co se,2020,167897
+kloeckner & co se,2021,193514
+kloeckner & co se,2022,204884
+kloeckner & co se,2023,218172
+knorr bremse ag,2015,53332
+knorr bremse ag,2016,54542
+knorr bremse ag,2017,54740
+knorr bremse ag,2018,167968
+knorr bremse ag,2019,183172
+knorr bremse ag,2020,188911
+knorr bremse ag,2021,199684
+knorr bremse ag,2022,211389
+knorr bremse ag,2023,212358
+kontron ag,2014,150028
+kontron ag,2015,163295
+kontron ag,2016,180928
+kontron ag,2017,224497
+kontron ag,2018,242016
+kontron ag,2019,131622
+kontron ag,2020,136490
+kontron ag,2021,144823
+kontron ag,2022,151659
+kontron ag,2023,153100
+krones ag,2014,84168
+krones ag,2015,86175
+krones ag,2016,93186
+krones ag,2017,94235
+krones ag,2018,113775
+krones ag,2019,112168
+krones ag,2020,121575
+krones ag,2021,124018
+krones ag,2022,168599
+krones ag,2023,176767
+kws,2014,72599
+kws,2015,89695
+kws,2016,80671
+kws,2017,87440
+kws,2018,94469
+kws,2019,101087
+kws,2020,107264
+kws,2021,109252
+kws,2022,110486
+kws,2023,120358
+lanxess ag,2014,168909
+lanxess ag,2015,180365
+lanxess ag,2016,179422
+lanxess ag,2017,170142
+lanxess ag,2018,181478
+lanxess ag,2019,198233
+lanxess ag,2020,214536
+lanxess ag,2021,208566
+lanxess ag,2022,217497
+lanxess ag,2023,212406
+leg immobilien,2014,143096
+leg immobilien,2015,145360
+leg immobilien,2016,138336
+leg immobilien,2017,143536
+leg immobilien,2018,137750
+leg immobilien,2019,142015
+leg immobilien,2020,178709
+leg immobilien,2021,202637
+leg immobilien,2022,207079
+leg immobilien,2023,199113
+metro ag,2014,263201
+metro ag,2015,250699
+metro ag,2016,255251
+metro ag,2017,208049
+metro ag,2018,186625
+metro ag,2019,204311
+metro ag,2020,190041
+metro ag,2021,190697
+metro ag,2022,114448
+metro ag,2023,114136
+morphosys ag,2014,118195
+morphosys ag,2015,133158
+morphosys ag,2016,120999
+morphosys ag,2017,137668
+morphosys ag,2018,168005
+morphosys ag,2019,162539
+morphosys ag,2020,173336
+morphosys ag,2021,166793
+morphosys ag,2022,158127
+morphosys ag,2023,167028
+nagarro se,2020,118471
+nagarro se,2021,112188
+nagarro se,2022,112237
+nagarro se,2023,129620
+nemetschek se,2014,98867
+nemetschek se,2015,297889
+nemetschek se,2016,182351
+nemetschek se,2017,116621
+nemetschek se,2018,121842
+nemetschek se,2019,100560
+nemetschek se,2020,107114
+nemetschek se,2021,117343
+nemetschek se,2022,140422
+nemetschek se,2023,136439
+new work se,2014,85623
+new work se,2015,86944
+new work se,2016,84522
+new work se,2017,101568
+new work se,2018,101720
+new work se,2019,102311
+new work se,2020,105867
+new work se,2021,90189
+new work se,2022,90596
+new work se,2023,94390
+nordex se,2016,112320
+nordex se,2017,109955
+nordex se,2018,118028
+nordex se,2019,112540
+nordex se,2020,117137
+nordex se,2021,134410
+nordex se,2022,143248
+nordex se,2023,137252
+norma group se,2014,136860
+norma group se,2015,148450
+norma group se,2016,152830
+norma group se,2017,181872
+norma group se,2018,192111
+norma group se,2019,181437
+norma group se,2020,206445
+norma group se,2021,244292
+norma group se,2022,268849
+norma group se,2023,279869
+patrizia se,2014,77441
+patrizia se,2015,74475
+patrizia se,2016,75070
+patrizia se,2017,85974
+patrizia se,2018,98567
+patrizia se,2019,97899
+patrizia se,2020,218641
+patrizia se,2021,110345
+patrizia se,2022,128638
+patrizia se,2023,141959
+pfeiffer vaccum,2014,72534
+pfeiffer vaccum,2015,77541
+pfeiffer vaccum,2016,77042
+pfeiffer vaccum,2017,95932
+pfeiffer vaccum,2018,105903
+pfeiffer vaccum,2019,114844
+pfeiffer vaccum,2020,137390
+pfeiffer vaccum,2021,157949
+pfeiffer vaccum,2022,166076
+pfeiffer vaccum,2023,189514
+pne ag,2014,120032
+pne ag,2015,106890
+pne ag,2016,102001
+pne ag,2017,111797
+pne ag,2018,125572
+pne ag,2019,131346
+pne ag,2020,129246
+pne ag,2021,124444
+pne ag,2022,132223
+pne ag,2023,158896
+puma se,2014,121047
+puma se,2015,113831
+puma se,2016,120027
+puma se,2017,139546
+puma se,2018,137333
+puma se,2019,149016
+puma se,2020,145597
+puma se,2021,163314
+puma se,2022,197857
+puma se,2023,236811
+pva tepla ag,2014,59248
+pva tepla ag,2015,51853
+pva tepla ag,2016,51744
+pva tepla ag,2017,52757
+pva tepla ag,2018,62272
+pva tepla ag,2019,70962
+pva tepla ag,2020,72883
+pva tepla ag,2021,67167
+pva tepla ag,2022,91873
+pva tepla ag,2023,88693
+rational ag,2014,76215
+rational ag,2015,80600
+rational ag,2016,80897
+rational ag,2017,77203
+rational ag,2018,78243
+rational ag,2019,77573
+rational ag,2020,82964
+rational ag,2021,94510
+rational ag,2022,88848
+rational ag,2023,87805
+redcare pharmacy,2019,86635
+redcare pharmacy,2020,97976
+redcare pharmacy,2021,111150
+redcare pharmacy,2022,121789
+redcare pharmacy,2023,124678
+renk,2020,183711
+renk,2023,90832
+rtl group sa,2014,129595
+rtl group sa,2015,133947
+rtl group sa,2016,157594
+rtl group sa,2017,159279
+rtl group sa,2018,155584
+rtl group sa,2019,148823
+rtl group sa,2020,138263
+rtl group sa,2021,129613
+rtl group sa,2022,137559
+rtl group sa,2023,129954
+saf-holland se,2014,102103
+saf-holland se,2015,111365
+saf-holland se,2016,122188
+saf-holland se,2017,133286
+saf-holland se,2018,133601
+saf-holland se,2019,140913
+saf-holland se,2020,141731
+saf-holland se,2021,143159
+saf-holland se,2022,151078
+saf-holland se,2023,180449
+salzgitter,2014,140088
+salzgitter,2015,130054
+salzgitter,2016,93344
+salzgitter,2017,101798
+salzgitter,2018,108322
+salzgitter,2019,113725
+salzgitter,2020,117801
+salzgitter,2021,114803
+salzgitter,2022,182449
+salzgitter,2023,200562
+schaeffler ag,2014,123055
+schaeffler ag,2015,161126
+schaeffler ag,2016,169710
+schaeffler ag,2017,194692
+schaeffler ag,2018,210879
+schaeffler ag,2019,162268
+schaeffler ag,2020,182324
+schaeffler ag,2021,142996
+schaeffler ag,2022,164979
+schaeffler ag,2023,223328
+scout24,2014,21927
+scout24,2015,103722
+scout24,2016,102771
+scout24,2017,112071
+scout24,2018,132135
+scout24,2019,138238
+scout24,2020,125560
+scout24,2021,143506
+scout24,2022,118376
+scout24,2023,170104
+secunet security networks ag,2014,65871
+secunet security networks ag,2015,65496
+secunet security networks ag,2016,67397
+secunet security networks ag,2017,81864
+secunet security networks ag,2018,96463
+secunet security networks ag,2019,100294
+secunet security networks ag,2020,102812
+secunet security networks ag,2021,119991
+secunet security networks ag,2022,131210
+secunet security networks ag,2023,141069
+sfc energy ag,2014,147777
+sfc energy ag,2015,159068
+sfc energy ag,2016,163112
+sfc energy ag,2017,160255
+sfc energy ag,2018,174433
+sfc energy ag,2019,184690
+sfc energy ag,2020,117349
+sfc energy ag,2021,126420
+sfc energy ag,2022,128034
+sfc energy ag,2023,134112
+sgl carbon,2014,152280
+sgl carbon,2015,144194
+sgl carbon,2016,44097
+sgl carbon,2017,150582
+sgl carbon,2018,158717
+sgl carbon,2019,157551
+sgl carbon,2020,151853
+sgl carbon,2021,147717
+sgl carbon,2022,151775
+sgl carbon,2023,163458
+siltronic ag,2015,98473
+siltronic ag,2016,96127
+siltronic ag,2017,110781
+siltronic ag,2018,117871
+siltronic ag,2019,118573
+siltronic ag,2020,133896
+siltronic ag,2021,139607
+siltronic ag,2022,150976
+siltronic ag,2023,154771
+stratec se,2014,74401
+stratec se,2015,97840
+stratec se,2016,103391
+stratec se,2017,112735
+stratec se,2018,120553
+stratec se,2019,114478
+stratec se,2020,115614
+stratec se,2021,115203
+stratec se,2022,118111
+stratec se,2023,118258
+stroeer se & co kgaa,2014,95188
+stroeer se & co kgaa,2015,95883
+stroeer se & co kgaa,2016,93914
+stroeer se & co kgaa,2017,102946
+stroeer se & co kgaa,2018,114923
+stroeer se & co kgaa,2019,106578
+stroeer se & co kgaa,2020,117185
+stroeer se & co kgaa,2021,119713
+stroeer se & co kgaa,2022,121772
+stroeer se & co kgaa,2023,120047
+suedzucker,2014,145834
+suedzucker,2015,135129
+suedzucker,2016,145037
+suedzucker,2017,151465
+suedzucker,2018,159158
+suedzucker,2019,156694
+suedzucker,2020,153912
+suedzucker,2021,167418
+suedzucker,2022,177669
+suedzucker,2023,172658
+suss microtec se,2014,98515
+suss microtec se,2015,102357
+suss microtec se,2016,355790
+suss microtec se,2017,111117
+suss microtec se,2018,93390
+suss microtec se,2019,103480
+suss microtec se,2020,99269
+suss microtec se,2021,142725
+suss microtec se,2022,135545
+suss microtec se,2023,132806
+synlab ag,2021,142302
+synlab ag,2022,146584
+synlab ag,2023,154927
+tag immobilien ag,2014,41880
+tag immobilien ag,2015,36999
+tag immobilien ag,2016,38751
+tag immobilien ag,2017,46227
+tag immobilien ag,2018,55063
+tag immobilien ag,2019,67124
+tag immobilien ag,2020,75342
+tag immobilien ag,2021,94998
+tag immobilien ag,2022,78911
+tag immobilien ag,2023,78902
+talanx ag,2018,36754
+talanx ag,2019,37692
+talanx ag,2020,40660
+talanx ag,2021,39197
+talanx ag,2022,40947
+talanx ag,2023,39832
+teamviewer,2019,98312
+teamviewer,2020,141612
+teamviewer,2021,161934
+teamviewer,2022,142978
+teamviewer,2023,136907
+thyssenkrupp ag,2014,166095
+thyssenkrupp ag,2015,166095
+thyssenkrupp ag,2016,153965
+thyssenkrupp ag,2017,149824
+thyssenkrupp ag,2018,156416
+thyssenkrupp ag,2019,156723
+thyssenkrupp ag,2020,170462
+thyssenkrupp ag,2021,192108
+thyssenkrupp ag,2022,203141
+thyssenkrupp ag,2023,215785
+thyssenkrupp nucera ag & co kgaa,2019,42740
+thyssenkrupp nucera ag & co kgaa,2020,42740
+thyssenkrupp nucera ag & co kgaa,2021,42740
+thyssenkrupp nucera ag & co kgaa,2022,42740
+thyssenkrupp nucera ag & co kgaa,2023,129094
+traton se,2016,66142
+traton se,2017,66142
+traton se,2018,66142
+traton se,2019,159282
+traton se,2020,183622
+traton se,2021,216478
+traton se,2022,210955
+traton se,2023,212148
+tui ag,2016,236618
+tui ag,2017,188670
+tui ag,2018,198493
+tui ag,2019,214950
+tui ag,2020,257432
+tui ag,2021,259099
+tui ag,2022,267030
+tui ag,2023,276415
+united internet ag,2014,128399
+united internet ag,2015,132067
+united internet ag,2016,137769
+united internet ag,2017,166066
+united internet ag,2018,182860
+united internet ag,2019,172971
+united internet ag,2020,181940
+united internet ag,2021,176636
+united internet ag,2022,186537
+united internet ag,2023,187246
+verbio se,2014,87930
+verbio se,2015,80995
+verbio se,2016,79102
+verbio se,2017,84936
+verbio se,2018,86902
+verbio se,2019,88255
+verbio se,2020,92416
+verbio se,2021,113435
+verbio se,2022,113659
+verbio se,2023,112151
+vossloh,2014,125731
+vossloh,2015,119644
+vossloh,2016,107354
+vossloh,2017,135224
+vossloh,2018,141730
+vossloh,2019,147156
+vossloh,2020,152392
+vossloh,2021,161094
+vossloh,2022,160090
+vossloh,2023,161743
+wacker chemie ag,2014,185397
+wacker chemie ag,2015,182885
+wacker chemie ag,2016,161163
+wacker chemie ag,2017,175305
+wacker chemie ag,2018,180277
+wacker chemie ag,2019,166511
+wacker chemie ag,2020,180379
+wacker chemie ag,2021,180949
+wacker chemie ag,2022,214092
+wacker chemie ag,2023,196586
+wacker neuson se,2017,129874
+wacker neuson se,2018,147107
+wacker neuson se,2019,155421
+wacker neuson se,2020,166997
+wacker neuson se,2021,157580
+wacker neuson se,2022,154771
+wacker neuson se,2023,153458
+wuestenrot & wuerttembergische,2014,213118
+wuestenrot & wuerttembergische,2015,218583
+wuestenrot & wuerttembergische,2016,220342
+wuestenrot & wuerttembergische,2017,228340
+wuestenrot & wuerttembergische,2018,253500
+wuestenrot & wuerttembergische,2019,249229
+wuestenrot & wuerttembergische,2020,258961
+wuestenrot & wuerttembergische,2021,305333
+wuestenrot & wuerttembergische,2022,311427
+wuestenrot & wuerttembergische,2023,299617
+zeal network se,2014,64205
+zeal network se,2015,74323
+zeal network se,2016,72425
+zeal network se,2017,78407
+zeal network se,2018,91683
+zeal network se,2019,94837
+zeal network se,2020,90819
+zeal network se,2021,93846
+zeal network se,2022,110171
+zeal network se,2023,109276
