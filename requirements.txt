@@ -4,3 +4,4 @@ spacy==3.8.7
 pyarrow==21.0.0
 langdetect==1.0.9
 tqdm==4.67.1
+sentence-transformers==5.1.0
