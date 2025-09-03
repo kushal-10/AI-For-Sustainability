@@ -37,6 +37,7 @@ for csv in tqdm(csvs):
 
 # print(total_sdgs, total_ais) # 3935049 319298
 print(total_sents, filtered_sents) # 110,707,703 || 1,747,704
+# 2,453,504,343 || 4,401,507
 
 
 
