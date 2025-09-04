@@ -2,18 +2,17 @@ from openai import OpenAI
 
 SYS_PROMPT = """
 Your goal is to classify a given SENTENCE in the following order:
-1) Generate a classification for the SENTENCE into one or more Sustainable Development Goals as a list. 
+1) Generate a classification for the SENTENCE into one or more of the 17 Sustainable Development Goals as a list. 
 Think if the sentence relates to one or more SDGs. There can be many SDGs applicable to the sentence, but list only the most relevant ones.
-If SENTENCE doesn't seem into any SDGs, just return 0 instead of a goal
+If SENTENCE doesn't seem into any SDGs, just return 0 instead of any goals from 1-17
 2) Classify as True if the SENTENCE mentions Artificial Intelligence and related technologies, else False - append to the list.
-3) Classify the sentiment of the text as Positive or Negative and append to the list.
 
 Provide the answer strictly in the following format as a single List:
-[SDGA, SDGB, ..., True/False, Positive/Negative]
+[SDGA, SDGB, ..., True/False]
 
-example1 - [1, 5, True, Negative]
-example2 - [11, 12, False, Negative]
-example3 - [0, False, Positive]
+example1 - [1, 5, True]
+example2 - [11, 12, False]
+example3 - [0, True]
 """
 
 
@@ -39,7 +38,7 @@ def create_batch_object(sentence: str, sentence_id: str, csv_path: str, model="g
 
     splits = csv_path.split("/")
     batch_obj = {
-        "custom_id": f"task-{sentence_id}-{splits[-3]}-{splits[-2]}",
+        "custom_id": f"task||{sentence_id}||{splits[-3]}||{splits[-2]}",
         "method": "POST",
         "url": "/v1/chat/completions",
         "body": {

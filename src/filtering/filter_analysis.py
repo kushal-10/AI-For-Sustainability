@@ -1,50 +1,50 @@
+#!/usr/bin/env python3
 import os
 
 import pandas as pd
+import json
+from pathlib import Path
 from tqdm import tqdm
 
+# ---------------- Config ----------------
+CSV_DIR = Path("data/scores_csv")        # directory with all csv files
+AI_JSON = Path("kw_data/ai.json")  # filtered AI keywords
+THRESHOLDS = [0.5, 0.3]
 
-base_dir = os.path.join("data", "scores_csv")
+# ---------------- Load AI keywords ----------------
+with open(AI_JSON, "r", encoding="utf-8") as f:
+    ai_keywords = list(json.load(f).keys())
 
-csvs = []
-for dirname, _, filenames in os.walk(base_dir):
+# ---------------- SDG columns (from your schema) ----------------
+sdg_columns = [
+    "sdg_1","sdg_2","sdg_3","sdg_4","sdg_5","sdg_6","sdg_7","sdg_8","sdg_9","sdg_10",
+    "sdg_11","sdg_12","sdg_13","sdg_14","sdg_15","sdg_16","sdg_17"
+]
+
+# ---------------- Collect results ----------------
+total_rows = 0
+results = {thr: 0 for thr in THRESHOLDS}
+
+csv_files = []
+for dirpath, _, filenames in os.walk(CSV_DIR):
     for filename in filenames:
         if filename.endswith(".csv"):
-            csvs.append(os.path.join(dirname, filename))
+            csv_files.append(os.path.join(dirpath, filename))
 
-T = 0.3
+for csv_file in tqdm(csv_files):
+    df = pd.read_csv(csv_file)
 
-# total_sdgs = 0
-# total_ais = 0
-filtered_sents = 0
-total_sents = 0
+    # Relevant columns = SDGs + AI keywords
+    cols = [c for c in df.columns if c in sdg_columns or c in ai_keywords]
+    data = df[cols]
 
-for csv in tqdm(csvs):
-    df = pd.read_csv(csv)
-    for i in range(len(df)):
-        row_data = df.iloc[i]
-        l = len(row_data)
-        total_sents += l
-        for j in range(1, l):
-            curr_val = row_data.iloc[j]
-            if curr_val >= T:
-                filtered_sents += 1
-                break
-                # if j <= 17:
-                #     total_sdgs += 1
-                # else:
-                #     total_ais += 1
+    total_rows += len(data)
 
-# print(total_sdgs, total_ais) # 3935049 319298
-print(total_sents, filtered_sents) # 110,707,703 || 1,747,704
-# 2,453,504,343 || 4,401,507
+    for thr in THRESHOLDS:
+        mask = (data >= thr).any(axis=1)
+        results[thr] += mask.sum()
 
-
-
-
-
-
-
-
-
-
+# ---------------- Print summary ----------------
+print(f"Total sentences across CSVs: {total_rows}")
+for thr in THRESHOLDS:
+    print(f"Sentences with ≥ {thr} in SDG+AI columns: {results[thr]}")
