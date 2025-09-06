@@ -10,7 +10,7 @@ import pandas as pd
 from tqdm import tqdm
 from openai import OpenAI
 
-from src.classification.objects import create_batch_object
+from src.gpt_filter.objects import create_batch_object
 from src.utils.file_utils import load_json  # your existing util
 
 # ---------------- Config ----------------
@@ -25,7 +25,7 @@ DEFAULT_BATCH_LINES = 20_000
 
 # ---------------- Logging ----------------
 logging.basicConfig(
-    filename=str(Path("src/classification/submit_requests.log")),
+    filename=str(Path("src/gpt_filter/submit_requests.log")),
     filemode="w",
     level=logging.INFO,
     format="%(asctime)s - %(levelname)s - %(message)s"
@@ -231,5 +231,5 @@ def main():
 if __name__ == "__main__":
     main()
 
-# python3 src/classification/batches.py --make-batches --ai-json kw_data/ai.json
-# python3 src/classification/batches.py --submit  --ai-json kw_data/ai.json
+# python3 src/gpt_filter/batches.py --make-batches --ai-json kw_data/ai.json
+# python3 src/gpt_filter/batches.py --submit  --ai_json kw_data/ai.json

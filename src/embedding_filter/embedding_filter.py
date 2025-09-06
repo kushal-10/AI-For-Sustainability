@@ -9,7 +9,7 @@ from tqdm import tqdm
 from sentence_transformers import SentenceTransformer
 
 # --- Your utils ---
-from src.filtering.utils import detect_german, ai_embeddings, ai_embeddings_de, sdg_embeddings_de, sdg_embeddings
+from src.embedding_filter.utils import detect_german, ai_embeddings, ai_embeddings_de, sdg_embeddings_de, sdg_embeddings
 from src.utils.file_utils import load_json
 
 BASE_DIR = Path("data/texts")

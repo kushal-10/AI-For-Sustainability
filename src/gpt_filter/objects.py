@@ -2,7 +2,7 @@ from openai import OpenAI
 
 SYS_PROMPT = """
 Your goal is to classify a given SENTENCE in the following order:
-1) Generate a classification for the SENTENCE into one or more of the 17 Sustainable Development Goals as a list. 
+1) Generate a gpt_filter for the SENTENCE into one or more of the 17 Sustainable Development Goals as a list. 
 Think if the sentence relates to one or more SDGs. There can be many SDGs applicable to the sentence, but list only the most relevant ones.
 If SENTENCE doesn't seem into any SDGs, just return 0 instead of any goals from 1-17
 2) Classify as True if the SENTENCE mentions Artificial Intelligence and related technologies, else False - append to the list.
@@ -54,7 +54,7 @@ def create_batch_object(sentence: str, sentence_id: str, csv_path: str, model="g
                     "content": sentence
                 }
             ],
-            "max_output_tokens": 50
+            "max_tokens": 50
         }
     }
 

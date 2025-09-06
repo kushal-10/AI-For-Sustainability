@@ -48,3 +48,4 @@ for csv_file in tqdm(csv_files):
 print(f"Total sentences across CSVs: {total_rows}")
 for thr in THRESHOLDS:
     print(f"Sentences with ≥ {thr} in SDG+AI columns: {results[thr]}")
+
