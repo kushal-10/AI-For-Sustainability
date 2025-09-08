@@ -1,0 +1,131 @@
+{
+  "sdg01": [
+    "no poverty",
+    "end poverty",
+    "poverty"
+  ],
+  "sdg02": [
+    "end hunger",
+    "hunger",
+    "food security",
+    "improved nutrition",
+    "sustainable agriculture",
+    "rural development"
+  ],
+  "sdg03": [
+    "good health",
+    "well-being",
+    "healthy lives",
+    "reproductive health",
+    "maternal health",
+    "child health"
+  ],
+  "sdg04": [
+    "quality education",
+    "inclusive education",
+    "lifelong learning"
+  ],
+  "sdg05": [
+    "gender equality",
+    "women and girls",
+    "violence against women"
+  ],
+  "sdg06": [
+    "drinking water",
+    "clean water",
+    "sanitation"
+  ],
+  "sdg07": [
+    "sustainable energy",
+    "affordable energy",
+    "clean energy",
+    "renewable energy",
+    "energy efficiency"
+  ],
+  "sdg08": [
+    "sustainable economic growth",
+    "decent work",
+    "inclusive growth",
+    "economic growth"
+  ],
+  "sdg09": [
+    "resilient infrastructure",
+    "inclusive industrialization",
+    "sustainable industrialization",
+    "sustainable innovation"
+  ],
+  "sdg10": [
+    "reduced inequalities",
+    "income inequal*",
+    "inclusivity",
+    "social inclusion",
+    "equal opportunit*",
+    "financial market regulation",
+    "responsible migration",
+    "least developed countries",
+    "migrant remittance*"
+  ],
+  "sdg11": [
+    "sustainable cities",
+    "sustainable transport",
+    "disaster risk"
+  ],
+  "sdg12": [
+    "sustainable consumption",
+    "responsible consumption",
+    "sustainable production"
+  ],
+  "sdg13": [
+    "climate action",
+    "climate change"
+  ],
+  "sdg14": [
+    "life below water",
+    "marine resources",
+    "ocean conserv*"
+  ],
+  "sdg15": [
+    "life on land",
+    "biodiversity",
+    "ecosystems",
+    "land degradation",
+    "desertification",
+    "drought"
+  ],
+  "sdg16": [
+    "peace",
+    "justice",
+    "strong institutions",
+    "accountab*"
+  ],
+  "sdg17": [
+    "global partnership",
+    "sustainable development",
+    "capacity-building",
+    "least developed countries",
+    "foreign direct investment",
+    "international cooperation",
+    "build back better",
+    "developing countries"
+  ],
+  "sdg": [
+    "sustainable development goal",
+    "sdg*",
+    "united nations",
+    "2030 agenda"
+  ],
+  "gc": [
+    "global compact",
+    "communication of progress",
+    "ungc",
+    "cop"
+  ],
+  "gri": [
+    "global reporting initiative",
+    "gri"
+  ],
+  "int": [
+    "integrated report",
+    "iirc"
+  ]
+}
