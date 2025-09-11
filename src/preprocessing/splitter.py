@@ -22,9 +22,9 @@ from src.utils.file_utils import load_text, save_json
 MIN_SEMANTIC_CHUNK_TOKENS = 10
 MAX_CHUNK_TOKENS = 512
 PARAPHRASE_MODEL = "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2"
-HF_BATCH_SIZE = 256  # tune per VRAM; try 32 if you hit OOM
+HF_BATCH_SIZE = 4096  # tune per VRAM; try 32 if you hit OOM
 
-# Enable sentence tokenizer
+# Enable sentence tokenizer (uncomment if punkt is missing on the machine)
 # nltk.download("punkt", quiet=True)
 
 # ---------- MPS/GPU helpers ----------
@@ -186,6 +186,32 @@ class NLTKSplitter(Splitter):
         text_content = load_text(txt_file)
         return {}
 
+# ---------- Sister-folder output helpers ----------
+def compute_out_root(root_dir: str) -> str:
+    """
+    Given a root_dir like .../data/sample_texts,
+    return a sister folder like .../data/sample_jsons.
+    If the last component ends with '_texts', swap to '_jsons'; else append '_jsons'.
+    """
+    root_dir = os.path.abspath(root_dir)
+    parent = os.path.dirname(root_dir)
+    last = os.path.basename(os.path.normpath(root_dir))
+    if last.endswith("_texts"):
+        last_out = last[:-6] + "jsons"
+    else:
+        last_out = last + "_jsons"
+    return os.path.join(parent, last_out)
+
+def get_output_path(results_path: str, splitter_name: str, root_dir: str) -> str:
+    """
+    Map .../root_dir/<subdirs>/results.txt
+      -> .../sister_root/<same subdirs>/splits_<splitter>.json
+    """
+    out_root = compute_out_root(root_dir)
+    rel_dir = os.path.relpath(os.path.dirname(results_path), start=root_dir)
+    out_dir = os.path.join(out_root, rel_dir)
+    return os.path.join(out_dir, f"splits_{splitter_name}.json")
+
 # ---------- File discovery ----------
 def find_results_files(root_dir: str) -> List[str]:
     matches = []
@@ -194,10 +220,6 @@ def find_results_files(root_dir: str) -> List[str]:
             if fn == "results.txt":
                 matches.append(os.path.join(dirpath, fn))
     return matches
-
-def get_output_path(results_path: str, splitter_name: str) -> str:
-    folder = os.path.dirname(results_path)
-    return os.path.join(folder, f"splits_{splitter_name}.json")
 
 def select_splitter(splitter_name: str, files: List[str]) -> Splitter:
     name = splitter_name.lower()
@@ -213,12 +235,12 @@ def select_splitter(splitter_name: str, files: List[str]) -> Splitter:
         raise ValueError("Unknown splitter. Choose from: semantic, naive, nltk, spacy")
 
 # ---------- Worker (runs in each process) ----------
-def _process_one(args: Tuple[str, str]) -> Tuple[str, str, str]:
-    fpath, splitter_name = args
+def _process_one(args: Tuple[str, str, str]) -> Tuple[str, str, str]:
+    fpath, splitter_name, root_dir = args
     try:
         splitter = select_splitter(splitter_name, [fpath])
         splits = splitter.split(fpath)
-        out_path = get_output_path(fpath, splitter_name)
+        out_path = get_output_path(fpath, splitter_name, root_dir)
         os.makedirs(os.path.dirname(out_path), exist_ok=True)
         save_json(out_path, splits)
         return ("ok", fpath, out_path)
@@ -243,13 +265,13 @@ def main(root_dir: str, splitter_name: str, workers: int):
         splitter = select_splitter(splitter_name, files)
         pbar = tqdm(files, desc=f"Splitting with '{splitter_name}'")
         for fpath in pbar:
-            status, fp, info = _process_one((fpath, splitter_name))
+            status, fp, info = _process_one((fpath, splitter_name, root_dir))
             if status == "err":
                 pbar.write(f"[ERROR] {fp}: {info}")
         return
 
     # Multi-process path
-    tasks = [(fp, splitter_name) for fp in files]
+    tasks = [(fp, splitter_name, root_dir) for fp in files]
     with ProcessPoolExecutor(max_workers=workers) as ex:
         futures = [ex.submit(_process_one, t) for t in tasks]
         for fut in tqdm(as_completed(futures), total=len(futures), desc=f"Splitting ({workers} workers)"):
