@@ -1,4 +1,5 @@
 import json
+import os
 import statistics
 from pathlib import Path
 
@@ -16,16 +17,16 @@ except ImportError:
     def count_tokens(text: str) -> int:
         return len(text.split())
 
-# Files to analyze
-paths = [
-    Path("results/sample_splits/basf_semantic_splits.json"),
-    Path("results/sample_splits/basf_semantic_splits_v2.json"),
-    Path("results/sample_splits/basf_naive_splits.json")
-]
+paths = []
+base_dir = os.path.join("data", "sample_texts")
+for dirname, _, filenames in os.walk(base_dir):
+    for filename in filenames:
+        if filename.endswith(".json"):
+            paths.append(os.path.join(dirname, filename))
 
 # Compute stats per file
 for path in paths:
-    if not path.exists():
+    if not os.path.exists(path):
         print(f"❌ File not found: {path}")
         continue
 
@@ -39,7 +40,7 @@ for path in paths:
         continue
 
     stats = {
-        "file": path.name,
+        "file": path,
         "total_sentences": len(token_counts),
         "min_tokens": min(token_counts),
         "max_tokens": max(token_counts),
@@ -50,7 +51,5 @@ for path in paths:
     print(stats)
 
 """
-{'file': 'basf_semantic_splits.json', 'total_sentences': 313, 'min_tokens': 8, 'max_tokens': 4274, 'mean_tokens': 850.0383386581469, 'median_tokens': 524}
-{'file': 'basf_semantic_splits_v2.json', 'total_sentences': 309, 'min_tokens': 8, 'max_tokens': 4274, 'mean_tokens': 861.042071197411, 'median_tokens': 531}
-{'file': 'basf_naive_splits.json', 'total_sentences': 6025, 'min_tokens': 1, 'max_tokens': 2084, 'mean_tokens': 41.35551867219917, 'median_tokens': 27}
+
 """
