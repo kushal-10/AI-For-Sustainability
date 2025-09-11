@@ -22,10 +22,10 @@ from src.utils.file_utils import load_text, save_json
 MIN_SEMANTIC_CHUNK_TOKENS = 10
 MAX_CHUNK_TOKENS = 512
 PARAPHRASE_MODEL = "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2"
-HF_BATCH_SIZE = 64  # tune per VRAM; try 32 if you hit OOM
+HF_BATCH_SIZE = 256  # tune per VRAM; try 32 if you hit OOM
 
 # Enable sentence tokenizer
-nltk.download("punkt", quiet=True)
+# nltk.download("punkt", quiet=True)
 
 # ---------- MPS/GPU helpers ----------
 def _torch_device():
