@@ -182,9 +182,45 @@ class SpacySplitter(Splitter):
         return {}
 
 class NLTKSplitter(Splitter):
+    """
+    Sentence-based splitter using NLTK's Punkt tokenizer.
+    - Cleans common PDF artifacts (line breaks, hyphenation, page numbers).
+    - Splits into sentences with nltk.sent_tokenize.
+    - Packs sentences greedily to respect the 512-token hard cap
+      using the shared `pack_sentences_greedy_strict` + tiktoken.
+    """
+
+    @staticmethod
+    def _ensure_punkt():
+        try:
+            nltk.data.find("tokenizers/punkt")
+        except LookupError:
+            nltk.download("punkt", quiet=True)
+
+    @staticmethod
+    def clean_pdf_text(raw_text: str) -> str:
+        text = raw_text.replace("\r\n", "\n").replace("\r", "\n")
+        text = re.sub(r"Page\s+\d+", "", text)       # drop "Page 12"
+        text = re.sub(r"-\n", "", text)              # de-hyphenate
+        text = re.sub(r"\n([a-z])", r" \1", text)    # join broken lines mid-sentence
+        text = re.sub(r"\n\s*\n+", "\n\n", text)     # collapse extra blank lines
+        text = re.sub(r"[ \t]+", " ", text)          # collapse spaces
+        text = text.replace("\u00ad", "").replace("\u2009", "").strip()
+        return text
+
     def split(self, txt_file) -> Dict:
-        text_content = load_text(txt_file)
-        return {}
+        self._ensure_punkt()
+        text = load_text(txt_file)
+        text = self.clean_pdf_text(text)
+
+        # Sentence tokenize
+        sentences = [s.strip() for s in nltk.sent_tokenize(text) if s.strip()]
+
+        # Pack into <=512-token chunks (uses tiktoken)
+        chunks = pack_sentences_greedy_strict(sentences, MAX_CHUNK_TOKENS)
+
+        # Return as {id: chunk}
+        return {str(i): c for i, c in enumerate(chunks)}
 
 # ---------- Sister-folder output helpers ----------
 def compute_out_root(root_dir: str) -> str:
@@ -290,3 +326,9 @@ if __name__ == "__main__":
                         help="Process files in parallel with N workers (recommend <= CPU cores).")
     args = parser.parse_args()
     main(args.root_dir, args.splitter, args.workers)
+
+
+
+"""
+python3 src/preprocessing/splitter.py --root_dir data/sample_texts --splitter nltk --workers 1
+"""

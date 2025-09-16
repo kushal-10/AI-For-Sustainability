@@ -51,5 +51,5 @@ for path in paths:
     print(stats)
 
 """
-
+python3 src/preprocessing/analyze_splitter.py
 """
