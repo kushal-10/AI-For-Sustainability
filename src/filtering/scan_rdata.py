@@ -1,27 +1,7 @@
 #!/usr/bin/env python3
 """
-extract_sdg_keywords.py
-
-- Reads:
-    1) All .RData files under --root (default: kw_data/)
-    2) Pre-exported JSONs under --json-dir (default: kw_data/_export_tmp/sdsn_queries)
-
-- For each row (must include at least 'sdg' and one of 'query' or 'keyword'):
-    • Collect `keyword` column values (if present)
-    • Parse/expand `query` strings into keywords/phrases:
-        - Handles quotes "…", angle <…>, braces {…}, parentheses (…)
-        - Boolean AND/OR, proximity W/n (treated as AND)
-        - Wildcards '*'/'%' kept ( '%' → '*' , '_' → '?' )
-        - Generates combinations for AND of OR-groups (e.g., A AND (B OR C) → A B, A C)
-    • Map SDG-XX → sdgN
-    • Deduplicate
-
-- Writes:
-    data/dbs/sdg_keywords.json
-    (optional) data/dbs/sdg_keywords.csv
-
 Usage:
-  python3 src/filtering/extract_sdg_keywords.py \
+  python3 src/filtering/scan_rdata.py \
       --root kw_data \
       --json-dir kw_data/_export_tmp/sdsn_queries \
       --out data/dbs/sdg_keywords.json \

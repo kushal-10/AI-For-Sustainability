@@ -2,13 +2,14 @@
 """
 base_filter.py
 
-Extensible filtering framework with optional wildcard support.
-
-- Walks data/jsons/<COMPANY>/<YEAR>/splits_semantic.json
-- Detects language from first 5 passages
-- Matches EN / (optionally) EN+DE keyword sets
-- Writes only *hit* passages to DuckDB
+Extensible filtering framework (fast path).
+Optimizations:
+- Optional wildcard expansion (--wildcard)
+- Combined regex per category (1 search/category/passage)
+- Fast language detection via pycld3 (fallback to langdetect)
+- Single DuckDB connection with Appender
 - Progress bar; only errors printed
+- Optional exact-hit enumeration (--enumerate-hits) [slower]
 
 Subclasses must implement:
   - category_names(self) -> List[str]
@@ -17,6 +18,8 @@ Subclasses must implement:
   - make_row(self, *, global_id, passage, company, year, language, hits_by_cat) -> Tuple[Any,...]
 """
 
+from __future__ import annotations
+
 import argparse
 import json
 import re
@@ -24,10 +27,16 @@ from pathlib import Path
 from typing import Any, Dict, Iterable, List, Tuple, Optional
 
 import duckdb
-from langdetect import detect, DetectorFactory
 from tqdm import tqdm
 
-DetectorFactory.seed = 42  # deterministic
+# ---- Language ID: prefer pycld3, fallback to langdetect ----
+try:
+    import pycld3  # type: ignore
+    _USE_CLD3 = True
+except Exception:
+    _USE_CLD3 = False
+    from langdetect import detect, DetectorFactory  # type: ignore
+    DetectorFactory.seed = 42  # deterministic
 
 
 # --------------------------- Small utils ---------------------------
@@ -44,15 +53,21 @@ def _first_n_passages(data: Dict[str, str], n: int = 5) -> List[str]:
     return [v for _, v in items[:n]]
 
 def _detect_is_german(passages: List[str]) -> Tuple[bool, str]:
+    """Return (is_german, best_label) using fast CLD3 if available."""
     labels: List[str] = []
     for p in passages:
         t = (p or "").strip()
         if not t:
             continue
-        try:
-            labels.append(detect(t))
-        except Exception:
-            pass
+        if _USE_CLD3:
+            res = pycld3.get_language(t[:2000])
+            if res and res.is_reliable:
+                labels.append(res.language)  # 'de', 'en', ...
+        else:
+            try:
+                labels.append(detect(t))
+            except Exception:
+                pass
     if not labels:
         return (False, "unknown")
     is_de = sum(1 for l in labels if l == "de") >= 2
@@ -66,21 +81,19 @@ def _token_to_regex(token: str, star_is_wildcard: bool) -> str:
     """
     Build a regex pattern from a keyword token.
     - If star_is_wildcard:
-        * trailing '*' after an alnum stem -> '\\w*'
-        * '*' elsewhere -> '.*'
-        * spaces -> '\\s+'
-      Otherwise, '*' is treated literally.
+        * trailing '*' after an alnum stem -> '\\w*'  (tight suffix)
+        * '*' elsewhere -> '.*'                        (loose span)
+        * spaces -> '\\s+'                             (robust whitespace)
+      Otherwise, '*' is literal.
     - Add '\\b' at start/end when the visible ends are alphanumeric.
     """
     raw = token.strip()
     if not raw:
         return ""
 
-    # Build escaped pattern character by character to control '*' and space behavior.
     pieces: List[str] = []
     for i, ch in enumerate(raw):
         if star_is_wildcard and ch == "*":
-            # trailing '*' -> \w*, otherwise .* (looser, can bridge across)
             if i == len(raw) - 1:
                 pieces.append(r"\w*")
             else:
@@ -88,12 +101,11 @@ def _token_to_regex(token: str, star_is_wildcard: bool) -> str:
         elif star_is_wildcard and ch == " ":
             pieces.append(r"\s+")
         else:
-            # normal escape
             pieces.append(re.escape(ch))
 
     pat_body = "".join(pieces)
 
-    # Word-boundaries if starts/ends with alnum (ignoring trailing '*')
+    # Word boundaries if starts/ends with alnum (ignore trailing '*')
     first_vis = next((c for c in raw if c != " "), raw[:1])
     last_vis = next((c for c in reversed(raw) if c != "*"), "")
     if _is_alnum(first_vis):
@@ -103,20 +115,52 @@ def _token_to_regex(token: str, star_is_wildcard: bool) -> str:
 
     return pat_body
 
-def _compile_patterns(keywords: Iterable[str], star_is_wildcard: bool = False) -> List[re.Pattern]:
-    pats: List[re.Pattern] = []
-    for kw in keywords:
-        pat = _token_to_regex(kw, star_is_wildcard)
+# --------- COMBINED REGEX (fast path) + optional per-token list (for enumeration) ---------
+
+def _compile_one(token: str, star_is_wildcard: bool) -> str:
+    return _token_to_regex(token, star_is_wildcard)
+
+def _combine_category_regex(tokens: List[str], star_is_wildcard: bool) -> Optional[re.Pattern]:
+    alts: List[str] = []
+    for t in tokens:
+        pat = _compile_one(t, star_is_wildcard)
         if pat:
-            pats.append(re.compile(pat, re.IGNORECASE))
-    return pats
+            alts.append(pat)
+    if not alts:
+        return None
+    combined = "(?:" + "|".join(alts) + ")"
+    return re.compile(combined, re.IGNORECASE)
 
-def _flatten_keyword_dict(dct: Dict[str, List[str]], star_is_wildcard: bool = False) -> Dict[str, List[re.Pattern]]:
-    return {cat: _compile_patterns(words, star_is_wildcard) for cat, words in dct.items()}
+def _compile_patterns_list(tokens: Iterable[str], star_is_wildcard: bool) -> List[re.Pattern]:
+    out: List[re.Pattern] = []
+    for t in tokens:
+        pat = _compile_one(t, star_is_wildcard)
+        if pat:
+            out.append(re.compile(pat, re.IGNORECASE))
+    return out
 
-def _find_hits(text: str, compiled_kw: Dict[str, List[re.Pattern]]) -> Dict[str, List[str]]:
+def _flatten_keyword_dict_combined(dct: Dict[str, List[str]], star_is_wildcard: bool) -> Dict[str, re.Pattern]:
+    out: Dict[str, re.Pattern] = {}
+    for cat, toks in dct.items():
+        cp = _combine_category_regex(toks, star_is_wildcard)
+        if cp is not None:
+            out[cat] = cp
+    return out
+
+def _flatten_keyword_dict_list(dct: Dict[str, List[str]], star_is_wildcard: bool) -> Dict[str, List[re.Pattern]]:
+    return {cat: _compile_patterns_list(words, star_is_wildcard) for cat, words in dct.items()}
+
+def _find_hits_fast(text: str, combined: Dict[str, re.Pattern]) -> Dict[str, List[str]]:
+    """Fast category-level detector. Returns ['__hit__'] when category matches."""
     hits: Dict[str, List[str]] = {}
-    for cat, pats in compiled_kw.items():
+    for cat, pat in combined.items():
+        hits[cat] = ["__hit__"] if pat.search(text) else []
+    return hits
+
+def _find_hits_enumerate(text: str, per_token: Dict[str, List[re.Pattern]]) -> Dict[str, List[str]]:
+    """Exact token enumeration (slower). Returns regex patterns that matched."""
+    hits: Dict[str, List[str]] = {}
+    for cat, pats in per_token.items():
         found: List[str] = []
         for p in pats:
             if p.search(text):
@@ -163,22 +207,35 @@ class Filter:
         table: Optional[str] = None,
         use_de_when_detected: bool = True,
         star_is_wildcard: bool = False,
+        enumerate_hits: bool = False,
     ):
         self.root = Path(root_path)
         self.star_is_wildcard = star_is_wildcard
+        self.enumerate_hits = enumerate_hits
 
         self.kw_en_raw = _load_json(Path(kw_en_path))
         self.kw_de_raw = _load_json(Path(kw_de_path))
 
-        self.compiled_en = _flatten_keyword_dict(self.kw_en_raw, self.star_is_wildcard)
-        self.compiled_de = _flatten_keyword_dict(self.kw_de_raw, self.star_is_wildcard)
+        # Fast combined regex (default path)
+        self.compiled_en_combined = _flatten_keyword_dict_combined(self.kw_en_raw, self.star_is_wildcard)
+        self.compiled_de_combined = _flatten_keyword_dict_combined(self.kw_de_raw, self.star_is_wildcard)
+
+        # Optional per-token lists (only used if enumerate_hits is True)
+        self.compiled_en_list = _flatten_keyword_dict_list(self.kw_en_raw, self.star_is_wildcard) if enumerate_hits else {}
+        self.compiled_de_list = _flatten_keyword_dict_list(self.kw_de_raw, self.star_is_wildcard) if enumerate_hits else {}
 
         self.out_db = Path(out_db)
         self._table_override = table
         self.use_de_when_detected = use_de_when_detected
 
         self._validate_categories()
-        self._init_db()
+
+        # Ensure DB dir and table; keep ONE connection open
+        self.out_db.parent.mkdir(parents=True, exist_ok=True)
+        cols = self.BASE_COLUMNS + self.hit_columns + self.extra_columns()
+        col_defs = ",\n                ".join(f"{name} {dtype}" for name, dtype in cols)
+        self._con = duckdb.connect(self.out_db.as_posix())
+        self._con.execute(f"CREATE TABLE IF NOT EXISTS {self.table} ({col_defs});")
 
     # ---------- Hooks for subclasses ----------
 
@@ -225,23 +282,28 @@ class Filter:
         if missing_de and self.use_de_when_detected:
             raise ValueError(f"Missing DE keyword categories: {sorted(missing_de)}")
 
-    def _init_db(self) -> None:
-        # Ensure folder exists (e.g., data/dbs/)
-        self.out_db.parent.mkdir(parents=True, exist_ok=True)
-        cols = self.BASE_COLUMNS + self.hit_columns + self.extra_columns()
-        col_defs = ",\n                ".join(f"{name} {dtype}" for name, dtype in cols)
-        con = duckdb.connect(self.out_db.as_posix())
-        con.execute(f"CREATE TABLE IF NOT EXISTS {self.table} ({col_defs});")
-        con.close()
+    # --- in base_filter.py ---
 
-    def _insert_rows(self, rows: List[Tuple[Any, ...]]) -> None:
+    def _append_rows(self, rows: list[tuple]) -> None:
+        """
+        Fast-path append using DuckDB appender; falls back to executemany() if not available.
+        """
         if not rows:
             return
-        cols = self.BASE_COLUMNS + self.hit_columns + self.extra_columns()
-        placeholders = ", ".join(["?"] * len(cols))
-        con = duckdb.connect(self.out_db.as_posix())
-        con.executemany(f"INSERT INTO {self.table} VALUES ({placeholders})", rows)
-        con.close()
+
+        # total columns = base + dynamic hit cols + any extras
+        ncols = len(self.BASE_COLUMNS) + len(self.hit_columns) + len(self.extra_columns())
+        placeholders = ",".join(["?"] * ncols)
+
+        try:
+            # Newer DuckDBs
+            with self._con.appender(self.table) as app:
+                for r in rows:
+                    app.append(r)
+        except AttributeError:
+            # Older DuckDBs (no .appender)
+            self._con.executemany(f"INSERT INTO {self.table} VALUES ({placeholders})", rows)
+
 
     def _iter_files(self) -> List[Tuple[str, str, Path]]:
         out: List[Tuple[str, str, Path]] = []
@@ -258,22 +320,34 @@ class Filter:
                     out.append((company, year, fpath))
         return out
 
-    def _merge_compiled(self, use_german: bool) -> Dict[str, List[re.Pattern]]:
+    def _merge_combined(self, use_german: bool) -> Dict[str, re.Pattern]:
+        if use_german and self.use_de_when_detected:
+            return {c: self.compiled_en_combined.get(c, None) or self.compiled_de_combined.get(c, None)
+                    for c in self.category_names()
+                    if (self.compiled_en_combined.get(c) or self.compiled_de_combined.get(c))}
+        else:
+            return {c: self.compiled_en_combined[c] for c in self.category_names() if c in self.compiled_en_combined}
+
+    def _merge_list(self, use_german: bool) -> Dict[str, List[re.Pattern]]:
+        if not self.enumerate_hits:
+            return {}
         if use_german and self.use_de_when_detected:
             merged: Dict[str, List[re.Pattern]] = {}
             for c in self.category_names():
-                merged[c] = self.compiled_en.get(c, []) + self.compiled_de.get(c, [])
+                merged[c] = self.compiled_en_list.get(c, []) + self.compiled_de_list.get(c, [])
             return merged
         else:
-            return {c: self.compiled_en.get(c, []) for c in self.category_names()}
+            return {c: self.compiled_en_list.get(c, []) for c in self.category_names()}
 
-    # ---------- Public pipeline ----------
+    # ---------- Per-file processing ----------
 
-    def process_one(self, company: str, year: str, json_path: Path) -> int:
+    def _rows_for_file(self, company: str, year: str, json_path: Path) -> List[Tuple[Any, ...]]:
         data = _load_json(json_path)
         passages_first5 = _first_n_passages(data, 5)
         is_german, best_label = _detect_is_german(passages_first5)
-        compiled = self._merge_compiled(use_german=is_german)
+
+        combined = self._merge_combined(use_german=is_german)
+        per_token = self._merge_list(use_german=is_german) if self.enumerate_hits else {}
 
         company_clean = _clean_company_for_id(company)
         rows: List[Tuple[Any, ...]] = []
@@ -284,7 +358,11 @@ class Filter:
             if not text:
                 continue
 
-            hits = _find_hits(text, compiled)
+            if self.enumerate_hits:
+                hits = _find_hits_enumerate(text, per_token)
+            else:
+                hits = _find_hits_fast(text, combined)
+
             if not _any_hits(hits):
                 continue
 
@@ -301,8 +379,9 @@ class Filter:
             )
             rows.append(row)
 
-        self._insert_rows(rows)
-        return len(rows)
+        return rows
+
+    # ---------- Public pipeline ----------
 
     def run(self) -> None:
         files = self._iter_files()
@@ -315,14 +394,16 @@ class Filter:
 
         for company, year, fpath in tqdm(files, desc=f"Filtering -> {self.table}", unit="file"):
             try:
-                inserted = self.process_one(company, year, fpath)
-                total_rows += inserted
+                rows = self._rows_for_file(company, year, fpath)
+                self._append_rows(rows)
+                total_rows += len(rows)
             except Exception as e:
                 errors.append(f"[ERROR] {company}/{year} ({fpath}): {e}")
 
         for line in errors:
             print(line)
         print(f"Done. Files: {len(files)} | Rows inserted: {total_rows} -> {self.table}")
+        self._con.close()
 
 
 # -------- CLI helper (used by subclasses) --------
@@ -336,4 +417,6 @@ def build_cli(parser_desc: str) -> argparse.ArgumentParser:
     ap.add_argument("--table", default=None, help="Override table name (optional)")
     ap.add_argument("--wildcard", action="store_true",
                     help="Treat '*' as wildcard: trailing '*' -> \\w*, internal '*' -> .* ; spaces -> \\s+.")
+    ap.add_argument("--enumerate-hits", action="store_true",
+                    help="Return exact matched tokens (slower). Default stores ['__hit__'] per hit category.")
     return ap

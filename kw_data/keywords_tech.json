@@ -1,6 +1,4 @@
-{
-  "ai_ml": [
-    "artificial intelligence",
+{"ai_ml": ["artificial intelligence",
     "ai",
     "business intelligence",
     "machine learning",
@@ -21,10 +19,8 @@
     "intelligent process automation",
     "explainability",
     "gan",
-    "generative adversarial network"
-  ],
-  "cloud_computing": [
-    "cloud computing",
+    "generative adversarial network"],
+  "cloud_computing": ["cloud computing",
     "stream computing",
     "graph computing",
     "inmemory computing",
@@ -38,10 +34,8 @@
     "eb-level storage",
     "internet of things",
     "iot",
-    "cyber-physical systems"
-  ],
-  "big_data_blockchain": [
-    "big data",
+    "cyber-physical systems"],
+  "big_data_blockchain": ["big data",
     "data mining",
     "text mining",
     "data visualization",
@@ -61,10 +55,8 @@
     "financial technology",
     "digital finance",
     "internet finance",
-    "quantitative finance"
-  ],
-  "applications_practice": [
-    "mobile internet",
+    "quantitative finance"],
+  "applications_practice": ["mobile internet",
     "industrial internet",
     "internet medical",
     "e-commerce",
@@ -91,6 +83,4 @@
     "smart grid",
     "intelligent marketing",
     "digital marketing",
-    "unmanned retail"
-  ]
-}
+    "unmanned retail"]}

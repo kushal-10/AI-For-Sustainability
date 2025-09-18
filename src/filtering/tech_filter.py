@@ -53,3 +53,12 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+"""
+python3 src/filtering/tech_filter.py \
+  --root data/jsons \
+  --kw_en kw_data/keywords_tech.json \
+  --kw_de kw_data/keywords_tech_de.json \
+  --out_db data/dbs/tech_hits.duckdb \
+  --table tech_hits
+"""
