@@ -54,8 +54,10 @@ def main():
         kw_de_path=args.kw_de,
         out_db=args.out_db,
         table=args.table,
-        star_is_wildcard=args.wildcard,  # enable wildcard behavior if requested
+        star_is_wildcard=args.wildcard,
+        enumerate_hits=getattr(args, "enumerate_hits", True),  # << ensure True if flag missing
     ).run()
+
 
 
 if __name__ == "__main__":
