@@ -1,232 +1,179 @@
 #!/usr/bin/env python3
-import argparse
-import json
-from pathlib import Path
-from typing import Dict, Tuple, List
-
+import os, json, glob, argparse, datetime
+from typing import List, Dict, Any
 import duckdb
 from openai import OpenAI
 
-# Reuse your object builder
-from src.gpt_classifier.objects import create_batch_object
+from src.gpt_classifier.objects import (
+    create_batch_object_sdg,
+    create_batch_object_tech,
+)
 
-TEXTS_ROOT = Path("data/texts")
-SCORES_ROOT = Path("data/scores_csv")  # only to synthesize csv_path for create_batch_object
-OUT_ROOT = Path("data/classification_batches")
+# -------- Defaults (no CLI args for these) --------
+SDG_DB_PATH   = "data/dbs/sdg_hits.duckdb"
+SDG_TABLE     = "sdg_hits"
+TECH_DB_PATH  = "data/dbs/tech_hits.duckdb"
+TECH_TABLE    = "tech_hits"
 
+OUT_DIR_SDG   = "data/batches/sdgs"
+OUT_DIR_TECH  = "data/batches/tech"
+BATCH_LIMIT   = 10_000
+BATCH_GLOB    = "*.jsonl"
+COMPLETION_WINDOW = "24h"
+ENDPOINT = "/v1/chat/completions"
 
-def parse_custom_id(custom_id: str) -> Tuple[str, str, str]:
-    """
-    custom_id format: task||{sentence_id}||{COMPANY}||{YEAR}
-    Returns (sentence_id, company, year)
-    """
-    parts = (custom_id or "").split("||")
-    if len(parts) < 4:
-        raise ValueError(f"Bad custom_id: {custom_id!r}")
-    _, sid, company, year = parts[:4]
-    return sid, company, year
+# -------- Helpers --------
 
+def ensure_dir(p: str):
+    os.makedirs(p, exist_ok=True)
 
-def _jsonl_rotating_writer(batch_dir: Path, prefix: str = "batch", batch_lines: int = 20000):
-    """Yield write_line(obj) that rotates files every `batch_lines` lines."""
-    batch_dir.mkdir(parents=True, exist_ok=True)
-    idx = 0
-    count = 0
-    f = None
-
-    def _open_new():
-        nonlocal f, idx, count
-        if f:
-            f.close()
-        path = batch_dir / f"{prefix}_{idx}.jsonl"
-        f = open(path, "w", encoding="utf-8")
-        count = 0
-
-    _open_new()
-
-    def write_line(obj: dict):
-        nonlocal f, idx, count
-        f.write(json.dumps(obj, ensure_ascii=False) + "\n")
-        count += 1
-        if count >= batch_lines:
-            f.close()
-            idx += 1
-            _open_new()
-
-    def close_and_report():
-        nonlocal f, idx, count
-        if f:
-            f.close()
-        return idx + (1 if count > 0 else 0)
-
-    return write_line, close_and_report
-
-
-# cache for splits.json per (company, year)
-_SPLITS_CACHE: Dict[Tuple[str, str], Dict[str, str]] = {}
-
-
-def load_sentence(company: str, year: str, sentence_id: str) -> str | None:
-    """
-    Load sentence text from data/texts/{company}/{year}/splits.json by string(sentence_id).
-    """
-    key = (company, year)
-    if key not in _SPLITS_CACHE:
-        p = TEXTS_ROOT / company / year / "splits.json"
-        if not p.exists():
-            return None
-        try:
-            with open(p, "r", encoding="utf-8") as fh:
-                _SPLITS_CACHE[key] = json.load(fh)
-        except Exception:
-            return None
-    try:
-        return _SPLITS_CACHE[key].get(str(int(sentence_id)))
-    except Exception:
+def _maybe_parse_json(v: Any):
+    if v is None:
         return None
+    if isinstance(v, (list, dict)):
+        return v
+    if isinstance(v, str):
+        s = v.strip()
+        if (s.startswith("[") and s.endswith("]")) or (s.startswith("{") and s.endswith("}")):
+            try:
+                return json.loads(s)
+            except Exception:
+                return None
+    return None
 
+def guess_passage_col(cols: List[str]) -> str:
+    for cand in ("passage", "sentence", "text", "content"):
+        if cand in cols:
+            return cand
+    raise ValueError("Could not find passage column (tried: passage/sentence/text/content).")
 
-def synth_csv_path(company: str, year: str) -> str:
-    """
-    `create_batch_object` expects a csv_path whose last segments resolve to .../{company}/{year}/...
-    We synthesize: data/scores_csv/{company}/{year}/similarity_scores.csv
-    """
-    return str(SCORES_ROOT / company / year / "similarity_scores.csv")
+def guess_global_id_col(cols: List[str]) -> str:
+    for cand in ("global_id", "Global_ID", "GLOBAL_ID", "id", "uid", "row_id"):
+        if cand in cols:
+            return cand
+    raise ValueError("global_id column not found (tried: global_id/Global_ID/GLOBAL_ID/id/uid/row_id).")
 
+def guess_hit_cols_sdg(cols: List[str]) -> List[str]:
+    return [c for c in cols if c.startswith("hits_sdg")]
 
-def create_batches(
-    db_path: Path,
-    out_dir: Path,
-    batch_lines: int = 20000,
-    model: str = "gpt-4.1-mini",
-) -> None:
-    """
-    Create JSONL batch files for all results where raw != '[0, False]'.
-    """
-    if not db_path.exists():
-        raise FileNotFoundError(f"DuckDB not found: {db_path}")
-    out_dir.mkdir(parents=True, exist_ok=True)
+def guess_hit_cols_tech(cols: List[str]) -> List[str]:
+    prefixes = ("hits_ai_ml", "hits_cloud_computing", "hits_big_data_blockchain", "hits_applications_practice")
+    return [c for c in cols if c.startswith(prefixes)]
 
-    con = duckdb.connect(db_path.as_posix())
-    try:
-        rows: List[Tuple[str]] = con.execute(
-            "SELECT custom_id FROM results WHERE raw != '[0, False]'"
-        ).fetchall()
-    finally:
-        con.close()
+def build_hits_dict(row: dict, hit_cols: List[str]) -> Dict[str, List[str]]:
+    out = {}
+    for c in hit_cols:
+        parsed = _maybe_parse_json(row.get(c))
+        if isinstance(parsed, list) and parsed:
+            patterns = [p for p in parsed if isinstance(p, str) and p.strip()]
+            if patterns:
+                out[c] = patterns
+    return out
 
-    if not rows:
-        print("No rows to enqueue (all are [0, False]).")
+def chunk_write(jsonl_objs: List[dict], out_dir: str, prefix: str, limit: int = BATCH_LIMIT) -> List[str]:
+    ensure_dir(out_dir)
+    ts = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
+    paths = []
+    for i in range(0, len(jsonl_objs), limit):
+        shard = i // limit + 1
+        path = os.path.join(out_dir, f"{prefix}_{ts}_part{shard:04d}.jsonl")
+        with open(path, "w", encoding="utf-8") as f:
+            for obj in jsonl_objs[i:i+limit]:
+                f.write(json.dumps(obj, ensure_ascii=False) + "\n")
+        paths.append(path)
+    return paths
+
+# -------- Build (DuckDB -> JSONL) --------
+
+def build_batches_from_duckdb(db_path: str, table: str, mode: str, out_dir: str) -> List[str]:
+    con = duckdb.connect(db_path, read_only=True)
+    df = con.execute(f"SELECT * FROM {table}").fetchdf()
+    cols = list(df.columns)
+
+    id_col = guess_global_id_col(cols)
+    passage_col = guess_passage_col(cols)
+
+    if mode == "sdg":
+        hit_cols = guess_hit_cols_sdg(cols)
+        if not hit_cols:
+            raise ValueError("No SDG hit columns found (expected columns starting with 'hits_sdg').")
+    else:
+        hit_cols = guess_hit_cols_tech(cols)
+        if not hit_cols:
+            raise ValueError("No TECH hit columns found (expected columns starting with hits_ai_ml/cloud_computing/big_data_blockchain/applications_practice).")
+
+    objs = []
+    for _, r in df.iterrows():
+        row = r.to_dict()
+        hits_dict = build_hits_dict(row, hit_cols)
+        if not hits_dict:
+            continue
+        gid = str(row[id_col])
+        passage = str(row[passage_col])
+        if mode == "sdg":
+            obj = create_batch_object_sdg(passage, gid, hits_dict)
+        else:
+            obj = create_batch_object_tech(passage, gid, hits_dict)
+        objs.append(obj)
+
+    prefix = "sdg_batch" if mode == "sdg" else "tech_batch"
+    paths = chunk_write(objs, out_dir, prefix, limit=BATCH_LIMIT)
+    print(f"[OK] {mode.upper()}: built {len(objs)} requests into {len(paths)} file(s):")
+    for p in paths: print("   ", p)
+    return paths
+
+# -------- Submit (JSONL -> OpenAI Batch) --------
+
+def submit_jsonl_batches(dirs: List[str]):
+    files = []
+    for d in dirs:
+        files.extend(sorted(glob.glob(os.path.join(d, BATCH_GLOB))))
+    if not files:
+        print("[INFO] No JSONL batch files found.")
         return
 
-    write_line, close_and_report = _jsonl_rotating_writer(out_dir, prefix="batch", batch_lines=batch_lines)
+    client = OpenAI()  # uses OPENAI_API_KEY
+    manifest = []
+    for path in files:
+        with open(path, "rb") as f:
+            file_obj = client.files.create(file=f, purpose="batch")
+        batch = client.batches.create(
+            input_file_id=file_obj.id,
+            endpoint=ENDPOINT,
+            completion_window=COMPLETION_WINDOW,
+        )
+        print(f"[OK] Submitted {os.path.basename(path)} -> batch_id={batch.id} status={batch.status}")
+        manifest.append({"jsonl_path": path, "file_id": file_obj.id, "batch_id": batch.id, "status": batch.status})
 
-    total = 0
-    written = 0
-    missing_sentence = 0
+    # Optional: write a small manifest next to each dir
+    for d in set(os.path.dirname(p) for p in files):
+        mpath = os.path.join(d, "manifest.json")
+        prev = []
+        if os.path.exists(mpath):
+            try:
+                with open(mpath, "r", encoding="utf-8") as f:
+                    prev = json.load(f)
+            except Exception:
+                prev = []
+        prev.extend([m for m in manifest if os.path.dirname(m["jsonl_path"]) == d])
+        with open(mpath, "w", encoding="utf-8") as f:
+            json.dump(prev, f, ensure_ascii=False, indent=2)
 
-    for (custom_id,) in rows:
-        total += 1
-        try:
-            sid, company, year = parse_custom_id(custom_id)
-        except Exception:
-            continue
-
-        sent = load_sentence(company, year, sid)
-        if not sent or not isinstance(sent, str) or not sent.strip():
-            missing_sentence += 1
-            continue
-
-        csv_path = synth_csv_path(company, year)
-        obj = create_batch_object(sent.strip(), sid, csv_path, model=model)
-        # Force the custom_id to match exactly
-        obj["custom_id"] = custom_id
-
-        write_line(obj)
-        written += 1
-
-    files = close_and_report()
-    print(f"Created {files} batch file(s) in {out_dir}")
-    print(f"Candidates: {total} | Written: {written} | Missing sentences: {missing_sentence}")
-
-
-def submit_batches(
-    batch_dir: Path,
-    completion_window: str = "24h",
-) -> None:
-    """
-    Upload each .jsonl in `batch_dir` and start a Batch job.
-    Prints: file path -> batch_file_id -> batch_job.id
-    """
-    client = OpenAI()
-    batch_files = sorted(p for p in batch_dir.glob("*.jsonl") if p.is_file())
-    if not batch_files:
-        print(f"No .jsonl files found in {batch_dir}")
-        return
-
-    for path in batch_files:
-        try:
-            with open(path, "rb") as fh:
-                up = client.files.create(file=fh, purpose="batch")
-            job = client.batches.create(
-                input_file_id=up.id,
-                endpoint="/v1/chat/completions",
-                completion_window=completion_window,
-            )
-            print("=" * 80)
-            print(f"Local file: {path}")
-            print(f"Uploaded file_id: {up.id}")
-            print(f"Batch job id: {job.id}")
-            print(f"Status: {getattr(job, 'status', '-')}")
-        except Exception as e:
-            print("=" * 80)
-            print(f"ERROR submitting {path}: {e}")
-
+# -------- CLI (exactly two options) --------
 
 def main():
-    parser = argparse.ArgumentParser(description="Create and/or submit classifier batches for non-[0, False] rows.")
-    parser.add_argument("--db", default="data/outputs_merged/classifications.duckdb", help="DuckDB path (with table `results`).")
-    parser.add_argument("--outdir", default=str(OUT_ROOT), help="Output dir for JSONL batches.")
-    parser.add_argument("--batch-lines", type=int, default=20000, help="Max lines per JSONL file.")
-    parser.add_argument("--model", default="gpt-4.1-mini", help="Model for chat completions.")
-    parser.add_argument("--make-batches", action="store_true", help="Create JSONL batches.")
-    parser.add_argument("--submit", action="store_true", help="Submit existing JSONL batches from --outdir.")
-    parser.add_argument("--completion-window", default="24h", help="Batch completion window (e.g., 24h, 48h).")
+    ap = argparse.ArgumentParser(description="Build or submit OpenAI batch JSONL files.")
+    # Exactly two flags only; everything else uses defaults above.
+    g = ap.add_mutually_exclusive_group(required=True)
+    g.add_argument("--build", action="store_true", help="Build batches (DuckDB -> JSONL).")
+    g.add_argument("--submit", action="store_true", help="Submit all JSONL batches.")
+    args = ap.parse_args()
 
-    args = parser.parse_args()
-    out_dir = Path(args.outdir)
-
-    if args.make-batches:
-        create_batches(
-            db_path=Path(args.db),
-            out_dir=out_dir,
-            batch_lines=args.batch_lines,
-            model=args.model,
-        )
-
-    if args.submit:
-        submit_batches(
-            batch_dir=out_dir,
-            completion_window=args.completion_window,
-        )
-
-    if not args.make-batches and not args.submit:
-        parser.print_help()
-
+    if args.build:
+        build_batches_from_duckdb(SDG_DB_PATH, SDG_TABLE, "sdg", OUT_DIR_SDG)
+        build_batches_from_duckdb(TECH_DB_PATH, TECH_TABLE, "tech", OUT_DIR_TECH)
+    elif args.submit:
+        submit_jsonl_batches([OUT_DIR_SDG, OUT_DIR_TECH])
 
 if __name__ == "__main__":
     main()
-
-"""
-python3 src/gpt_classifier/batches.py \
-  --make-batches \
-  --db data/outputs_merged/classifications.duckdb \
-  --outdir data/classification_batches \
-  --batch-lines 20000 \
-  --model gpt-4.1-mini
-
-python3 src/gpt_classifier/batches.py \
-  --submit \
-  --outdir data/classification_batches \
-  --completion-window 24h
-"""

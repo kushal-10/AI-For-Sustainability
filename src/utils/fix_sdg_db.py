@@ -171,6 +171,4 @@ python3 src/utils/fix_sdg_db.py \
   --kw_en kw_data/keywords_sdg.json \
   --kw_de kw_data/keywords_sdg_de.json \
   --wildcard
-
-
 """

@@ -1,51 +1,109 @@
-from openai import OpenAI
+#!/usr/bin/env python3
+# Prompts + object builders. No I/O here.
 
-SYS_PROMPT = """
-You are given a SENTENCE to classify. Perform the following steps:
+# -------------------- SYSTEM PROMPTS (short, one mixed example each) --------------------
 
-1. Symbolic vs Substantive Classification
-   - SYMBOLIC = Mentions sustainability or AI in vague, aspirational, or rhetorical terms (e.g., commitments, values, goals) without evidence of concrete action, resources, or measurable outcomes.  
-   - SUBSTANTIVE = Mentions sustainability or AI with clear evidence of implementation, resource allocation, measurable results, projects, or operational changes.  
+SYS_PROMPT_SDG = r"""
+You analyze corporate disclosures for SDG mentions.
+Input:
+- Passage (plain text).
+- SDG_HITS: JSON with lists of REGEX PATTERNS that ALREADY MATCHED the passage.
+Do NOT match yourself.
 
-2. Sentiment Classification
-   - POSITIVE = The sentence expresses a beneficial, optimistic, or favorable view of sustainability/AI.  
-   - NEGATIVE = The sentence expresses a critical, risk-oriented, or unfavorable view of sustainability/AI.  
+Task:
+For EACH regex pattern in SDG_HITS, classify the passage’s mention as "symbolic" or "substantive".
 
-Output Format (strict):  
-Return a single Python-style list with exactly two elements:  
-[SYMBOLIC/SUBSTANTIVE, POSITIVE/NEGATIVE]
+Definitions:
+- symbolic: vague/aspirational, policy or compliance-only (e.g., legal citations), generic intentions without concrete actions, resources, timelines, KPIs, or measured outcomes.
+- substantive: concrete implementation/results (projects, pilots, budgets/teams, timelines, KPIs/metrics, verified/assured reporting, quantified impact).
 
-Examples:  
-- [SYMBOLIC, POSITIVE]  
-- [SUBSTANTIVE, NEGATIVE]  
-- [SUBSTANTIVE, POSITIVE]  
-- [SYMBOLIC, NEGATIVE]  
+Output:
+- ONLY a JSON/dict
+- KEYS: the EXACT regex strings (preserve escaping)
+- VALUES: "symbolic" or "substantive"
+- No explanations or extra fields.
+
+Example (one symbolic, one substantive):
+Input SDG_HITS:
+{
+  "hits_sdg13": ["\\benvironmental\\s+impact\\b", "\\bgreenhouse\\s+gas\\w*\\b"]
+}
+Passage:
+"We aim to reduce our environmental impact. In 2024 we cut Scope 2 greenhouse gases by 12% via PPAs (assured)."
+Expected output:
+{
+  "\\benvironmental\\s+impact\\b": "symbolic",
+  "\\bgreenhouse\\s+gas\\w*\\b": "substantive"
+}
 """
 
+SYS_PROMPT_TECH = r"""
+You analyze corporate disclosures for technology mentions.
+Input:
+- Passage (plain text).
+- TECH_HITS: JSON with lists of REGEX PATTERNS that ALREADY MATCHED the passage.
+Do NOT match yourself.
 
-def create_batch_object(sentence: str, sentence_id: str, csv_path: str, model="gpt-4.1-mini"):
+Task:
+For EACH regex pattern in TECH_HITS, classify the passage’s mention as "symbolic" or "substantive".
 
-    splits = csv_path.split("/")
-    batch_obj = {
-        "custom_id": f"task||{sentence_id}||{splits[-3]}||{splits[-2]}",
+Definitions:
+- symbolic: vague/aspirational/strategy-only; no concrete implementation or measured outcomes.
+- substantive: concrete use or results (named systems/tools, pilots/production, KPIs/metrics, budgets/teams, timelines, specific integrations/vendors, audits/assurance).
+
+Output:
+- ONLY a JSON/dict
+- KEYS: the EXACT regex strings (preserve escaping)
+- VALUES: "symbolic" or "substantive"
+- No explanations or extra fields.
+
+Example (one symbolic, one substantive):
+Input TECH_HITS:
+{
+  "hits_ai_ml": ["\\bartificial\\s+intelligence\\b"],
+  "hits_cloud_computing": ["\\bcloud\\s+computing\\b"]
+}
+Passage:
+"We plan to explore artificial intelligence next year. 40% of data workloads now run in production on cloud computing with monitored SLAs."
+Expected output:
+{
+  "\\bartificial\\s+intelligence\\b": "symbolic",
+  "\\bcloud\\s+computing\\b": "substantive"
+}
+"""
+
+# -------------------- BATCH OBJECT BUILDERS --------------------
+
+def create_batch_object_sdg(passage: str, global_id: str, sdg_hits: dict, model: str = "gpt-4.1-mini"):
+    user_content = f"Passage:\n{passage}\n\nSDG_HITS (regex patterns already matched):\n{sdg_hits}"
+    return {
+        "custom_id": f"sdg||{global_id}",
         "method": "POST",
         "url": "/v1/chat/completions",
         "body": {
-            # This is what you would have in your Chat Completions API call
             "model": model,
             "messages": [
-                {
-                    "role": "system",
-                    "content": SYS_PROMPT
-                },
-                {
-                    "role": "user",
-                    "content": sentence
-                }
+                {"role": "system", "content": SYS_PROMPT_SDG},
+                {"role": "user", "content": user_content}
             ],
-            "max_tokens": 50
+            "max_tokens": 150,
+            "temperature": 0
         }
     }
 
-    return batch_obj
-
+def create_batch_object_tech(passage: str, global_id: str, tech_hits: dict, model: str = "gpt-4.1-mini"):
+    user_content = f"Passage:\n{passage}\n\nTECH_HITS (regex patterns already matched):\n{tech_hits}"
+    return {
+        "custom_id": f"tech||{global_id}",
+        "method": "POST",
+        "url": "/v1/chat/completions",
+        "body": {
+            "model": model,
+            "messages": [
+                {"role": "system", "content": SYS_PROMPT_TECH},
+                {"role": "user", "content": user_content}
+            ],
+            "max_tokens": 150,
+            "temperature": 0
+        }
+    }
