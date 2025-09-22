@@ -25,7 +25,13 @@ try:
 except Exception as e:
     raise SystemExit("openai package not installed. `pip install openai`") from e
 
-ACTIVE_STATES = {"validating", "in_progress", "finalizing", "cancelling"}
+ACTIVE_STATES = {
+                # "validating",
+                #  "in_progress",
+                 # "finalizing",
+                 # "cancelling",
+                 "completed"
+                }
 
 def human_ts(ts: Any) -> str:
     try:
