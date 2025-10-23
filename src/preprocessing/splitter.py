@@ -8,6 +8,7 @@ from concurrent.futures import ProcessPoolExecutor, as_completed
 
 from tqdm import tqdm
 from langchain_experimental.text_splitter import SemanticChunker
+
 # NOTE: langchain_community.HuggingFaceEmbeddings is deprecated; prefer langchain_huggingface
 try:
     from langchain_huggingface import HuggingFaceEmbeddings
