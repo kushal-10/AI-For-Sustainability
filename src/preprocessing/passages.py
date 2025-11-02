@@ -106,6 +106,4 @@ Files scanned:            1420
 Total sentences:          4616633
 Sentences with any SDG:   50288
 Hit rate:                 1.09%
-
-Modularity - FIx module classes, make a CI/CD pipeline, with updated results, store dataset
 """
