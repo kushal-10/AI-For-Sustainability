@@ -44,10 +44,10 @@ def _get_token_counter():
     """
     try:
         import tiktoken  # local import per process
-        enc = tiktoken.get_encoding("cl100k_base")
+        enc = tiktoken.get_encoding("o200k_base")
         def count_tokens(text: str) -> int:
             return len(enc.encode(text or ""))
-        tokenizer_name = "tiktoken cl100k_base"
+        tokenizer_name = "tiktoken o200k_base"
     except Exception:
         def count_tokens(text: str) -> int:
             return len(text.split()) if text else 0
@@ -201,15 +201,14 @@ def main():
 if __name__ == "__main__":
     main()
 
-
 """
 files_scanned: 1420
 total_sentences: 620177
-mean_tokens: 350.4602911749388
-median_tokens: 431.0
+mean_tokens: 341.7491038848587
+median_tokens: 413.0
 min_tokens: 1
-max_tokens: 512
-tokenizer_used: tiktoken cl100k_base
+max_tokens: 788
+tokenizer_used: tiktoken o200k_base
 read_errors: 0
 proc_errors: 0
 workers: 8
