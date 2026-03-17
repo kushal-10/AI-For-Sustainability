@@ -219,8 +219,6 @@ Reasoning procedure (apply silently for each pattern):
   Step 3 — Synthesise:
     - If all three lenses agree → assign that label.
     - If two of three agree → assign the majority label.
-    - If all three disagree (not possible with binary labels, but included for robustness) 
-      → default to "symbolic" (conservative prior: burden of proof is on substantive).
 
 Output:
 - ONLY a JSON/dict (no reasoning in the output)
