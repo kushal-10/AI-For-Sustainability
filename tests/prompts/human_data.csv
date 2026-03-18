@@ -3,12 +3,12 @@ id,GPT,coder1,coder2,cross
 2,sub,sub,sub,sub
 3,sub,sub,sub,sub
 4,sym,sym,sym,sym
-5,sub,sym,sub,sub
+5,sub,sub,sub,sub
 6,sym,sym,sym,sym
 7,sym,sym,sym,sym
 8,sub,sym,sub,sym
 9,sym,sym,sym,sym
-10,sub,sym,sub,sub
+10,sub,sub,sub,sub
 11,sym,sym,sym,sym
 12,sym,sym,sym,sym
 13,sub,sym,sym,sym
@@ -45,11 +45,11 @@ id,GPT,coder1,coder2,cross
 44,sub,sub,sym,sym
 45,sym,sym,sym,sym
 46,sub,sub,sub,sub
-47,sub,sym,sub,sub
+47,sub,sub,sub,sub
 48,sym,sym,sym,sym
 49,sub,sub,sub,sub
 50,sub,sub,sub,sub
-51,sym,sym,sub,sub
+51,sym,sub,sub,sub
 52,sub,sub,sub,sub
 53,sym,sym,sub,sym
 54,sub,sub,sub,sub
@@ -67,7 +67,7 @@ id,GPT,coder1,coder2,cross
 66,sub,sub,sub,sub
 67,sym,sym,sym,sym
 68,sym,sym,sym,sym
-69,sym,sym,sub,sub
+69,sym,sub,sub,sub
 70,sym,sym,sym,sym
 71,sym,sym,sym,sym
 72,sub,sub,sub,sub
@@ -85,7 +85,7 @@ id,GPT,coder1,coder2,cross
 84,sym,sym,sym,sym
 85,sub,sub,sym,sub
 86,sub,sym,sub,sub
-87,sub,sym,sub,sub
+87,sub,sub,sub,sub
 88,sym,sym,sym,sym
 89,sym,sub,sym,sub
 90,sym,sym,sym,sym
