@@ -1,0 +1,6 @@
+{
+  "zero_shot": "batch_69baa29342c88190be6479c5948f6b35",
+  "few_shot": "batch_69baa29601c88190940ea2a072285c53",
+  "cot": "batch_69baa2988f688190aa30eb018d4f9415",
+  "tot": "batch_69baa29c0168819081bcf0c2405d2a29"
+}
