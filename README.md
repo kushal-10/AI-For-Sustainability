@@ -16,50 +16,15 @@ source .venv/bin/activate
 pip install -r requirements.txt
 ```
 
-The data - PDF files for the annual reports should be stored in `data/reports/FIRM/YEAR.pdf`
+## Versions
 
-## Pre-Processing
+| Version | Branch/Tag | Description |
+|---------|-----------|-------------|
+| v1.0.0 | `legacy` | Full pipeline from raw PDFs → Filtering → DuckDB → SDG/Tech classification |
+| v2.0.0 | `main` | Starts from SDG/Tech hits — new prompts, evaluation, analysis |
 
-1. Convert files from `.pdf` to `.txt` using a base PyMuPDF package. This will create the text files under `data/texts/FIRM/YEAR/results.txt`
+> To reproduce v1.0.0 preprocessing from scratch, checkout the `legacy` branch.
 
-```python
-python3 src/preprocessing/pdf2text.py
-```
-
-2. Check if any files got corrupted/Contains text in other languages. If, so use `tesseract` OCR to extract text. [`corrupted_files.py` and `check_non_ascii.py`]
-
-Have these reports saved under `data/reports_corrupted` then run:
-```python
-python3 src/preprocessing/tesseract.py
-```
-
-3. Use a semantic chunker to split the text files into chunks based on the similarities between sentences - [langchain text-splitters](https://reference.langchain.com/python/langchain_text_splitters/).
-```python
-python3 src/preprocessing/splitter.py
-```
-This will create a `*/splits_semantic.json` for each `*/results.txt` under `data/jsons`.
-
-## Filtering the passages
-
-There are certain reports only available in `German`, so we collect a list of tech and sdg keywords first in `English` and then translate them. A list of collected keywords and their translations is available under `kw_data`
-
-Run the following to filter the passages and create a DuckDB for each set of hits in tech and SDG:
-
-```python
-python3 src/filtering/tech_filter.py \
-  --root data/jsons \
-  --kw_en kw_data/keywords_tech.json \
-  --kw_de kw_data/keywords_tech_de.json \
-  --out_db data/dbs/tech_hits.duckdb \
-  --table tech_hits
-
-python3 src/filtering/sdg_filter.py \
-  --root data/jsons \
-  --kw_en kw_data/keywords_sdg.json \
-  --kw_de kw_data/keywords_sdg_de.json \
-  --out_db data/dbs/sdg_hits.duckdb \
-  --table sdg_hits
-```
 
 ## Classification into Symbolic/Substantive
 
