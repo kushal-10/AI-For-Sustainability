@@ -7,7 +7,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 End-to-end LLM pipeline to classify corporate sustainability disclosures (passages from German firm reports) as **Symbolic** vs **Substantive** mentions of SDGs and AI/Tech topics, grounded in legitimacy theory (Ashforth & Gibbs 1990, Suchman 1995).
 
 **v2.0.0** (current `main` branch): Starts from pre-computed SDG/Tech keyword hits in DuckDB. Focuses on prompting strategies, evaluation, and analysis.
-**v1.0.0** (`legacy` branch): Full pipeline from raw PDFs through OCR/splitting to DuckDB.
+**v1.0.0** (`legacy` branch): Full pipeline from raw PDFs through OCR/splitting to DuckDB. Legacy source code lives in `src_legacy/`.
 
 ## Setup
 
@@ -23,22 +23,22 @@ export OPENAI_API_KEY=your_key
 
 ### 1. Classification (Batch Submission)
 ```bash
-python3 src/gpt_classifier/batches.py -- build    # DuckDB → JSONL batch files
-python3 src/gpt_classifier/batches.py -- submit   # submit to OpenAI Batch API (24h window)
-python3 src/gpt_classifier/poll_batches.py        # monitor batch status
-python3 src/gpt_classifier/collect_results.py     # collect completed results
+python3 src_legacy/gpt_classifier/batches.py -- build    # DuckDB → JSONL batch files
+python3 src_legacy/gpt_classifier/batches.py -- submit   # submit to OpenAI Batch API (24h window)
+python3 src_legacy/gpt_classifier/poll_batches.py        # monitor batch status
+python3 src_legacy/gpt_classifier/collect_results.py     # collect completed results
 ```
 
 ### 2. Post-Processing
 ```bash
-python3 src/postprocessing/check_classifications.py          # verify all passages classified
-python3 src/postprocessing/fix_err_classifications.py        # resubmit unclassified passages
-python3 src/postprocessing/apply_classifications.py          # merge results into classified DuckDBs
-python3 src/postprocessing/apply_fixed_classifications.py    # run if fix_err was needed
-python3 src/postprocessing/build_company_year_summary.py     # aggregate to firm-year level
-python3 src/postprocessing/merge_kw_filter.py                # merge keyword + classification data
-python3 src/postprocessing/add_lang.py                       # add language detection metadata
-python3 src/postprocessing/add_token.py                      # add token count estimates
+python3 src_legacy/postprocessing/check_classifications.py          # verify all passages classified
+python3 src_legacy/postprocessing/fix_err_classifications.py        # resubmit unclassified passages
+python3 src_legacy/postprocessing/apply_classifications.py          # merge results into classified DuckDBs
+python3 src_legacy/postprocessing/apply_fixed_classifications.py    # run if fix_err was needed
+python3 src_legacy/postprocessing/build_company_year_summary.py     # aggregate to firm-year level
+python3 src_legacy/postprocessing/merge_kw_filter.py                # merge keyword + classification data
+python3 src_legacy/postprocessing/add_lang.py                       # add language detection metadata
+python3 src_legacy/postprocessing/add_token.py                      # add token count estimates
 ```
 
 ### 3. Prompt Evaluation (tests/prompts/)
@@ -51,7 +51,7 @@ python3 tests/prompts/analysis.py                 # compute accuracy vs ground t
 
 ### 4. Analysis
 ```bash
-python3 src/analysis/cost.py                      # estimate token costs for batch files
+python3 src_legacy/analysis/cost.py                      # estimate token costs for batch files
 ```
 
 ## Architecture
@@ -68,20 +68,20 @@ DuckDB (sdg_hits / tech_hits)
 
 ### Key Modules
 
-**`src/filtering/`** — Keyword filtering pipeline
+**`src_legacy/filtering/`** — Keyword filtering pipeline
 - `base_filter.py`: Abstract base with DuckDB Appender pattern, wildcard regex expansion, language detection
 - `sdg_filter.py` / `tech_filter.py`: SDG (17 categories sdg1–sdg17) and Tech (4 categories: ai_ml, cloud_computing, big_data_blockchain, applications_practice) filters
 - Keywords stored in `kw_data/keywords_{sdg,tech}_{en,de}.json`
 
-**`src/gpt_classifier/`** — OpenAI batch classification
+**`src_legacy/gpt_classifier/`** — OpenAI batch classification
 - `objects.py`: System prompts and batch object builders for SDG/Tech (`create_batch_object_sdg`, `create_batch_object_tech`)
 - `batches.py`: Orchestrates DuckDB → JSONL → OpenAI Batch API submission
 - Model: `gpt-4.1-mini`
 
-**`src/postprocessing/`** — Result aggregation and cleanup
+**`src_legacy/postprocessing/`** — Result aggregation and cleanup
 - Produces `{sdg,tech}_hits_classified.duckdb` and final firm-year CSV summaries
 
-**`src/analysis/`** — Metrics and cost estimation
+**`src_legacy/analysis/`** — Metrics and cost estimation
 - `cost.py`: Uses tiktoken `o200k_base` encoding for accurate token counting
 
 **`tests/prompts/`** — Prompt strategy evaluation
