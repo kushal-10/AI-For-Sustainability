@@ -1,6 +1,18 @@
 {
-  "zero_shot": "batch_69baa29342c88190be6479c5948f6b35",
-  "few_shot": "batch_69baa29601c88190940ea2a072285c53",
-  "cot": "batch_69baa2988f688190aa30eb018d4f9415",
-  "tot": "batch_69baa29c0168819081bcf0c2405d2a29"
+  "zero_shot__low": "batch_69bd9c8d4c3081909b0f1af7bb6fe65d",
+  "zero_shot__medium": "batch_69bd9c8f06688190adc8ce45869db751",
+  "zero_shot__high": "batch_69bd9c90746481908a93285c8f3511e2",
+  "zero_shot__xhigh": "batch_69bd9c9162e48190a49e7276c3d2a80a",
+  "few_shot__low": "batch_69bd9c92baa0819091116c9829cf5a75",
+  "few_shot__medium": "batch_69bd9c94374881909aa1b4dc3ddfb1df",
+  "few_shot__high": "batch_69bd9c95609c81909a95e76ff245d085",
+  "few_shot__xhigh": "batch_69bd9c96cfc48190b9804e26b1c81c99",
+  "cot__low": "batch_69bd9c98080881909607cb04541a6c89",
+  "cot__medium": "batch_69bd9c99697c819085b8b902d15139cf",
+  "cot__high": "batch_69bd9c9a8dd8819081ccf93217f482c2",
+  "cot__xhigh": "batch_69bd9c9beed881909c5bbd1e34c07946",
+  "tot__low": "batch_69bd9c9d459c8190a872d21649b2caf3",
+  "tot__medium": "batch_69bd9c9ef6c8819090b5192b91810e57",
+  "tot__high": "batch_69bd9ca0b1e48190992b3d23ff600f8a",
+  "tot__xhigh": "batch_69bd9ca1caa881908a8198323c49ed11"
 }
