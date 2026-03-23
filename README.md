@@ -20,10 +20,10 @@ pip install -r requirements.txt
 
 | Version | Branch/Tag | Description |
 |---------|-----------|-------------|
-| v1.0.0 | `legacy` | Full pipeline from raw PDFs → Filtering → DuckDB → SDG/Tech classification |
+| v1.0.0 | `v1-full-pipeline` | Full pipeline from raw PDFs → Filtering → DuckDB → SDG/Tech classification |
 | v2.0.0 | `main` | Starts from SDG/Tech hits — new prompts, evaluation, analysis |
 
-> To reproduce v1.0.0 preprocessing from scratch, checkout the `legacy` branch.
+> To reproduce v1.0.0 preprocessing from scratch, checkout the `v1-full-pipeline` branch.
 
 
 ## Classification into Symbolic/Substantive

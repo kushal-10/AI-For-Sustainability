@@ -7,7 +7,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 End-to-end LLM pipeline to classify corporate sustainability disclosures (passages from German firm reports) as **Symbolic** vs **Substantive** mentions of SDGs and AI/Tech topics, grounded in legitimacy theory (Ashforth & Gibbs 1990, Suchman 1995).
 
 **v2.0.0** (current `main` branch): Starts from pre-computed SDG/Tech keyword hits in DuckDB. Focuses on prompting strategies, evaluation, and analysis.
-**v1.0.0** (`legacy` branch): Full pipeline from raw PDFs through OCR/splitting to DuckDB. Legacy source code lives in `src_legacy/`.
+**v1.0.0** (`v1-full-pipeline` branch): Full pipeline from raw PDFs through OCR/splitting to DuckDB. Legacy source code lives in `src_legacy/`.
 
 ## Setup
 
