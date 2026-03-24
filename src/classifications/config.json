@@ -1,0 +1,29 @@
+[
+  {
+    "id": "gpt-4o__tot",
+    "model": "gpt-4o",
+    "reasoning_effort": null,
+    "prompt_type": "tot",
+    "batch_id_sdg_1": "",
+    "batch_id_sdg_2": "",
+    "batch_id_tech": ""
+  },
+  {
+    "id": "gpt-5.2__high__cot",
+    "model": "gpt-5.2",
+    "reasoning_effort": "high",
+    "prompt_type": "cot",
+    "batch_id_sdg_1": "",
+    "batch_id_sdg_2": "",
+    "batch_id_tech": ""
+  },
+  {
+    "id": "gpt-5.2__low__zero_shot",
+    "model": "gpt-5.2",
+    "reasoning_effort": "low",
+    "prompt_type": "zero_shot",
+    "batch_id_sdg_1": "",
+    "batch_id_sdg_2": "",
+    "batch_id_tech": ""
+  }
+]

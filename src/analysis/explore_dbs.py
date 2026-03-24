@@ -14,8 +14,8 @@ import duckdb
 import pandas as pd
 
 DB_DIR = "data/dbs"
-SDG_DB  = f"{DB_DIR}/sdg_hits_classified.duckdb"
-TECH_DB = f"{DB_DIR}/tech_hits_classified.duckdb"
+SDG_DB  = f"{DB_DIR}/sdg_hits.duckdb"
+TECH_DB = f"{DB_DIR}/tech_hits.duckdb"
 
 SDG_CATEGORIES  = [f"hits_sdg{i}" for i in range(1, 18)]
 TECH_CATEGORIES = ["hits_ai_ml", "hits_cloud_computing", "hits_big_data_blockchain", "hits_applications_practice"]

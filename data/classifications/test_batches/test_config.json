@@ -1,0 +1,29 @@
+[
+  {
+    "id": "gpt-4o__tot",
+    "model": "gpt-4o",
+    "reasoning_effort": null,
+    "prompt_type": "tot",
+    "batch_id_sdg_1": "batch_69c28a3109c081909dd46fcc058245e6",
+    "batch_id_sdg_2": "batch_69c28a3205008190846ecad13445c7bc",
+    "batch_id_tech": "batch_69c28a3313f4819093718e5fc1788545"
+  },
+  {
+    "id": "gpt-5.2__high__cot",
+    "model": "gpt-5.2",
+    "reasoning_effort": "high",
+    "prompt_type": "cot",
+    "batch_id_sdg_1": "batch_69c28a33fee48190b1a771c01347a1e1",
+    "batch_id_sdg_2": "batch_69c28a353d4881909b127c9396da03d6",
+    "batch_id_tech": "batch_69c28a36cb388190888326584e273bcd"
+  },
+  {
+    "id": "gpt-5.2__low__zero_shot",
+    "model": "gpt-5.2",
+    "reasoning_effort": "low",
+    "prompt_type": "zero_shot",
+    "batch_id_sdg_1": "batch_69c28a37ab5c8190a9763963242f7220",
+    "batch_id_sdg_2": "batch_69c28a38a4848190bbc869aae21d6e51",
+    "batch_id_tech": "batch_69c28a39dd108190b7d2261637de861d"
+  }
+]
