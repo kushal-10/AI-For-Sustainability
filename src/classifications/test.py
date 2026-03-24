@@ -27,8 +27,9 @@ import pandas as pd
 from openai import OpenAI
 
 from src.classifications.batch_builder import (
-    SDG_COLS_1,
-    SDG_COLS_2,
+    SDG_COLS_A,
+    SDG_COLS_B,
+    SDG_COLS_C,
     TECH_HIT_COLS,
     SDG_PROMPTS,
     TECH_PROMPTS,
@@ -87,8 +88,9 @@ def _init_test_config(config_path: str, test_config_path: str) -> list[dict]:
             "model":             entry["model"],
             "reasoning_effort":  entry.get("reasoning_effort"),
             "prompt_type":       entry["prompt_type"],
-            "batch_id_sdg_1":    "",
-            "batch_id_sdg_2":    "",
+            "batch_id_sdg_a":    "",
+            "batch_id_sdg_b":    "",
+            "batch_id_sdg_c":    "",
             "batch_id_tech":     "",
         }
         for entry in prod
@@ -122,7 +124,7 @@ def build_test(
     test_cfg = _init_test_config(config_path, test_config_path)
 
     # ── Sample once, reuse for all entries ─────────────────────────────────────
-    all_sdg_cols  = [c for c in SDG_COLS_1 + SDG_COLS_2]
+    all_sdg_cols  = [c for c in SDG_COLS_A + SDG_COLS_B + SDG_COLS_C]
     print(f"Sampling {n_samples} SDG rows from {sdg_db} ...")
     df_sdg  = _load_samples(sdg_db,  sdg_table,  all_sdg_cols,               n_samples)
     print(f"  → {len(df_sdg)} rows sampled")
@@ -147,25 +149,19 @@ def build_test(
         sdg_prompt       = SDG_PROMPTS[prompt_type]
         tech_prompt      = TECH_PROMPTS[prompt_type]
 
-        # sdg_1
-        path1 = jsonl_path(out_base, entry_id, "sdg_1")
-        if path1.exists():
-            print(f"[SKIP] {entry_id}/sdg_1.jsonl already exists")
-        else:
-            cols1 = [c for c in SDG_COLS_1 if c in sdg_avail]
-            n = build_jsonl(df_sdg, cols1, sdg_id_col, sdg_passage_col,
-                            "sdg_1", sdg_prompt, model, reasoning_effort, path1)
-            print(f"[OK]   {entry_id}/sdg_1.jsonl — {n} requests")
-
-        # sdg_2
-        path2 = jsonl_path(out_base, entry_id, "sdg_2")
-        if path2.exists():
-            print(f"[SKIP] {entry_id}/sdg_2.jsonl already exists")
-        else:
-            cols2 = [c for c in SDG_COLS_2 if c in sdg_avail]
-            n = build_jsonl(df_sdg, cols2, sdg_id_col, sdg_passage_col,
-                            "sdg_2", sdg_prompt, model, reasoning_effort, path2)
-            print(f"[OK]   {entry_id}/sdg_2.jsonl — {n} requests")
+        for label, cols, span in (
+            ("sdg_a", SDG_COLS_A, "sdg1–sdg9"),
+            ("sdg_b", SDG_COLS_B, "sdg10–sdg13"),
+            ("sdg_c", SDG_COLS_C, "sdg14–sdg17"),
+        ):
+            p = jsonl_path(out_base, entry_id, label)
+            if p.exists():
+                print(f"[SKIP] {entry_id}/{label}.jsonl already exists")
+            else:
+                filtered = [c for c in cols if c in sdg_avail]
+                n = build_jsonl(df_sdg, filtered, sdg_id_col, sdg_passage_col,
+                                label, sdg_prompt, model, reasoning_effort, p)
+                print(f"[OK]   {entry_id}/{label}.jsonl — {n} requests  ({span})")
 
         # tech
         path_t = jsonl_path(out_base, entry_id, "tech")
@@ -202,22 +198,25 @@ def push_test(
     test_cfg = _init_test_config(config_path, test_config_path)
     client   = OpenAI()
 
-    pending = [
-        e for e in test_cfg
-        if not e.get("batch_id_sdg_1") or not e.get("batch_id_sdg_2") or not e.get("batch_id_tech")
-    ]
+    _domains = (
+        ("sdg_a", "batch_id_sdg_a"),
+        ("sdg_b", "batch_id_sdg_b"),
+        ("sdg_c", "batch_id_sdg_c"),
+        ("tech",  "batch_id_tech"),
+    )
+
+    def _is_pending(e: dict) -> bool:
+        return any(not e.get(k) for _, k in _domains)
+
+    pending = [e for e in test_cfg if _is_pending(e)]
     print(f"Entries pending submission: {len(pending)} / {len(test_cfg)}")
 
     for i, entry in enumerate(test_cfg):
-        if entry.get("batch_id_sdg_1") and entry.get("batch_id_sdg_2") and entry.get("batch_id_tech"):
+        if not _is_pending(entry):
             continue
 
         entry_id = entry["id"]
-        for domain, id_key in (
-            ("sdg_1", "batch_id_sdg_1"),
-            ("sdg_2", "batch_id_sdg_2"),
-            ("tech",  "batch_id_tech"),
-        ):
+        for domain, id_key in _domains:
             if entry.get(id_key):
                 print(f"[SKIP] {entry_id}/{domain} — already submitted: {entry[id_key]}")
                 continue
@@ -289,8 +288,9 @@ def _fetch_rows(client: OpenAI, config: list[dict]) -> list[dict]:
     rows = []
     for entry in config:
         for domain, id_key in (
-            ("sdg_1", "batch_id_sdg_1"),
-            ("sdg_2", "batch_id_sdg_2"),
+            ("sdg_a", "batch_id_sdg_a"),
+            ("sdg_b", "batch_id_sdg_b"),
+            ("sdg_c", "batch_id_sdg_c"),
             ("tech",  "batch_id_tech"),
         ):
             bid = entry.get(id_key, "")
@@ -330,8 +330,9 @@ def cancel_test(
 
     for i, entry in enumerate(test_cfg):
         for domain, id_key in (
-            ("sdg_1", "batch_id_sdg_1"),
-            ("sdg_2", "batch_id_sdg_2"),
+            ("sdg_a", "batch_id_sdg_a"),
+            ("sdg_b", "batch_id_sdg_b"),
+            ("sdg_c", "batch_id_sdg_c"),
             ("tech",  "batch_id_tech"),
         ):
             bid = entry.get(id_key, "")
@@ -374,7 +375,7 @@ def check_test(
     with open(test_config_path, encoding="utf-8") as f:
         test_cfg = json.load(f)
 
-    submitted = [e for e in test_cfg if e.get("batch_id_sdg_1") or e.get("batch_id_sdg_2") or e.get("batch_id_tech")]
+    submitted = [e for e in test_cfg if e.get("batch_id_sdg_a") or e.get("batch_id_sdg_b") or e.get("batch_id_sdg_c") or e.get("batch_id_tech")]
     if not submitted:
         print("No batch IDs found in test config. Run --push first.")
         return

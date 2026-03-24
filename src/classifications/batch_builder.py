@@ -1,14 +1,16 @@
 """
 batch_builder.py — Methods for building JSONL batch files from SDG/Tech DuckDB hits.
 
-SDG is split into two files per entry to stay under the OpenAI 200 MB batch limit:
-  sdg_1.jsonl  — SDG categories 1–9
-  sdg_2.jsonl  — SDG categories 10–17
+SDG is split into three files per entry to stay under the OpenAI 100 MB batch limit:
+  sdg_a.jsonl  — SDG categories 1–9
+  sdg_b.jsonl  — SDG categories 10–13
+  sdg_c.jsonl  — SDG categories 14–17
   tech.jsonl   — all 4 Tech categories
 
 Output paths:
-  data/classifications/batches/{entry_id}/sdg_1.jsonl
-  data/classifications/batches/{entry_id}/sdg_2.jsonl
+  data/classifications/batches/{entry_id}/sdg_a.jsonl
+  data/classifications/batches/{entry_id}/sdg_b.jsonl
+  data/classifications/batches/{entry_id}/sdg_c.jsonl
   data/classifications/batches/{entry_id}/tech.jsonl
 
 Prompt selection:
@@ -53,9 +55,11 @@ TECH_PROMPTS: dict[str, str] = {
 }
 
 # ── SDG split ──────────────────────────────────────────────────────────────────
+# Three-way split keeps each JSONL file under OpenAI's 100 MB batch file limit.
 
-SDG_COLS_1 = [f"hits_sdg{i}" for i in range(1, 10)]    # sdg1–sdg9
-SDG_COLS_2 = [f"hits_sdg{i}" for i in range(10, 18)]   # sdg10–sdg17
+SDG_COLS_A = [f"hits_sdg{i}" for i in range(1, 10)]    # sdg1–sdg9
+SDG_COLS_B = [f"hits_sdg{i}" for i in range(10, 14)]   # sdg10–sdg13
+SDG_COLS_C = [f"hits_sdg{i}" for i in range(14, 18)]   # sdg14–sdg17
 TECH_HIT_COLS = {
     "hits_ai_ml",
     "hits_cloud_computing",
@@ -80,7 +84,7 @@ def save_config(config_path: str, config: list[dict]) -> None:
 
 def jsonl_path(out_base: str, entry_id: str, domain: str) -> Path:
     """
-    domain: "sdg_1" | "sdg_2" | "tech"
+    domain: "sdg_a" | "sdg_b" | "sdg_c" | "tech"
     """
     return Path(out_base) / entry_id / f"{domain}.jsonl"
 
@@ -136,7 +140,7 @@ def make_batch_object(
     reasoning_effort: str | None,
 ) -> dict:
     """Return one OpenAI Batch API request object."""
-    # domain may be "sdg_1" or "sdg_2" — label both as SDG_HITS
+    # domain is "sdg_a", "sdg_b", "sdg_c", or "tech"
     hits_label   = "SDG_HITS" if domain.startswith("sdg") else "TECH_HITS"
     user_content = f"Passage:\n{passage}\n\n{hits_label}:\n{hits_dict}"
 
@@ -226,25 +230,36 @@ def build_for_entry(
     sdg_db: str,
     tech_db: str,
     out_base: str,
-    sdg_table: str = "sdg_hits_classified",
-    tech_table: str = "tech_hits_classified",
+    sdg_table: str        = "sdg_hits_classified",
+    tech_table: str       = "tech_hits_classified",
+    filter_domain: str | None = None,
 ) -> None:
     """
-    Build sdg_1.jsonl, sdg_2.jsonl, and tech.jsonl for one config entry.
-    Skips if all three batch_ids are already set (already submitted).
-    Skips individual files that already exist on disk.
+    Build sdg_a.jsonl, sdg_b.jsonl, sdg_c.jsonl, and tech.jsonl for one config entry.
+    Pass filter_domain to build only that domain (e.g. "sdg-a", "tech").
+    Skips if all targeted batch_ids are already set or files already exist on disk.
     """
     entry_id         = entry["id"]
     model            = entry["model"]
     reasoning_effort = entry.get("reasoning_effort")
     prompt_type      = entry["prompt_type"]
 
+    def _want(domain: str) -> bool:
+        return not filter_domain or _norm(filter_domain) == _norm(domain)
+
+    sdg_domains = [
+        (jsonl_path(out_base, entry_id, "sdg_a"), SDG_COLS_A, "sdg_a", "sdg1–sdg9"),
+        (jsonl_path(out_base, entry_id, "sdg_b"), SDG_COLS_B, "sdg_b", "sdg10–sdg13"),
+        (jsonl_path(out_base, entry_id, "sdg_c"), SDG_COLS_C, "sdg_c", "sdg14–sdg17"),
+    ]
+
     all_submitted = (
-        entry.get("batch_id_sdg_1")
-        and entry.get("batch_id_sdg_2")
+        entry.get("batch_id_sdg_a")
+        and entry.get("batch_id_sdg_b")
+        and entry.get("batch_id_sdg_c")
         and entry.get("batch_id_tech")
     )
-    if all_submitted:
+    if all_submitted and not filter_domain:
         print(f"[SKIP] {entry_id} — already submitted")
         return
 
@@ -252,56 +267,70 @@ def build_for_entry(
     tech_sys_prompt = TECH_PROMPTS[prompt_type]
 
     # ── SDG ────────────────────────────────────────────────────────────────────
-    sdg1_out = jsonl_path(out_base, entry_id, "sdg_1")
-    sdg2_out = jsonl_path(out_base, entry_id, "sdg_2")
-
-    if sdg1_out.exists() and sdg2_out.exists():
-        print(f"[SKIP] {entry_id}/sdg_1.jsonl + sdg_2.jsonl already exist")
-    else:
-        df_sdg, id_col, passage_col = _load_db(sdg_db, sdg_table)
-        available_cols = set(df_sdg.columns)
-
-        if not sdg1_out.exists():
-            cols1 = [c for c in SDG_COLS_1 if c in available_cols]
-            n1 = build_jsonl(df_sdg, cols1, id_col, passage_col,
-                             "sdg_1", sdg_sys_prompt, model, reasoning_effort, sdg1_out)
-            print(f"[OK]   {entry_id}/sdg_1.jsonl — {n1:,} requests  (sdg1–sdg9)")
+    wanted_sdg = [(p, c, lbl, span) for p, c, lbl, span in sdg_domains if _want(lbl)]
+    if wanted_sdg:
+        if all(p.exists() for p, _, _, _ in wanted_sdg):
+            for _, _, lbl, _ in wanted_sdg:
+                print(f"[SKIP] {entry_id}/{lbl}.jsonl already exists")
         else:
-            print(f"[SKIP] {entry_id}/sdg_1.jsonl already exists")
-
-        if not sdg2_out.exists():
-            cols2 = [c for c in SDG_COLS_2 if c in available_cols]
-            n2 = build_jsonl(df_sdg, cols2, id_col, passage_col,
-                             "sdg_2", sdg_sys_prompt, model, reasoning_effort, sdg2_out)
-            print(f"[OK]   {entry_id}/sdg_2.jsonl — {n2:,} requests  (sdg10–sdg17)")
-        else:
-            print(f"[SKIP] {entry_id}/sdg_2.jsonl already exists")
+            df_sdg, id_col, passage_col = _load_db(sdg_db, sdg_table)
+            available_cols = set(df_sdg.columns)
+            for out_path, cols, lbl, span in wanted_sdg:
+                if out_path.exists():
+                    print(f"[SKIP] {entry_id}/{lbl}.jsonl already exists")
+                else:
+                    filtered = [c for c in cols if c in available_cols]
+                    n = build_jsonl(df_sdg, filtered, id_col, passage_col,
+                                    lbl, sdg_sys_prompt, model, reasoning_effort, out_path)
+                    print(f"[OK]   {entry_id}/{lbl}.jsonl — {n:,} requests  ({span})")
 
     # ── Tech ───────────────────────────────────────────────────────────────────
-    tech_out = jsonl_path(out_base, entry_id, "tech")
-    if tech_out.exists():
-        print(f"[SKIP] {entry_id}/tech.jsonl already exists")
-    else:
-        df_tech, id_col_t, passage_col_t = _load_db(tech_db, tech_table)
-        tech_cols = [c for c in df_tech.columns if c in TECH_HIT_COLS]
-        n_tech = build_jsonl(df_tech, tech_cols, id_col_t, passage_col_t,
-                             "tech", tech_sys_prompt, model, reasoning_effort, tech_out)
-        print(f"[OK]   {entry_id}/tech.jsonl  — {n_tech:,} requests")
+    if _want("tech"):
+        tech_out = jsonl_path(out_base, entry_id, "tech")
+        if tech_out.exists():
+            print(f"[SKIP] {entry_id}/tech.jsonl already exists")
+        else:
+            df_tech, id_col_t, passage_col_t = _load_db(tech_db, tech_table)
+            tech_cols = [c for c in df_tech.columns if c in TECH_HIT_COLS]
+            n_tech = build_jsonl(df_tech, tech_cols, id_col_t, passage_col_t,
+                                 "tech", tech_sys_prompt, model, reasoning_effort, tech_out)
+            print(f"[OK]   {entry_id}/tech.jsonl  — {n_tech:,} requests")
 
 
 # ── Build all ──────────────────────────────────────────────────────────────────
+
+def _norm(s: str) -> str:
+    return s.lower().replace("-", "_")
+
 
 def build_all(
     config_path: str,
     sdg_db: str,
     tech_db: str,
     out_base: str,
-    sdg_table: str  = "sdg_hits_classified",
-    tech_table: str = "tech_hits_classified",
+    sdg_table: str        = "sdg_hits_classified",
+    tech_table: str       = "tech_hits_classified",
+    filter_entry: str | None  = None,
+    filter_domain: str | None = None,
 ) -> None:
-    """Build JSONL files for every config entry that hasn't been submitted yet."""
+    """
+    Build JSONL files for every config entry that hasn't been submitted yet.
+
+    filter_entry  — substring match on entry id (e.g. "4o-tot", "high-cot").
+    filter_domain — restrict to one domain ("sdg-a", "sdg-b", "sdg-c", "tech").
+    """
     config = load_config(config_path)
-    print(f"Config: {len(config)} entries\n")
-    for entry in config:
-        build_for_entry(entry, sdg_db, tech_db, out_base, sdg_table, tech_table)
-    print("\nDone. Run push_batches.py to submit to OpenAI.")
+    scoped = [
+        e for e in config
+        if not filter_entry or _norm(filter_entry) in _norm(e["id"])
+    ]
+    if not scoped:
+        print(f"No config entries matched filter '{filter_entry}'. Available: {[e['id'] for e in config]}")
+        return
+
+    label = f"entry='{filter_entry or 'all'}'  domain='{filter_domain or 'all'}'"
+    print(f"Config: {len(scoped)} / {len(config)} entries  (filter: {label})\n")
+    for entry in scoped:
+        build_for_entry(entry, sdg_db, tech_db, out_base, sdg_table, tech_table,
+                        filter_domain=filter_domain)
+    print("\nDone. Run --push to submit to OpenAI.")

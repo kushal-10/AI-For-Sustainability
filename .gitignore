@@ -207,6 +207,9 @@ marimo/_lsp/
 __marimo__/
 
 
+data/batches_backup
+
+
 .DS*
 results*
 

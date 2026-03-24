@@ -81,8 +81,9 @@ def _fetch_rows(client: OpenAI, config: list[dict]) -> list[dict]:
     rows = []
     for entry in config:
         for domain, id_key in (
-            ("sdg_1", "batch_id_sdg_1"),
-            ("sdg_2", "batch_id_sdg_2"),
+            ("sdg_a", "batch_id_sdg_a"),
+            ("sdg_b", "batch_id_sdg_b"),
+            ("sdg_c", "batch_id_sdg_c"),
             ("tech",  "batch_id_tech"),
         ):
             bid = entry.get(id_key, "")
@@ -116,7 +117,7 @@ def poll_all(
     config = load_config(config_path)
     client = OpenAI()  # reads OPENAI_API_KEY
 
-    batch_entries = [e for e in config if e.get("batch_id_sdg_1") or e.get("batch_id_sdg_2") or e.get("batch_id_tech")]
+    batch_entries = [e for e in config if e.get("batch_id_sdg_a") or e.get("batch_id_sdg_b") or e.get("batch_id_sdg_c") or e.get("batch_id_tech")]
     if not batch_entries:
         print("No batch IDs found in config. Run push_batches.py first.")
         return

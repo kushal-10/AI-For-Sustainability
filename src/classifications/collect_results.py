@@ -110,8 +110,9 @@ def collect_entry(
     out_dir.mkdir(parents=True, exist_ok=True)
 
     for domain, id_key in (
-        ("sdg_1", "batch_id_sdg_1"),
-        ("sdg_2", "batch_id_sdg_2"),
+        ("sdg_a", "batch_id_sdg_a"),
+        ("sdg_b", "batch_id_sdg_b"),
+        ("sdg_c", "batch_id_sdg_c"),
         ("tech",  "batch_id_tech"),
     ):
         bid = entry.get(id_key, "")
@@ -169,7 +170,7 @@ def collect_all(
     config = load_config(config_path)
     client = OpenAI()  # reads OPENAI_API_KEY
 
-    submitted = [e for e in config if e.get("batch_id_sdg_1") or e.get("batch_id_sdg_2") or e.get("batch_id_tech")]
+    submitted = [e for e in config if e.get("batch_id_sdg_a") or e.get("batch_id_sdg_b") or e.get("batch_id_sdg_c") or e.get("batch_id_tech")]
     print(f"Entries with batch IDs: {len(submitted)} / {len(config)}\n")
 
     for entry in submitted:

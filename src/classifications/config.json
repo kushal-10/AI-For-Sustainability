@@ -4,8 +4,9 @@
     "model": "gpt-4o",
     "reasoning_effort": null,
     "prompt_type": "tot",
-    "batch_id_sdg_1": "",
-    "batch_id_sdg_2": "",
+    "batch_id_sdg_a": "",
+    "batch_id_sdg_b": "",
+    "batch_id_sdg_c": "",
     "batch_id_tech": ""
   },
   {
@@ -13,8 +14,9 @@
     "model": "gpt-5.2",
     "reasoning_effort": "high",
     "prompt_type": "cot",
-    "batch_id_sdg_1": "",
-    "batch_id_sdg_2": "",
+    "batch_id_sdg_a": "",
+    "batch_id_sdg_b": "",
+    "batch_id_sdg_c": "",
     "batch_id_tech": ""
   },
   {
@@ -22,8 +24,9 @@
     "model": "gpt-5.2",
     "reasoning_effort": "low",
     "prompt_type": "zero_shot",
-    "batch_id_sdg_1": "",
-    "batch_id_sdg_2": "",
+    "batch_id_sdg_a": "",
+    "batch_id_sdg_b": "",
+    "batch_id_sdg_c": "",
     "batch_id_tech": ""
   }
 ]
