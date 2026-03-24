@@ -206,6 +206,16 @@ marimo/_static/
 marimo/_lsp/
 __marimo__/
 
-data*
+
+data/batches_backup
+
+
 .DS*
 results*
+
+# Large data files — not tracked in git
+data/dbs/
+data/backup_dbs/
+data/classifications/batches/
+data/classifications/test_batches/gpt-*/
+data/exports/
