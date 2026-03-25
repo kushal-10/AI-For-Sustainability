@@ -98,6 +98,57 @@ def _iter_jsonl(text: str):
             continue
 
 
+# ── Per-part collector (used by run_queue_loop) ────────────────────────────────
+
+def collect_part(
+    client: OpenAI,
+    queue_item: dict,
+    results_base: str = RESULTS_BASE,
+) -> bool:
+    """
+    Download and save results for a single queue item (one JSONL part file).
+
+    Output files:
+      {results_base}/{entry_id}/{part_stem}_results.json
+      {results_base}/{entry_id}/{part_stem}_errors.json
+
+    Returns True if results were successfully saved.
+    """
+    entry_id  = queue_item["entry_id"]
+    batch_id  = queue_item["batch_id"]
+    part_stem = Path(queue_item["file"]).stem   # e.g. "sdg_a_part0012"
+
+    out_dir  = Path(results_base) / entry_id
+    out_dir.mkdir(parents=True, exist_ok=True)
+    out_path = out_dir / f"{part_stem}_results.json"
+    err_path = out_dir / f"{part_stem}_errors.json"
+
+    b       = client.batches.retrieve(batch_id).model_dump()
+    status  = (b.get("status") or "").lower()
+    out_fid = b.get("output_file_id") or ""
+
+    if status != "completed" or not out_fid:
+        print(f"[SKIP] {part_stem}: status={status!r}, no output_file_id")
+        return False
+
+    raw     = _download_text(client, out_fid)
+    results: dict = {}
+    errors:  dict = {}
+    for rec in _iter_jsonl(raw):
+        cid, parsed, err = _extract(rec)
+        if not cid:
+            continue
+        if err:
+            errors[cid] = err
+        else:
+            results[cid] = parsed
+
+    out_path.write_text(json.dumps(results, ensure_ascii=False, indent=2), encoding="utf-8")
+    err_path.write_text(json.dumps(errors,  ensure_ascii=False, indent=2), encoding="utf-8")
+    print(f"[save] {part_stem}: {len(results):,} ok  {len(errors):,} errors → {out_path.name}")
+    return True
+
+
 # ── Per-entry collector ────────────────────────────────────────────────────────
 
 def collect_entry(

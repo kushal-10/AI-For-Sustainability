@@ -5,31 +5,35 @@ run.py — CLI to build, push, check, collect, and cancel JSONL batch files.
 Usage:
     python3 src/classifications/run.py --build
     python3 src/classifications/run.py --push
+    python3 src/classifications/run.py --push --model gpt-4o__tot
+    python3 src/classifications/run.py --push --model gpt-4o__tot --domain sdg-a
     python3 src/classifications/run.py --push --file data/classifications/batches/entry/sdg_a_part0001.jsonl
-    python3 src/classifications/run.py --push --model gpt-4o__tot --batch sdg_a_part0001.jsonl
     python3 src/classifications/run.py --list
     python3 src/classifications/run.py --check
     python3 src/classifications/run.py --check --watch 30
     python3 src/classifications/run.py --cancel
 
+--push runs an autonomous loop:
+    submit one part → poll every 2 min → collect results → submit next part → ...
+
+    Each unit is one JSONL part file (e.g. sdg_a_part0012.jsonl).
+    State is persisted in data/classifications/queue.json, so Ctrl+C is safe —
+    re-run --push to resume from where you left off.
+
+    --poll-interval  Override the 120 s default check interval.
+    --model ENTRY_ID Filter the loop to a specific config entry (e.g. gpt-4o__tot).
+    --domain DOMAIN  Filter the loop to one domain (sdg-a, sdg-b, sdg-c, tech).
+    --file PATH      Manual override: submit one specific file only (no loop).
+
 Tier 1 limits (900,000 token batch queue):
     --build splits each domain into numbered part files.
     --list  shows all parts with token counts and submission status.
-    Submit one part at a time with --push --model <entry-id> --batch <filename>
-    or with --push --file <full-path>.
-
-Filtering (--push and --build only):
-    --entry SUBSTR   Substring match on config entry id
-    --domain DOMAIN  Exact domain: "sdg-a", "sdg-b", "sdg-c", "tech"
-
-    python3 src/classifications/run.py --push --entry 4o-tot --domain sdg-a
-    python3 src/classifications/run.py --build --push --entry low --domain sdg-c
 """
 
 import argparse
 from openai import OpenAI
 from src.classifications.batch_builder import build_all, load_config, save_config
-from src.classifications.push_batches import push_all, push_file, list_batches
+from src.classifications.push_batches import push_all, push_file, list_batches, run_queue_loop
 from src.classifications.poll_batches import poll_all
 from src.classifications.collect_results import collect_all
 
@@ -98,12 +102,12 @@ def main():
     ap.add_argument("--collect",  action="store_true", help="Download completed batch results")
     ap.add_argument("--cancel",   action="store_true", help="Cancel all in-progress/validating batches")
     # ── Per-file push ──────────────────────────────────────────────────────────
-    ap.add_argument("--file",     default=None, metavar="PATH",
-                                  help="With --push: submit one specific part file (full path)")
-    ap.add_argument("--model",    default=None, metavar="ENTRY_ID",
-                                  help="With --push --batch: entry id, e.g. gpt-4o__tot")
-    ap.add_argument("--batch",    default=None, metavar="FILENAME",
-                                  help="With --push --model: batch filename, e.g. sdg_a_part0001.jsonl")
+    ap.add_argument("--file",         default=None, metavar="PATH",
+                                      help="With --push: submit one specific part file (no loop)")
+    ap.add_argument("--model",        default=None, metavar="ENTRY_ID",
+                                      help="Filter --push loop to one config entry, e.g. gpt-4o__tot")
+    ap.add_argument("--poll-interval", type=int, default=120, metavar="SEC",
+                                      help="Seconds between status checks during --push loop (default: 120)")
     # ── Filters (--build / --push) ─────────────────────────────────────────────
     ap.add_argument("--entry",    default=None, metavar="SUBSTR",
                                   help="Filter by config entry id (substring match)")
@@ -129,10 +133,6 @@ def main():
         ap.error("--file can only be used with --push")
     if args.model and not args.push:
         ap.error("--model can only be used with --push")
-    if args.batch and not args.model:
-        ap.error("--batch requires --model")
-    if args.model and not args.batch:
-        ap.error("--model requires --batch")
 
     if args.build:
         build_all(
@@ -147,24 +147,21 @@ def main():
         )
 
     if args.push:
-        if args.model and args.batch:
-            resolved = f"{args.out_base}/{args.model}/{args.batch}"
-            push_file(
-                path_str    = resolved,
-                config_path = args.config,
-                out_base    = args.out_base,
-            )
-        elif args.file:
+        if args.file:
+            # Manual single-file submit, no loop
             push_file(
                 path_str    = args.file,
                 config_path = args.config,
                 out_base    = args.out_base,
             )
         else:
-            push_all(
+            # Autonomous loop: submit → poll → collect → repeat
+            run_queue_loop(
                 config_path   = args.config,
                 out_base      = args.out_base,
-                filter_entry  = args.entry,
+                results_base  = "data/classifications/results",
+                poll_interval = args.poll_interval,
+                filter_entry  = args.model,
                 filter_domain = args.domain,
             )
 
