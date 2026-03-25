@@ -1,0 +1,2081 @@
+[
+  {
+    "entry_id": "gpt-4o__tot",
+    "domain": "sdg_a",
+    "file": "data/classifications/batches/gpt-4o__tot/sdg_a_part0001.jsonl",
+    "batch_id": "",
+    "openai_status": ""
+  },
+  {
+    "entry_id": "gpt-4o__tot",
+    "domain": "sdg_a",
+    "file": "data/classifications/batches/gpt-4o__tot/sdg_a_part0002.jsonl",
+    "batch_id": "",
+    "openai_status": ""
+  },
+  {
+    "entry_id": "gpt-4o__tot",
+    "domain": "sdg_a",
+    "file": "data/classifications/batches/gpt-4o__tot/sdg_a_part0003.jsonl",
+    "batch_id": "",
+    "openai_status": ""
+  },
+  {
+    "entry_id": "gpt-4o__tot",
+    "domain": "sdg_a",
+    "file": "data/classifications/batches/gpt-4o__tot/sdg_a_part0004.jsonl",
+    "batch_id": "",
+    "openai_status": ""
+  },
+  {
+    "entry_id": "gpt-4o__tot",
+    "domain": "sdg_a",
+    "file": "data/classifications/batches/gpt-4o__tot/sdg_a_part0005.jsonl",
+    "batch_id": "",
+    "openai_status": ""
+  },
+  {
+    "entry_id": "gpt-4o__tot",
+    "domain": "sdg_a",
+    "file": "data/classifications/batches/gpt-4o__tot/sdg_a_part0006.jsonl",
+    "batch_id": "",
+    "openai_status": ""
+  },
+  {
+    "entry_id": "gpt-4o__tot",
+    "domain": "sdg_a",
+    "file": "data/classifications/batches/gpt-4o__tot/sdg_a_part0007.jsonl",
+    "batch_id": "",
+    "openai_status": ""
+  },
+  {
+    "entry_id": "gpt-4o__tot",
+    "domain": "sdg_a",
+    "file": "data/classifications/batches/gpt-4o__tot/sdg_a_part0008.jsonl",
+    "batch_id": "",
+    "openai_status": ""
+  },
+  {
+    "entry_id": "gpt-4o__tot",
+    "domain": "sdg_a",
+    "file": "data/classifications/batches/gpt-4o__tot/sdg_a_part0009.jsonl",
+    "batch_id": "",
+    "openai_status": ""
+  },
+  {
+    "entry_id": "gpt-4o__tot",
+    "domain": "sdg_a",
+    "file": "data/classifications/batches/gpt-4o__tot/sdg_a_part0010.jsonl",
+    "batch_id": "",
+    "openai_status": ""
+  },
+  {
+    "entry_id": "gpt-4o__tot",
+    "domain": "sdg_a",
+    "file": "data/classifications/batches/gpt-4o__tot/sdg_a_part0011.jsonl",
+    "batch_id": "",
+    "openai_status": ""
+  },
+  {
+    "entry_id": "gpt-4o__tot",
+    "domain": "sdg_a",
+    "file": "data/classifications/batches/gpt-4o__tot/sdg_a_part0012.jsonl",
+    "batch_id": "",
+    "openai_status": ""
+  },
+  {
+    "entry_id": "gpt-4o__tot",
+    "domain": "sdg_a",
+    "file": "data/classifications/batches/gpt-4o__tot/sdg_a_part0013.jsonl",
+    "batch_id": "",
+    "openai_status": ""
+  },
+  {
+    "entry_id": "gpt-4o__tot",
+    "domain": "sdg_a",
+    "file": "data/classifications/batches/gpt-4o__tot/sdg_a_part0014.jsonl",
+    "batch_id": "",
+    "openai_status": ""
+  },
+  {
+    "entry_id": "gpt-4o__tot",
+    "domain": "sdg_a",
+    "file": "data/classifications/batches/gpt-4o__tot/sdg_a_part0015.jsonl",
+    "batch_id": "",
+    "openai_status": ""
+  },
+  {
+    "entry_id": "gpt-4o__tot",
+    "domain": "sdg_a",
+    "file": "data/classifications/batches/gpt-4o__tot/sdg_a_part0016.jsonl",
+    "batch_id": "",
+    "openai_status": ""
+  },
+  {
+    "entry_id": "gpt-4o__tot",
+    "domain": "sdg_a",
+    "file": "data/classifications/batches/gpt-4o__tot/sdg_a_part0017.jsonl",
+    "batch_id": "",
+    "openai_status": ""
+  },
+  {
+    "entry_id": "gpt-4o__tot",
+    "domain": "sdg_b",
+    "file": "data/classifications/batches/gpt-4o__tot/sdg_b_part0001.jsonl",
+    "batch_id": "",
+    "openai_status": ""
+  },
+  {
+    "entry_id": "gpt-4o__tot",
+    "domain": "sdg_b",
+    "file": "data/classifications/batches/gpt-4o__tot/sdg_b_part0002.jsonl",
+    "batch_id": "",
+    "openai_status": ""
+  },
+  {
+    "entry_id": "gpt-4o__tot",
+    "domain": "sdg_b",
+    "file": "data/classifications/batches/gpt-4o__tot/sdg_b_part0003.jsonl",
+    "batch_id": "",
+    "openai_status": ""
+  },
+  {
+    "entry_id": "gpt-4o__tot",
+    "domain": "sdg_b",
+    "file": "data/classifications/batches/gpt-4o__tot/sdg_b_part0004.jsonl",
+    "batch_id": "",
+    "openai_status": ""
+  },
+  {
+    "entry_id": "gpt-4o__tot",
+    "domain": "sdg_b",
+    "file": "data/classifications/batches/gpt-4o__tot/sdg_b_part0005.jsonl",
+    "batch_id": "",
+    "openai_status": ""
+  },
+  {
+    "entry_id": "gpt-4o__tot",
+    "domain": "sdg_b",
+    "file": "data/classifications/batches/gpt-4o__tot/sdg_b_part0006.jsonl",
+    "batch_id": "",
+    "openai_status": ""
+  },
+  {
+    "entry_id": "gpt-4o__tot",
+    "domain": "sdg_b",
+    "file": "data/classifications/batches/gpt-4o__tot/sdg_b_part0007.jsonl",
+    "batch_id": "",
+    "openai_status": ""
+  },
+  {
+    "entry_id": "gpt-4o__tot",
+    "domain": "sdg_b",
+    "file": "data/classifications/batches/gpt-4o__tot/sdg_b_part0008.jsonl",
+    "batch_id": "",
+    "openai_status": ""
+  },
+  {
+    "entry_id": "gpt-4o__tot",
+    "domain": "sdg_b",
+    "file": "data/classifications/batches/gpt-4o__tot/sdg_b_part0009.jsonl",
+    "batch_id": "",
+    "openai_status": ""
+  },
+  {
+    "entry_id": "gpt-4o__tot",
+    "domain": "sdg_b",
+    "file": "data/classifications/batches/gpt-4o__tot/sdg_b_part0010.jsonl",
+    "batch_id": "",
+    "openai_status": ""
+  },
+  {
+    "entry_id": "gpt-4o__tot",
+    "domain": "sdg_b",
+    "file": "data/classifications/batches/gpt-4o__tot/sdg_b_part0011.jsonl",
+    "batch_id": "",
+    "openai_status": ""
+  },
+  {
+    "entry_id": "gpt-4o__tot",
+    "domain": "sdg_b",
+    "file": "data/classifications/batches/gpt-4o__tot/sdg_b_part0012.jsonl",
+    "batch_id": "",
+    "openai_status": ""
+  },
+  {
+    "entry_id": "gpt-4o__tot",
+    "domain": "sdg_b",
+    "file": "data/classifications/batches/gpt-4o__tot/sdg_b_part0013.jsonl",
+    "batch_id": "",
+    "openai_status": ""
+  },
+  {
+    "entry_id": "gpt-4o__tot",
+    "domain": "sdg_b",
+    "file": "data/classifications/batches/gpt-4o__tot/sdg_b_part0014.jsonl",
+    "batch_id": "",
+    "openai_status": ""
+  },
+  {
+    "entry_id": "gpt-4o__tot",
+    "domain": "sdg_b",
+    "file": "data/classifications/batches/gpt-4o__tot/sdg_b_part0015.jsonl",
+    "batch_id": "",
+    "openai_status": ""
+  },
+  {
+    "entry_id": "gpt-4o__tot",
+    "domain": "sdg_b",
+    "file": "data/classifications/batches/gpt-4o__tot/sdg_b_part0016.jsonl",
+    "batch_id": "",
+    "openai_status": ""
+  },
+  {
+    "entry_id": "gpt-4o__tot",
+    "domain": "sdg_b",
+    "file": "data/classifications/batches/gpt-4o__tot/sdg_b_part0017.jsonl",
+    "batch_id": "",
+    "openai_status": ""
+  },
+  {
+    "entry_id": "gpt-4o__tot",
+    "domain": "sdg_b",
+    "file": "data/classifications/batches/gpt-4o__tot/sdg_b_part0018.jsonl",
+    "batch_id": "",
+    "openai_status": ""
+  },
+  {
+    "entry_id": "gpt-4o__tot",
+    "domain": "sdg_b",
+    "file": "data/classifications/batches/gpt-4o__tot/sdg_b_part0019.jsonl",
+    "batch_id": "",
+    "openai_status": ""
+  },
+  {
+    "entry_id": "gpt-4o__tot",
+    "domain": "sdg_b",
+    "file": "data/classifications/batches/gpt-4o__tot/sdg_b_part0020.jsonl",
+    "batch_id": "",
+    "openai_status": ""
+  },
+  {
+    "entry_id": "gpt-4o__tot",
+    "domain": "sdg_b",
+    "file": "data/classifications/batches/gpt-4o__tot/sdg_b_part0021.jsonl",
+    "batch_id": "",
+    "openai_status": ""
+  },
+  {
+    "entry_id": "gpt-4o__tot",
+    "domain": "sdg_b",
+    "file": "data/classifications/batches/gpt-4o__tot/sdg_b_part0022.jsonl",
+    "batch_id": "",
+    "openai_status": ""
+  },
+  {
+    "entry_id": "gpt-4o__tot",
+    "domain": "sdg_b",
+    "file": "data/classifications/batches/gpt-4o__tot/sdg_b_part0023.jsonl",
+    "batch_id": "",
+    "openai_status": ""
+  },
+  {
+    "entry_id": "gpt-4o__tot",
+    "domain": "sdg_b",
+    "file": "data/classifications/batches/gpt-4o__tot/sdg_b_part0024.jsonl",
+    "batch_id": "",
+    "openai_status": ""
+  },
+  {
+    "entry_id": "gpt-4o__tot",
+    "domain": "sdg_b",
+    "file": "data/classifications/batches/gpt-4o__tot/sdg_b_part0025.jsonl",
+    "batch_id": "",
+    "openai_status": ""
+  },
+  {
+    "entry_id": "gpt-4o__tot",
+    "domain": "sdg_b",
+    "file": "data/classifications/batches/gpt-4o__tot/sdg_b_part0026.jsonl",
+    "batch_id": "",
+    "openai_status": ""
+  },
+  {
+    "entry_id": "gpt-4o__tot",
+    "domain": "sdg_b",
+    "file": "data/classifications/batches/gpt-4o__tot/sdg_b_part0027.jsonl",
+    "batch_id": "",
+    "openai_status": ""
+  },
+  {
+    "entry_id": "gpt-4o__tot",
+    "domain": "sdg_b",
+    "file": "data/classifications/batches/gpt-4o__tot/sdg_b_part0028.jsonl",
+    "batch_id": "",
+    "openai_status": ""
+  },
+  {
+    "entry_id": "gpt-4o__tot",
+    "domain": "sdg_b",
+    "file": "data/classifications/batches/gpt-4o__tot/sdg_b_part0029.jsonl",
+    "batch_id": "",
+    "openai_status": ""
+  },
+  {
+    "entry_id": "gpt-4o__tot",
+    "domain": "sdg_b",
+    "file": "data/classifications/batches/gpt-4o__tot/sdg_b_part0030.jsonl",
+    "batch_id": "",
+    "openai_status": ""
+  },
+  {
+    "entry_id": "gpt-4o__tot",
+    "domain": "sdg_b",
+    "file": "data/classifications/batches/gpt-4o__tot/sdg_b_part0031.jsonl",
+    "batch_id": "",
+    "openai_status": ""
+  },
+  {
+    "entry_id": "gpt-4o__tot",
+    "domain": "sdg_b",
+    "file": "data/classifications/batches/gpt-4o__tot/sdg_b_part0032.jsonl",
+    "batch_id": "",
+    "openai_status": ""
+  },
+  {
+    "entry_id": "gpt-4o__tot",
+    "domain": "sdg_b",
+    "file": "data/classifications/batches/gpt-4o__tot/sdg_b_part0033.jsonl",
+    "batch_id": "",
+    "openai_status": ""
+  },
+  {
+    "entry_id": "gpt-4o__tot",
+    "domain": "sdg_b",
+    "file": "data/classifications/batches/gpt-4o__tot/sdg_b_part0034.jsonl",
+    "batch_id": "",
+    "openai_status": ""
+  },
+  {
+    "entry_id": "gpt-4o__tot",
+    "domain": "sdg_b",
+    "file": "data/classifications/batches/gpt-4o__tot/sdg_b_part0035.jsonl",
+    "batch_id": "",
+    "openai_status": ""
+  },
+  {
+    "entry_id": "gpt-4o__tot",
+    "domain": "sdg_b",
+    "file": "data/classifications/batches/gpt-4o__tot/sdg_b_part0036.jsonl",
+    "batch_id": "",
+    "openai_status": ""
+  },
+  {
+    "entry_id": "gpt-4o__tot",
+    "domain": "sdg_b",
+    "file": "data/classifications/batches/gpt-4o__tot/sdg_b_part0037.jsonl",
+    "batch_id": "",
+    "openai_status": ""
+  },
+  {
+    "entry_id": "gpt-4o__tot",
+    "domain": "sdg_b",
+    "file": "data/classifications/batches/gpt-4o__tot/sdg_b_part0038.jsonl",
+    "batch_id": "",
+    "openai_status": ""
+  },
+  {
+    "entry_id": "gpt-4o__tot",
+    "domain": "sdg_c",
+    "file": "data/classifications/batches/gpt-4o__tot/sdg_c_part0001.jsonl",
+    "batch_id": "",
+    "openai_status": ""
+  },
+  {
+    "entry_id": "gpt-4o__tot",
+    "domain": "sdg_c",
+    "file": "data/classifications/batches/gpt-4o__tot/sdg_c_part0002.jsonl",
+    "batch_id": "",
+    "openai_status": ""
+  },
+  {
+    "entry_id": "gpt-4o__tot",
+    "domain": "sdg_c",
+    "file": "data/classifications/batches/gpt-4o__tot/sdg_c_part0003.jsonl",
+    "batch_id": "",
+    "openai_status": ""
+  },
+  {
+    "entry_id": "gpt-4o__tot",
+    "domain": "sdg_c",
+    "file": "data/classifications/batches/gpt-4o__tot/sdg_c_part0004.jsonl",
+    "batch_id": "",
+    "openai_status": ""
+  },
+  {
+    "entry_id": "gpt-4o__tot",
+    "domain": "sdg_c",
+    "file": "data/classifications/batches/gpt-4o__tot/sdg_c_part0005.jsonl",
+    "batch_id": "",
+    "openai_status": ""
+  },
+  {
+    "entry_id": "gpt-4o__tot",
+    "domain": "sdg_c",
+    "file": "data/classifications/batches/gpt-4o__tot/sdg_c_part0006.jsonl",
+    "batch_id": "",
+    "openai_status": ""
+  },
+  {
+    "entry_id": "gpt-4o__tot",
+    "domain": "sdg_c",
+    "file": "data/classifications/batches/gpt-4o__tot/sdg_c_part0007.jsonl",
+    "batch_id": "",
+    "openai_status": ""
+  },
+  {
+    "entry_id": "gpt-4o__tot",
+    "domain": "sdg_c",
+    "file": "data/classifications/batches/gpt-4o__tot/sdg_c_part0008.jsonl",
+    "batch_id": "",
+    "openai_status": ""
+  },
+  {
+    "entry_id": "gpt-4o__tot",
+    "domain": "sdg_c",
+    "file": "data/classifications/batches/gpt-4o__tot/sdg_c_part0009.jsonl",
+    "batch_id": "",
+    "openai_status": ""
+  },
+  {
+    "entry_id": "gpt-4o__tot",
+    "domain": "sdg_c",
+    "file": "data/classifications/batches/gpt-4o__tot/sdg_c_part0010.jsonl",
+    "batch_id": "",
+    "openai_status": ""
+  },
+  {
+    "entry_id": "gpt-4o__tot",
+    "domain": "sdg_c",
+    "file": "data/classifications/batches/gpt-4o__tot/sdg_c_part0011.jsonl",
+    "batch_id": "",
+    "openai_status": ""
+  },
+  {
+    "entry_id": "gpt-4o__tot",
+    "domain": "sdg_c",
+    "file": "data/classifications/batches/gpt-4o__tot/sdg_c_part0012.jsonl",
+    "batch_id": "",
+    "openai_status": ""
+  },
+  {
+    "entry_id": "gpt-4o__tot",
+    "domain": "sdg_c",
+    "file": "data/classifications/batches/gpt-4o__tot/sdg_c_part0013.jsonl",
+    "batch_id": "",
+    "openai_status": ""
+  },
+  {
+    "entry_id": "gpt-4o__tot",
+    "domain": "sdg_c",
+    "file": "data/classifications/batches/gpt-4o__tot/sdg_c_part0014.jsonl",
+    "batch_id": "",
+    "openai_status": ""
+  },
+  {
+    "entry_id": "gpt-4o__tot",
+    "domain": "sdg_c",
+    "file": "data/classifications/batches/gpt-4o__tot/sdg_c_part0015.jsonl",
+    "batch_id": "",
+    "openai_status": ""
+  },
+  {
+    "entry_id": "gpt-4o__tot",
+    "domain": "sdg_c",
+    "file": "data/classifications/batches/gpt-4o__tot/sdg_c_part0016.jsonl",
+    "batch_id": "",
+    "openai_status": ""
+  },
+  {
+    "entry_id": "gpt-4o__tot",
+    "domain": "tech",
+    "file": "data/classifications/batches/gpt-4o__tot/tech_part0001.jsonl",
+    "batch_id": "",
+    "openai_status": ""
+  },
+  {
+    "entry_id": "gpt-4o__tot",
+    "domain": "tech",
+    "file": "data/classifications/batches/gpt-4o__tot/tech_part0002.jsonl",
+    "batch_id": "",
+    "openai_status": ""
+  },
+  {
+    "entry_id": "gpt-4o__tot",
+    "domain": "tech",
+    "file": "data/classifications/batches/gpt-4o__tot/tech_part0003.jsonl",
+    "batch_id": "",
+    "openai_status": ""
+  },
+  {
+    "entry_id": "gpt-4o__tot",
+    "domain": "tech",
+    "file": "data/classifications/batches/gpt-4o__tot/tech_part0004.jsonl",
+    "batch_id": "",
+    "openai_status": ""
+  },
+  {
+    "entry_id": "gpt-4o__tot",
+    "domain": "tech",
+    "file": "data/classifications/batches/gpt-4o__tot/tech_part0005.jsonl",
+    "batch_id": "",
+    "openai_status": ""
+  },
+  {
+    "entry_id": "gpt-4o__tot",
+    "domain": "tech",
+    "file": "data/classifications/batches/gpt-4o__tot/tech_part0006.jsonl",
+    "batch_id": "",
+    "openai_status": ""
+  },
+  {
+    "entry_id": "gpt-4o__tot",
+    "domain": "tech",
+    "file": "data/classifications/batches/gpt-4o__tot/tech_part0007.jsonl",
+    "batch_id": "",
+    "openai_status": ""
+  },
+  {
+    "entry_id": "gpt-4o__tot",
+    "domain": "tech",
+    "file": "data/classifications/batches/gpt-4o__tot/tech_part0008.jsonl",
+    "batch_id": "",
+    "openai_status": ""
+  },
+  {
+    "entry_id": "gpt-4o__tot",
+    "domain": "tech",
+    "file": "data/classifications/batches/gpt-4o__tot/tech_part0009.jsonl",
+    "batch_id": "",
+    "openai_status": ""
+  },
+  {
+    "entry_id": "gpt-4o__tot",
+    "domain": "tech",
+    "file": "data/classifications/batches/gpt-4o__tot/tech_part0010.jsonl",
+    "batch_id": "",
+    "openai_status": ""
+  },
+  {
+    "entry_id": "gpt-4o__tot",
+    "domain": "tech",
+    "file": "data/classifications/batches/gpt-4o__tot/tech_part0011.jsonl",
+    "batch_id": "",
+    "openai_status": ""
+  },
+  {
+    "entry_id": "gpt-4o__tot",
+    "domain": "tech",
+    "file": "data/classifications/batches/gpt-4o__tot/tech_part0012.jsonl",
+    "batch_id": "",
+    "openai_status": ""
+  },
+  {
+    "entry_id": "gpt-4o__tot",
+    "domain": "tech",
+    "file": "data/classifications/batches/gpt-4o__tot/tech_part0013.jsonl",
+    "batch_id": "",
+    "openai_status": ""
+  },
+  {
+    "entry_id": "gpt-4o__tot",
+    "domain": "tech",
+    "file": "data/classifications/batches/gpt-4o__tot/tech_part0014.jsonl",
+    "batch_id": "",
+    "openai_status": ""
+  },
+  {
+    "entry_id": "gpt-4o__tot",
+    "domain": "tech",
+    "file": "data/classifications/batches/gpt-4o__tot/tech_part0015.jsonl",
+    "batch_id": "",
+    "openai_status": ""
+  },
+  {
+    "entry_id": "gpt-4o__tot",
+    "domain": "tech",
+    "file": "data/classifications/batches/gpt-4o__tot/tech_part0016.jsonl",
+    "batch_id": "",
+    "openai_status": ""
+  },
+  {
+    "entry_id": "gpt-4o__tot",
+    "domain": "tech",
+    "file": "data/classifications/batches/gpt-4o__tot/tech_part0017.jsonl",
+    "batch_id": "",
+    "openai_status": ""
+  },
+  {
+    "entry_id": "gpt-4o__tot",
+    "domain": "tech",
+    "file": "data/classifications/batches/gpt-4o__tot/tech_part0018.jsonl",
+    "batch_id": "",
+    "openai_status": ""
+  },
+  {
+    "entry_id": "gpt-4o__tot",
+    "domain": "tech",
+    "file": "data/classifications/batches/gpt-4o__tot/tech_part0019.jsonl",
+    "batch_id": "",
+    "openai_status": ""
+  },
+  {
+    "entry_id": "gpt-4o__tot",
+    "domain": "tech",
+    "file": "data/classifications/batches/gpt-4o__tot/tech_part0020.jsonl",
+    "batch_id": "",
+    "openai_status": ""
+  },
+  {
+    "entry_id": "gpt-4o__tot",
+    "domain": "tech",
+    "file": "data/classifications/batches/gpt-4o__tot/tech_part0021.jsonl",
+    "batch_id": "",
+    "openai_status": ""
+  },
+  {
+    "entry_id": "gpt-4o__tot",
+    "domain": "tech",
+    "file": "data/classifications/batches/gpt-4o__tot/tech_part0022.jsonl",
+    "batch_id": "",
+    "openai_status": ""
+  },
+  {
+    "entry_id": "gpt-4o__tot",
+    "domain": "tech",
+    "file": "data/classifications/batches/gpt-4o__tot/tech_part0023.jsonl",
+    "batch_id": "",
+    "openai_status": ""
+  },
+  {
+    "entry_id": "gpt-4o__tot",
+    "domain": "tech",
+    "file": "data/classifications/batches/gpt-4o__tot/tech_part0024.jsonl",
+    "batch_id": "",
+    "openai_status": ""
+  },
+  {
+    "entry_id": "gpt-4o__tot",
+    "domain": "tech",
+    "file": "data/classifications/batches/gpt-4o__tot/tech_part0025.jsonl",
+    "batch_id": "",
+    "openai_status": ""
+  },
+  {
+    "entry_id": "gpt-4o__tot",
+    "domain": "tech",
+    "file": "data/classifications/batches/gpt-4o__tot/tech_part0026.jsonl",
+    "batch_id": "",
+    "openai_status": ""
+  },
+  {
+    "entry_id": "gpt-4o__tot",
+    "domain": "tech",
+    "file": "data/classifications/batches/gpt-4o__tot/tech_part0027.jsonl",
+    "batch_id": "",
+    "openai_status": ""
+  },
+  {
+    "entry_id": "gpt-4o__tot",
+    "domain": "tech",
+    "file": "data/classifications/batches/gpt-4o__tot/tech_part0028.jsonl",
+    "batch_id": "",
+    "openai_status": ""
+  },
+  {
+    "entry_id": "gpt-5.2__high__cot",
+    "domain": "sdg_a",
+    "file": "data/classifications/batches/gpt-5.2__high__cot/sdg_a_part0001.jsonl",
+    "batch_id": "",
+    "openai_status": ""
+  },
+  {
+    "entry_id": "gpt-5.2__high__cot",
+    "domain": "sdg_a",
+    "file": "data/classifications/batches/gpt-5.2__high__cot/sdg_a_part0002.jsonl",
+    "batch_id": "",
+    "openai_status": ""
+  },
+  {
+    "entry_id": "gpt-5.2__high__cot",
+    "domain": "sdg_a",
+    "file": "data/classifications/batches/gpt-5.2__high__cot/sdg_a_part0003.jsonl",
+    "batch_id": "",
+    "openai_status": ""
+  },
+  {
+    "entry_id": "gpt-5.2__high__cot",
+    "domain": "sdg_a",
+    "file": "data/classifications/batches/gpt-5.2__high__cot/sdg_a_part0004.jsonl",
+    "batch_id": "",
+    "openai_status": ""
+  },
+  {
+    "entry_id": "gpt-5.2__high__cot",
+    "domain": "sdg_a",
+    "file": "data/classifications/batches/gpt-5.2__high__cot/sdg_a_part0005.jsonl",
+    "batch_id": "",
+    "openai_status": ""
+  },
+  {
+    "entry_id": "gpt-5.2__high__cot",
+    "domain": "sdg_a",
+    "file": "data/classifications/batches/gpt-5.2__high__cot/sdg_a_part0006.jsonl",
+    "batch_id": "",
+    "openai_status": ""
+  },
+  {
+    "entry_id": "gpt-5.2__high__cot",
+    "domain": "sdg_a",
+    "file": "data/classifications/batches/gpt-5.2__high__cot/sdg_a_part0007.jsonl",
+    "batch_id": "",
+    "openai_status": ""
+  },
+  {
+    "entry_id": "gpt-5.2__high__cot",
+    "domain": "sdg_a",
+    "file": "data/classifications/batches/gpt-5.2__high__cot/sdg_a_part0008.jsonl",
+    "batch_id": "",
+    "openai_status": ""
+  },
+  {
+    "entry_id": "gpt-5.2__high__cot",
+    "domain": "sdg_a",
+    "file": "data/classifications/batches/gpt-5.2__high__cot/sdg_a_part0009.jsonl",
+    "batch_id": "",
+    "openai_status": ""
+  },
+  {
+    "entry_id": "gpt-5.2__high__cot",
+    "domain": "sdg_a",
+    "file": "data/classifications/batches/gpt-5.2__high__cot/sdg_a_part0010.jsonl",
+    "batch_id": "",
+    "openai_status": ""
+  },
+  {
+    "entry_id": "gpt-5.2__high__cot",
+    "domain": "sdg_a",
+    "file": "data/classifications/batches/gpt-5.2__high__cot/sdg_a_part0011.jsonl",
+    "batch_id": "",
+    "openai_status": ""
+  },
+  {
+    "entry_id": "gpt-5.2__high__cot",
+    "domain": "sdg_a",
+    "file": "data/classifications/batches/gpt-5.2__high__cot/sdg_a_part0012.jsonl",
+    "batch_id": "",
+    "openai_status": ""
+  },
+  {
+    "entry_id": "gpt-5.2__high__cot",
+    "domain": "sdg_a",
+    "file": "data/classifications/batches/gpt-5.2__high__cot/sdg_a_part0013.jsonl",
+    "batch_id": "",
+    "openai_status": ""
+  },
+  {
+    "entry_id": "gpt-5.2__high__cot",
+    "domain": "sdg_a",
+    "file": "data/classifications/batches/gpt-5.2__high__cot/sdg_a_part0014.jsonl",
+    "batch_id": "",
+    "openai_status": ""
+  },
+  {
+    "entry_id": "gpt-5.2__high__cot",
+    "domain": "sdg_a",
+    "file": "data/classifications/batches/gpt-5.2__high__cot/sdg_a_part0015.jsonl",
+    "batch_id": "",
+    "openai_status": ""
+  },
+  {
+    "entry_id": "gpt-5.2__high__cot",
+    "domain": "sdg_a",
+    "file": "data/classifications/batches/gpt-5.2__high__cot/sdg_a_part0016.jsonl",
+    "batch_id": "",
+    "openai_status": ""
+  },
+  {
+    "entry_id": "gpt-5.2__high__cot",
+    "domain": "sdg_a",
+    "file": "data/classifications/batches/gpt-5.2__high__cot/sdg_a_part0017.jsonl",
+    "batch_id": "",
+    "openai_status": ""
+  },
+  {
+    "entry_id": "gpt-5.2__high__cot",
+    "domain": "sdg_b",
+    "file": "data/classifications/batches/gpt-5.2__high__cot/sdg_b_part0001.jsonl",
+    "batch_id": "",
+    "openai_status": ""
+  },
+  {
+    "entry_id": "gpt-5.2__high__cot",
+    "domain": "sdg_b",
+    "file": "data/classifications/batches/gpt-5.2__high__cot/sdg_b_part0002.jsonl",
+    "batch_id": "",
+    "openai_status": ""
+  },
+  {
+    "entry_id": "gpt-5.2__high__cot",
+    "domain": "sdg_b",
+    "file": "data/classifications/batches/gpt-5.2__high__cot/sdg_b_part0003.jsonl",
+    "batch_id": "",
+    "openai_status": ""
+  },
+  {
+    "entry_id": "gpt-5.2__high__cot",
+    "domain": "sdg_b",
+    "file": "data/classifications/batches/gpt-5.2__high__cot/sdg_b_part0004.jsonl",
+    "batch_id": "",
+    "openai_status": ""
+  },
+  {
+    "entry_id": "gpt-5.2__high__cot",
+    "domain": "sdg_b",
+    "file": "data/classifications/batches/gpt-5.2__high__cot/sdg_b_part0005.jsonl",
+    "batch_id": "",
+    "openai_status": ""
+  },
+  {
+    "entry_id": "gpt-5.2__high__cot",
+    "domain": "sdg_b",
+    "file": "data/classifications/batches/gpt-5.2__high__cot/sdg_b_part0006.jsonl",
+    "batch_id": "",
+    "openai_status": ""
+  },
+  {
+    "entry_id": "gpt-5.2__high__cot",
+    "domain": "sdg_b",
+    "file": "data/classifications/batches/gpt-5.2__high__cot/sdg_b_part0007.jsonl",
+    "batch_id": "",
+    "openai_status": ""
+  },
+  {
+    "entry_id": "gpt-5.2__high__cot",
+    "domain": "sdg_b",
+    "file": "data/classifications/batches/gpt-5.2__high__cot/sdg_b_part0008.jsonl",
+    "batch_id": "",
+    "openai_status": ""
+  },
+  {
+    "entry_id": "gpt-5.2__high__cot",
+    "domain": "sdg_b",
+    "file": "data/classifications/batches/gpt-5.2__high__cot/sdg_b_part0009.jsonl",
+    "batch_id": "",
+    "openai_status": ""
+  },
+  {
+    "entry_id": "gpt-5.2__high__cot",
+    "domain": "sdg_b",
+    "file": "data/classifications/batches/gpt-5.2__high__cot/sdg_b_part0010.jsonl",
+    "batch_id": "",
+    "openai_status": ""
+  },
+  {
+    "entry_id": "gpt-5.2__high__cot",
+    "domain": "sdg_b",
+    "file": "data/classifications/batches/gpt-5.2__high__cot/sdg_b_part0011.jsonl",
+    "batch_id": "",
+    "openai_status": ""
+  },
+  {
+    "entry_id": "gpt-5.2__high__cot",
+    "domain": "sdg_b",
+    "file": "data/classifications/batches/gpt-5.2__high__cot/sdg_b_part0012.jsonl",
+    "batch_id": "",
+    "openai_status": ""
+  },
+  {
+    "entry_id": "gpt-5.2__high__cot",
+    "domain": "sdg_b",
+    "file": "data/classifications/batches/gpt-5.2__high__cot/sdg_b_part0013.jsonl",
+    "batch_id": "",
+    "openai_status": ""
+  },
+  {
+    "entry_id": "gpt-5.2__high__cot",
+    "domain": "sdg_b",
+    "file": "data/classifications/batches/gpt-5.2__high__cot/sdg_b_part0014.jsonl",
+    "batch_id": "",
+    "openai_status": ""
+  },
+  {
+    "entry_id": "gpt-5.2__high__cot",
+    "domain": "sdg_b",
+    "file": "data/classifications/batches/gpt-5.2__high__cot/sdg_b_part0015.jsonl",
+    "batch_id": "",
+    "openai_status": ""
+  },
+  {
+    "entry_id": "gpt-5.2__high__cot",
+    "domain": "sdg_b",
+    "file": "data/classifications/batches/gpt-5.2__high__cot/sdg_b_part0016.jsonl",
+    "batch_id": "",
+    "openai_status": ""
+  },
+  {
+    "entry_id": "gpt-5.2__high__cot",
+    "domain": "sdg_b",
+    "file": "data/classifications/batches/gpt-5.2__high__cot/sdg_b_part0017.jsonl",
+    "batch_id": "",
+    "openai_status": ""
+  },
+  {
+    "entry_id": "gpt-5.2__high__cot",
+    "domain": "sdg_b",
+    "file": "data/classifications/batches/gpt-5.2__high__cot/sdg_b_part0018.jsonl",
+    "batch_id": "",
+    "openai_status": ""
+  },
+  {
+    "entry_id": "gpt-5.2__high__cot",
+    "domain": "sdg_b",
+    "file": "data/classifications/batches/gpt-5.2__high__cot/sdg_b_part0019.jsonl",
+    "batch_id": "",
+    "openai_status": ""
+  },
+  {
+    "entry_id": "gpt-5.2__high__cot",
+    "domain": "sdg_b",
+    "file": "data/classifications/batches/gpt-5.2__high__cot/sdg_b_part0020.jsonl",
+    "batch_id": "",
+    "openai_status": ""
+  },
+  {
+    "entry_id": "gpt-5.2__high__cot",
+    "domain": "sdg_b",
+    "file": "data/classifications/batches/gpt-5.2__high__cot/sdg_b_part0021.jsonl",
+    "batch_id": "",
+    "openai_status": ""
+  },
+  {
+    "entry_id": "gpt-5.2__high__cot",
+    "domain": "sdg_b",
+    "file": "data/classifications/batches/gpt-5.2__high__cot/sdg_b_part0022.jsonl",
+    "batch_id": "",
+    "openai_status": ""
+  },
+  {
+    "entry_id": "gpt-5.2__high__cot",
+    "domain": "sdg_b",
+    "file": "data/classifications/batches/gpt-5.2__high__cot/sdg_b_part0023.jsonl",
+    "batch_id": "",
+    "openai_status": ""
+  },
+  {
+    "entry_id": "gpt-5.2__high__cot",
+    "domain": "sdg_b",
+    "file": "data/classifications/batches/gpt-5.2__high__cot/sdg_b_part0024.jsonl",
+    "batch_id": "",
+    "openai_status": ""
+  },
+  {
+    "entry_id": "gpt-5.2__high__cot",
+    "domain": "sdg_b",
+    "file": "data/classifications/batches/gpt-5.2__high__cot/sdg_b_part0025.jsonl",
+    "batch_id": "",
+    "openai_status": ""
+  },
+  {
+    "entry_id": "gpt-5.2__high__cot",
+    "domain": "sdg_b",
+    "file": "data/classifications/batches/gpt-5.2__high__cot/sdg_b_part0026.jsonl",
+    "batch_id": "",
+    "openai_status": ""
+  },
+  {
+    "entry_id": "gpt-5.2__high__cot",
+    "domain": "sdg_b",
+    "file": "data/classifications/batches/gpt-5.2__high__cot/sdg_b_part0027.jsonl",
+    "batch_id": "",
+    "openai_status": ""
+  },
+  {
+    "entry_id": "gpt-5.2__high__cot",
+    "domain": "sdg_b",
+    "file": "data/classifications/batches/gpt-5.2__high__cot/sdg_b_part0028.jsonl",
+    "batch_id": "",
+    "openai_status": ""
+  },
+  {
+    "entry_id": "gpt-5.2__high__cot",
+    "domain": "sdg_b",
+    "file": "data/classifications/batches/gpt-5.2__high__cot/sdg_b_part0029.jsonl",
+    "batch_id": "",
+    "openai_status": ""
+  },
+  {
+    "entry_id": "gpt-5.2__high__cot",
+    "domain": "sdg_b",
+    "file": "data/classifications/batches/gpt-5.2__high__cot/sdg_b_part0030.jsonl",
+    "batch_id": "",
+    "openai_status": ""
+  },
+  {
+    "entry_id": "gpt-5.2__high__cot",
+    "domain": "sdg_b",
+    "file": "data/classifications/batches/gpt-5.2__high__cot/sdg_b_part0031.jsonl",
+    "batch_id": "",
+    "openai_status": ""
+  },
+  {
+    "entry_id": "gpt-5.2__high__cot",
+    "domain": "sdg_b",
+    "file": "data/classifications/batches/gpt-5.2__high__cot/sdg_b_part0032.jsonl",
+    "batch_id": "",
+    "openai_status": ""
+  },
+  {
+    "entry_id": "gpt-5.2__high__cot",
+    "domain": "sdg_b",
+    "file": "data/classifications/batches/gpt-5.2__high__cot/sdg_b_part0033.jsonl",
+    "batch_id": "",
+    "openai_status": ""
+  },
+  {
+    "entry_id": "gpt-5.2__high__cot",
+    "domain": "sdg_b",
+    "file": "data/classifications/batches/gpt-5.2__high__cot/sdg_b_part0034.jsonl",
+    "batch_id": "",
+    "openai_status": ""
+  },
+  {
+    "entry_id": "gpt-5.2__high__cot",
+    "domain": "sdg_b",
+    "file": "data/classifications/batches/gpt-5.2__high__cot/sdg_b_part0035.jsonl",
+    "batch_id": "",
+    "openai_status": ""
+  },
+  {
+    "entry_id": "gpt-5.2__high__cot",
+    "domain": "sdg_b",
+    "file": "data/classifications/batches/gpt-5.2__high__cot/sdg_b_part0036.jsonl",
+    "batch_id": "",
+    "openai_status": ""
+  },
+  {
+    "entry_id": "gpt-5.2__high__cot",
+    "domain": "sdg_b",
+    "file": "data/classifications/batches/gpt-5.2__high__cot/sdg_b_part0037.jsonl",
+    "batch_id": "",
+    "openai_status": ""
+  },
+  {
+    "entry_id": "gpt-5.2__high__cot",
+    "domain": "sdg_b",
+    "file": "data/classifications/batches/gpt-5.2__high__cot/sdg_b_part0038.jsonl",
+    "batch_id": "",
+    "openai_status": ""
+  },
+  {
+    "entry_id": "gpt-5.2__high__cot",
+    "domain": "sdg_c",
+    "file": "data/classifications/batches/gpt-5.2__high__cot/sdg_c_part0001.jsonl",
+    "batch_id": "",
+    "openai_status": ""
+  },
+  {
+    "entry_id": "gpt-5.2__high__cot",
+    "domain": "sdg_c",
+    "file": "data/classifications/batches/gpt-5.2__high__cot/sdg_c_part0002.jsonl",
+    "batch_id": "",
+    "openai_status": ""
+  },
+  {
+    "entry_id": "gpt-5.2__high__cot",
+    "domain": "sdg_c",
+    "file": "data/classifications/batches/gpt-5.2__high__cot/sdg_c_part0003.jsonl",
+    "batch_id": "",
+    "openai_status": ""
+  },
+  {
+    "entry_id": "gpt-5.2__high__cot",
+    "domain": "sdg_c",
+    "file": "data/classifications/batches/gpt-5.2__high__cot/sdg_c_part0004.jsonl",
+    "batch_id": "",
+    "openai_status": ""
+  },
+  {
+    "entry_id": "gpt-5.2__high__cot",
+    "domain": "sdg_c",
+    "file": "data/classifications/batches/gpt-5.2__high__cot/sdg_c_part0005.jsonl",
+    "batch_id": "",
+    "openai_status": ""
+  },
+  {
+    "entry_id": "gpt-5.2__high__cot",
+    "domain": "sdg_c",
+    "file": "data/classifications/batches/gpt-5.2__high__cot/sdg_c_part0006.jsonl",
+    "batch_id": "",
+    "openai_status": ""
+  },
+  {
+    "entry_id": "gpt-5.2__high__cot",
+    "domain": "sdg_c",
+    "file": "data/classifications/batches/gpt-5.2__high__cot/sdg_c_part0007.jsonl",
+    "batch_id": "",
+    "openai_status": ""
+  },
+  {
+    "entry_id": "gpt-5.2__high__cot",
+    "domain": "sdg_c",
+    "file": "data/classifications/batches/gpt-5.2__high__cot/sdg_c_part0008.jsonl",
+    "batch_id": "",
+    "openai_status": ""
+  },
+  {
+    "entry_id": "gpt-5.2__high__cot",
+    "domain": "sdg_c",
+    "file": "data/classifications/batches/gpt-5.2__high__cot/sdg_c_part0009.jsonl",
+    "batch_id": "",
+    "openai_status": ""
+  },
+  {
+    "entry_id": "gpt-5.2__high__cot",
+    "domain": "sdg_c",
+    "file": "data/classifications/batches/gpt-5.2__high__cot/sdg_c_part0010.jsonl",
+    "batch_id": "",
+    "openai_status": ""
+  },
+  {
+    "entry_id": "gpt-5.2__high__cot",
+    "domain": "sdg_c",
+    "file": "data/classifications/batches/gpt-5.2__high__cot/sdg_c_part0011.jsonl",
+    "batch_id": "",
+    "openai_status": ""
+  },
+  {
+    "entry_id": "gpt-5.2__high__cot",
+    "domain": "sdg_c",
+    "file": "data/classifications/batches/gpt-5.2__high__cot/sdg_c_part0012.jsonl",
+    "batch_id": "",
+    "openai_status": ""
+  },
+  {
+    "entry_id": "gpt-5.2__high__cot",
+    "domain": "sdg_c",
+    "file": "data/classifications/batches/gpt-5.2__high__cot/sdg_c_part0013.jsonl",
+    "batch_id": "",
+    "openai_status": ""
+  },
+  {
+    "entry_id": "gpt-5.2__high__cot",
+    "domain": "sdg_c",
+    "file": "data/classifications/batches/gpt-5.2__high__cot/sdg_c_part0014.jsonl",
+    "batch_id": "",
+    "openai_status": ""
+  },
+  {
+    "entry_id": "gpt-5.2__high__cot",
+    "domain": "sdg_c",
+    "file": "data/classifications/batches/gpt-5.2__high__cot/sdg_c_part0015.jsonl",
+    "batch_id": "",
+    "openai_status": ""
+  },
+  {
+    "entry_id": "gpt-5.2__high__cot",
+    "domain": "sdg_c",
+    "file": "data/classifications/batches/gpt-5.2__high__cot/sdg_c_part0016.jsonl",
+    "batch_id": "",
+    "openai_status": ""
+  },
+  {
+    "entry_id": "gpt-5.2__high__cot",
+    "domain": "tech",
+    "file": "data/classifications/batches/gpt-5.2__high__cot/tech_part0001.jsonl",
+    "batch_id": "",
+    "openai_status": ""
+  },
+  {
+    "entry_id": "gpt-5.2__high__cot",
+    "domain": "tech",
+    "file": "data/classifications/batches/gpt-5.2__high__cot/tech_part0002.jsonl",
+    "batch_id": "",
+    "openai_status": ""
+  },
+  {
+    "entry_id": "gpt-5.2__high__cot",
+    "domain": "tech",
+    "file": "data/classifications/batches/gpt-5.2__high__cot/tech_part0003.jsonl",
+    "batch_id": "",
+    "openai_status": ""
+  },
+  {
+    "entry_id": "gpt-5.2__high__cot",
+    "domain": "tech",
+    "file": "data/classifications/batches/gpt-5.2__high__cot/tech_part0004.jsonl",
+    "batch_id": "",
+    "openai_status": ""
+  },
+  {
+    "entry_id": "gpt-5.2__high__cot",
+    "domain": "tech",
+    "file": "data/classifications/batches/gpt-5.2__high__cot/tech_part0005.jsonl",
+    "batch_id": "",
+    "openai_status": ""
+  },
+  {
+    "entry_id": "gpt-5.2__high__cot",
+    "domain": "tech",
+    "file": "data/classifications/batches/gpt-5.2__high__cot/tech_part0006.jsonl",
+    "batch_id": "",
+    "openai_status": ""
+  },
+  {
+    "entry_id": "gpt-5.2__high__cot",
+    "domain": "tech",
+    "file": "data/classifications/batches/gpt-5.2__high__cot/tech_part0007.jsonl",
+    "batch_id": "",
+    "openai_status": ""
+  },
+  {
+    "entry_id": "gpt-5.2__high__cot",
+    "domain": "tech",
+    "file": "data/classifications/batches/gpt-5.2__high__cot/tech_part0008.jsonl",
+    "batch_id": "",
+    "openai_status": ""
+  },
+  {
+    "entry_id": "gpt-5.2__high__cot",
+    "domain": "tech",
+    "file": "data/classifications/batches/gpt-5.2__high__cot/tech_part0009.jsonl",
+    "batch_id": "",
+    "openai_status": ""
+  },
+  {
+    "entry_id": "gpt-5.2__high__cot",
+    "domain": "tech",
+    "file": "data/classifications/batches/gpt-5.2__high__cot/tech_part0010.jsonl",
+    "batch_id": "",
+    "openai_status": ""
+  },
+  {
+    "entry_id": "gpt-5.2__high__cot",
+    "domain": "tech",
+    "file": "data/classifications/batches/gpt-5.2__high__cot/tech_part0011.jsonl",
+    "batch_id": "",
+    "openai_status": ""
+  },
+  {
+    "entry_id": "gpt-5.2__high__cot",
+    "domain": "tech",
+    "file": "data/classifications/batches/gpt-5.2__high__cot/tech_part0012.jsonl",
+    "batch_id": "",
+    "openai_status": ""
+  },
+  {
+    "entry_id": "gpt-5.2__high__cot",
+    "domain": "tech",
+    "file": "data/classifications/batches/gpt-5.2__high__cot/tech_part0013.jsonl",
+    "batch_id": "",
+    "openai_status": ""
+  },
+  {
+    "entry_id": "gpt-5.2__high__cot",
+    "domain": "tech",
+    "file": "data/classifications/batches/gpt-5.2__high__cot/tech_part0014.jsonl",
+    "batch_id": "",
+    "openai_status": ""
+  },
+  {
+    "entry_id": "gpt-5.2__high__cot",
+    "domain": "tech",
+    "file": "data/classifications/batches/gpt-5.2__high__cot/tech_part0015.jsonl",
+    "batch_id": "",
+    "openai_status": ""
+  },
+  {
+    "entry_id": "gpt-5.2__high__cot",
+    "domain": "tech",
+    "file": "data/classifications/batches/gpt-5.2__high__cot/tech_part0016.jsonl",
+    "batch_id": "",
+    "openai_status": ""
+  },
+  {
+    "entry_id": "gpt-5.2__high__cot",
+    "domain": "tech",
+    "file": "data/classifications/batches/gpt-5.2__high__cot/tech_part0017.jsonl",
+    "batch_id": "",
+    "openai_status": ""
+  },
+  {
+    "entry_id": "gpt-5.2__high__cot",
+    "domain": "tech",
+    "file": "data/classifications/batches/gpt-5.2__high__cot/tech_part0018.jsonl",
+    "batch_id": "",
+    "openai_status": ""
+  },
+  {
+    "entry_id": "gpt-5.2__high__cot",
+    "domain": "tech",
+    "file": "data/classifications/batches/gpt-5.2__high__cot/tech_part0019.jsonl",
+    "batch_id": "",
+    "openai_status": ""
+  },
+  {
+    "entry_id": "gpt-5.2__high__cot",
+    "domain": "tech",
+    "file": "data/classifications/batches/gpt-5.2__high__cot/tech_part0020.jsonl",
+    "batch_id": "",
+    "openai_status": ""
+  },
+  {
+    "entry_id": "gpt-5.2__high__cot",
+    "domain": "tech",
+    "file": "data/classifications/batches/gpt-5.2__high__cot/tech_part0021.jsonl",
+    "batch_id": "",
+    "openai_status": ""
+  },
+  {
+    "entry_id": "gpt-5.2__high__cot",
+    "domain": "tech",
+    "file": "data/classifications/batches/gpt-5.2__high__cot/tech_part0022.jsonl",
+    "batch_id": "",
+    "openai_status": ""
+  },
+  {
+    "entry_id": "gpt-5.2__high__cot",
+    "domain": "tech",
+    "file": "data/classifications/batches/gpt-5.2__high__cot/tech_part0023.jsonl",
+    "batch_id": "",
+    "openai_status": ""
+  },
+  {
+    "entry_id": "gpt-5.2__high__cot",
+    "domain": "tech",
+    "file": "data/classifications/batches/gpt-5.2__high__cot/tech_part0024.jsonl",
+    "batch_id": "",
+    "openai_status": ""
+  },
+  {
+    "entry_id": "gpt-5.2__high__cot",
+    "domain": "tech",
+    "file": "data/classifications/batches/gpt-5.2__high__cot/tech_part0025.jsonl",
+    "batch_id": "",
+    "openai_status": ""
+  },
+  {
+    "entry_id": "gpt-5.2__high__cot",
+    "domain": "tech",
+    "file": "data/classifications/batches/gpt-5.2__high__cot/tech_part0026.jsonl",
+    "batch_id": "",
+    "openai_status": ""
+  },
+  {
+    "entry_id": "gpt-5.2__high__cot",
+    "domain": "tech",
+    "file": "data/classifications/batches/gpt-5.2__high__cot/tech_part0027.jsonl",
+    "batch_id": "",
+    "openai_status": ""
+  },
+  {
+    "entry_id": "gpt-5.2__high__cot",
+    "domain": "tech",
+    "file": "data/classifications/batches/gpt-5.2__high__cot/tech_part0028.jsonl",
+    "batch_id": "",
+    "openai_status": ""
+  },
+  {
+    "entry_id": "gpt-5.2__low__zero_shot",
+    "domain": "sdg_a",
+    "file": "data/classifications/batches/gpt-5.2__low__zero_shot/sdg_a_part0001.jsonl",
+    "batch_id": "batch_69c3e35b889881909ffc76a5562d8b28",
+    "openai_status": "in_progress"
+  },
+  {
+    "entry_id": "gpt-5.2__low__zero_shot",
+    "domain": "sdg_a",
+    "file": "data/classifications/batches/gpt-5.2__low__zero_shot/sdg_a_part0002.jsonl",
+    "batch_id": "",
+    "openai_status": ""
+  },
+  {
+    "entry_id": "gpt-5.2__low__zero_shot",
+    "domain": "sdg_a",
+    "file": "data/classifications/batches/gpt-5.2__low__zero_shot/sdg_a_part0003.jsonl",
+    "batch_id": "",
+    "openai_status": ""
+  },
+  {
+    "entry_id": "gpt-5.2__low__zero_shot",
+    "domain": "sdg_a",
+    "file": "data/classifications/batches/gpt-5.2__low__zero_shot/sdg_a_part0004.jsonl",
+    "batch_id": "",
+    "openai_status": ""
+  },
+  {
+    "entry_id": "gpt-5.2__low__zero_shot",
+    "domain": "sdg_a",
+    "file": "data/classifications/batches/gpt-5.2__low__zero_shot/sdg_a_part0005.jsonl",
+    "batch_id": "",
+    "openai_status": ""
+  },
+  {
+    "entry_id": "gpt-5.2__low__zero_shot",
+    "domain": "sdg_a",
+    "file": "data/classifications/batches/gpt-5.2__low__zero_shot/sdg_a_part0006.jsonl",
+    "batch_id": "",
+    "openai_status": ""
+  },
+  {
+    "entry_id": "gpt-5.2__low__zero_shot",
+    "domain": "sdg_a",
+    "file": "data/classifications/batches/gpt-5.2__low__zero_shot/sdg_a_part0007.jsonl",
+    "batch_id": "",
+    "openai_status": ""
+  },
+  {
+    "entry_id": "gpt-5.2__low__zero_shot",
+    "domain": "sdg_a",
+    "file": "data/classifications/batches/gpt-5.2__low__zero_shot/sdg_a_part0008.jsonl",
+    "batch_id": "",
+    "openai_status": ""
+  },
+  {
+    "entry_id": "gpt-5.2__low__zero_shot",
+    "domain": "sdg_a",
+    "file": "data/classifications/batches/gpt-5.2__low__zero_shot/sdg_a_part0009.jsonl",
+    "batch_id": "",
+    "openai_status": ""
+  },
+  {
+    "entry_id": "gpt-5.2__low__zero_shot",
+    "domain": "sdg_a",
+    "file": "data/classifications/batches/gpt-5.2__low__zero_shot/sdg_a_part0010.jsonl",
+    "batch_id": "",
+    "openai_status": ""
+  },
+  {
+    "entry_id": "gpt-5.2__low__zero_shot",
+    "domain": "sdg_a",
+    "file": "data/classifications/batches/gpt-5.2__low__zero_shot/sdg_a_part0011.jsonl",
+    "batch_id": "",
+    "openai_status": ""
+  },
+  {
+    "entry_id": "gpt-5.2__low__zero_shot",
+    "domain": "sdg_a",
+    "file": "data/classifications/batches/gpt-5.2__low__zero_shot/sdg_a_part0012.jsonl",
+    "batch_id": "",
+    "openai_status": ""
+  },
+  {
+    "entry_id": "gpt-5.2__low__zero_shot",
+    "domain": "sdg_a",
+    "file": "data/classifications/batches/gpt-5.2__low__zero_shot/sdg_a_part0013.jsonl",
+    "batch_id": "",
+    "openai_status": ""
+  },
+  {
+    "entry_id": "gpt-5.2__low__zero_shot",
+    "domain": "sdg_a",
+    "file": "data/classifications/batches/gpt-5.2__low__zero_shot/sdg_a_part0014.jsonl",
+    "batch_id": "",
+    "openai_status": ""
+  },
+  {
+    "entry_id": "gpt-5.2__low__zero_shot",
+    "domain": "sdg_a",
+    "file": "data/classifications/batches/gpt-5.2__low__zero_shot/sdg_a_part0015.jsonl",
+    "batch_id": "",
+    "openai_status": ""
+  },
+  {
+    "entry_id": "gpt-5.2__low__zero_shot",
+    "domain": "sdg_a",
+    "file": "data/classifications/batches/gpt-5.2__low__zero_shot/sdg_a_part0016.jsonl",
+    "batch_id": "",
+    "openai_status": ""
+  },
+  {
+    "entry_id": "gpt-5.2__low__zero_shot",
+    "domain": "sdg_a",
+    "file": "data/classifications/batches/gpt-5.2__low__zero_shot/sdg_a_part0017.jsonl",
+    "batch_id": "",
+    "openai_status": ""
+  },
+  {
+    "entry_id": "gpt-5.2__low__zero_shot",
+    "domain": "sdg_b",
+    "file": "data/classifications/batches/gpt-5.2__low__zero_shot/sdg_b_part0001.jsonl",
+    "batch_id": "",
+    "openai_status": ""
+  },
+  {
+    "entry_id": "gpt-5.2__low__zero_shot",
+    "domain": "sdg_b",
+    "file": "data/classifications/batches/gpt-5.2__low__zero_shot/sdg_b_part0002.jsonl",
+    "batch_id": "",
+    "openai_status": ""
+  },
+  {
+    "entry_id": "gpt-5.2__low__zero_shot",
+    "domain": "sdg_b",
+    "file": "data/classifications/batches/gpt-5.2__low__zero_shot/sdg_b_part0003.jsonl",
+    "batch_id": "",
+    "openai_status": ""
+  },
+  {
+    "entry_id": "gpt-5.2__low__zero_shot",
+    "domain": "sdg_b",
+    "file": "data/classifications/batches/gpt-5.2__low__zero_shot/sdg_b_part0004.jsonl",
+    "batch_id": "",
+    "openai_status": ""
+  },
+  {
+    "entry_id": "gpt-5.2__low__zero_shot",
+    "domain": "sdg_b",
+    "file": "data/classifications/batches/gpt-5.2__low__zero_shot/sdg_b_part0005.jsonl",
+    "batch_id": "",
+    "openai_status": ""
+  },
+  {
+    "entry_id": "gpt-5.2__low__zero_shot",
+    "domain": "sdg_b",
+    "file": "data/classifications/batches/gpt-5.2__low__zero_shot/sdg_b_part0006.jsonl",
+    "batch_id": "",
+    "openai_status": ""
+  },
+  {
+    "entry_id": "gpt-5.2__low__zero_shot",
+    "domain": "sdg_b",
+    "file": "data/classifications/batches/gpt-5.2__low__zero_shot/sdg_b_part0007.jsonl",
+    "batch_id": "",
+    "openai_status": ""
+  },
+  {
+    "entry_id": "gpt-5.2__low__zero_shot",
+    "domain": "sdg_b",
+    "file": "data/classifications/batches/gpt-5.2__low__zero_shot/sdg_b_part0008.jsonl",
+    "batch_id": "",
+    "openai_status": ""
+  },
+  {
+    "entry_id": "gpt-5.2__low__zero_shot",
+    "domain": "sdg_b",
+    "file": "data/classifications/batches/gpt-5.2__low__zero_shot/sdg_b_part0009.jsonl",
+    "batch_id": "",
+    "openai_status": ""
+  },
+  {
+    "entry_id": "gpt-5.2__low__zero_shot",
+    "domain": "sdg_b",
+    "file": "data/classifications/batches/gpt-5.2__low__zero_shot/sdg_b_part0010.jsonl",
+    "batch_id": "",
+    "openai_status": ""
+  },
+  {
+    "entry_id": "gpt-5.2__low__zero_shot",
+    "domain": "sdg_b",
+    "file": "data/classifications/batches/gpt-5.2__low__zero_shot/sdg_b_part0011.jsonl",
+    "batch_id": "",
+    "openai_status": ""
+  },
+  {
+    "entry_id": "gpt-5.2__low__zero_shot",
+    "domain": "sdg_b",
+    "file": "data/classifications/batches/gpt-5.2__low__zero_shot/sdg_b_part0012.jsonl",
+    "batch_id": "",
+    "openai_status": ""
+  },
+  {
+    "entry_id": "gpt-5.2__low__zero_shot",
+    "domain": "sdg_b",
+    "file": "data/classifications/batches/gpt-5.2__low__zero_shot/sdg_b_part0013.jsonl",
+    "batch_id": "",
+    "openai_status": ""
+  },
+  {
+    "entry_id": "gpt-5.2__low__zero_shot",
+    "domain": "sdg_b",
+    "file": "data/classifications/batches/gpt-5.2__low__zero_shot/sdg_b_part0014.jsonl",
+    "batch_id": "",
+    "openai_status": ""
+  },
+  {
+    "entry_id": "gpt-5.2__low__zero_shot",
+    "domain": "sdg_b",
+    "file": "data/classifications/batches/gpt-5.2__low__zero_shot/sdg_b_part0015.jsonl",
+    "batch_id": "",
+    "openai_status": ""
+  },
+  {
+    "entry_id": "gpt-5.2__low__zero_shot",
+    "domain": "sdg_b",
+    "file": "data/classifications/batches/gpt-5.2__low__zero_shot/sdg_b_part0016.jsonl",
+    "batch_id": "",
+    "openai_status": ""
+  },
+  {
+    "entry_id": "gpt-5.2__low__zero_shot",
+    "domain": "sdg_b",
+    "file": "data/classifications/batches/gpt-5.2__low__zero_shot/sdg_b_part0017.jsonl",
+    "batch_id": "",
+    "openai_status": ""
+  },
+  {
+    "entry_id": "gpt-5.2__low__zero_shot",
+    "domain": "sdg_b",
+    "file": "data/classifications/batches/gpt-5.2__low__zero_shot/sdg_b_part0018.jsonl",
+    "batch_id": "",
+    "openai_status": ""
+  },
+  {
+    "entry_id": "gpt-5.2__low__zero_shot",
+    "domain": "sdg_b",
+    "file": "data/classifications/batches/gpt-5.2__low__zero_shot/sdg_b_part0019.jsonl",
+    "batch_id": "",
+    "openai_status": ""
+  },
+  {
+    "entry_id": "gpt-5.2__low__zero_shot",
+    "domain": "sdg_b",
+    "file": "data/classifications/batches/gpt-5.2__low__zero_shot/sdg_b_part0020.jsonl",
+    "batch_id": "",
+    "openai_status": ""
+  },
+  {
+    "entry_id": "gpt-5.2__low__zero_shot",
+    "domain": "sdg_b",
+    "file": "data/classifications/batches/gpt-5.2__low__zero_shot/sdg_b_part0021.jsonl",
+    "batch_id": "",
+    "openai_status": ""
+  },
+  {
+    "entry_id": "gpt-5.2__low__zero_shot",
+    "domain": "sdg_b",
+    "file": "data/classifications/batches/gpt-5.2__low__zero_shot/sdg_b_part0022.jsonl",
+    "batch_id": "",
+    "openai_status": ""
+  },
+  {
+    "entry_id": "gpt-5.2__low__zero_shot",
+    "domain": "sdg_b",
+    "file": "data/classifications/batches/gpt-5.2__low__zero_shot/sdg_b_part0023.jsonl",
+    "batch_id": "",
+    "openai_status": ""
+  },
+  {
+    "entry_id": "gpt-5.2__low__zero_shot",
+    "domain": "sdg_b",
+    "file": "data/classifications/batches/gpt-5.2__low__zero_shot/sdg_b_part0024.jsonl",
+    "batch_id": "",
+    "openai_status": ""
+  },
+  {
+    "entry_id": "gpt-5.2__low__zero_shot",
+    "domain": "sdg_b",
+    "file": "data/classifications/batches/gpt-5.2__low__zero_shot/sdg_b_part0025.jsonl",
+    "batch_id": "",
+    "openai_status": ""
+  },
+  {
+    "entry_id": "gpt-5.2__low__zero_shot",
+    "domain": "sdg_b",
+    "file": "data/classifications/batches/gpt-5.2__low__zero_shot/sdg_b_part0026.jsonl",
+    "batch_id": "",
+    "openai_status": ""
+  },
+  {
+    "entry_id": "gpt-5.2__low__zero_shot",
+    "domain": "sdg_b",
+    "file": "data/classifications/batches/gpt-5.2__low__zero_shot/sdg_b_part0027.jsonl",
+    "batch_id": "",
+    "openai_status": ""
+  },
+  {
+    "entry_id": "gpt-5.2__low__zero_shot",
+    "domain": "sdg_b",
+    "file": "data/classifications/batches/gpt-5.2__low__zero_shot/sdg_b_part0028.jsonl",
+    "batch_id": "",
+    "openai_status": ""
+  },
+  {
+    "entry_id": "gpt-5.2__low__zero_shot",
+    "domain": "sdg_b",
+    "file": "data/classifications/batches/gpt-5.2__low__zero_shot/sdg_b_part0029.jsonl",
+    "batch_id": "",
+    "openai_status": ""
+  },
+  {
+    "entry_id": "gpt-5.2__low__zero_shot",
+    "domain": "sdg_b",
+    "file": "data/classifications/batches/gpt-5.2__low__zero_shot/sdg_b_part0030.jsonl",
+    "batch_id": "",
+    "openai_status": ""
+  },
+  {
+    "entry_id": "gpt-5.2__low__zero_shot",
+    "domain": "sdg_b",
+    "file": "data/classifications/batches/gpt-5.2__low__zero_shot/sdg_b_part0031.jsonl",
+    "batch_id": "",
+    "openai_status": ""
+  },
+  {
+    "entry_id": "gpt-5.2__low__zero_shot",
+    "domain": "sdg_b",
+    "file": "data/classifications/batches/gpt-5.2__low__zero_shot/sdg_b_part0032.jsonl",
+    "batch_id": "",
+    "openai_status": ""
+  },
+  {
+    "entry_id": "gpt-5.2__low__zero_shot",
+    "domain": "sdg_b",
+    "file": "data/classifications/batches/gpt-5.2__low__zero_shot/sdg_b_part0033.jsonl",
+    "batch_id": "",
+    "openai_status": ""
+  },
+  {
+    "entry_id": "gpt-5.2__low__zero_shot",
+    "domain": "sdg_b",
+    "file": "data/classifications/batches/gpt-5.2__low__zero_shot/sdg_b_part0034.jsonl",
+    "batch_id": "",
+    "openai_status": ""
+  },
+  {
+    "entry_id": "gpt-5.2__low__zero_shot",
+    "domain": "sdg_b",
+    "file": "data/classifications/batches/gpt-5.2__low__zero_shot/sdg_b_part0035.jsonl",
+    "batch_id": "",
+    "openai_status": ""
+  },
+  {
+    "entry_id": "gpt-5.2__low__zero_shot",
+    "domain": "sdg_b",
+    "file": "data/classifications/batches/gpt-5.2__low__zero_shot/sdg_b_part0036.jsonl",
+    "batch_id": "",
+    "openai_status": ""
+  },
+  {
+    "entry_id": "gpt-5.2__low__zero_shot",
+    "domain": "sdg_b",
+    "file": "data/classifications/batches/gpt-5.2__low__zero_shot/sdg_b_part0037.jsonl",
+    "batch_id": "",
+    "openai_status": ""
+  },
+  {
+    "entry_id": "gpt-5.2__low__zero_shot",
+    "domain": "sdg_b",
+    "file": "data/classifications/batches/gpt-5.2__low__zero_shot/sdg_b_part0038.jsonl",
+    "batch_id": "",
+    "openai_status": ""
+  },
+  {
+    "entry_id": "gpt-5.2__low__zero_shot",
+    "domain": "sdg_c",
+    "file": "data/classifications/batches/gpt-5.2__low__zero_shot/sdg_c_part0001.jsonl",
+    "batch_id": "",
+    "openai_status": ""
+  },
+  {
+    "entry_id": "gpt-5.2__low__zero_shot",
+    "domain": "sdg_c",
+    "file": "data/classifications/batches/gpt-5.2__low__zero_shot/sdg_c_part0002.jsonl",
+    "batch_id": "",
+    "openai_status": ""
+  },
+  {
+    "entry_id": "gpt-5.2__low__zero_shot",
+    "domain": "sdg_c",
+    "file": "data/classifications/batches/gpt-5.2__low__zero_shot/sdg_c_part0003.jsonl",
+    "batch_id": "",
+    "openai_status": ""
+  },
+  {
+    "entry_id": "gpt-5.2__low__zero_shot",
+    "domain": "sdg_c",
+    "file": "data/classifications/batches/gpt-5.2__low__zero_shot/sdg_c_part0004.jsonl",
+    "batch_id": "",
+    "openai_status": ""
+  },
+  {
+    "entry_id": "gpt-5.2__low__zero_shot",
+    "domain": "sdg_c",
+    "file": "data/classifications/batches/gpt-5.2__low__zero_shot/sdg_c_part0005.jsonl",
+    "batch_id": "",
+    "openai_status": ""
+  },
+  {
+    "entry_id": "gpt-5.2__low__zero_shot",
+    "domain": "sdg_c",
+    "file": "data/classifications/batches/gpt-5.2__low__zero_shot/sdg_c_part0006.jsonl",
+    "batch_id": "",
+    "openai_status": ""
+  },
+  {
+    "entry_id": "gpt-5.2__low__zero_shot",
+    "domain": "sdg_c",
+    "file": "data/classifications/batches/gpt-5.2__low__zero_shot/sdg_c_part0007.jsonl",
+    "batch_id": "",
+    "openai_status": ""
+  },
+  {
+    "entry_id": "gpt-5.2__low__zero_shot",
+    "domain": "sdg_c",
+    "file": "data/classifications/batches/gpt-5.2__low__zero_shot/sdg_c_part0008.jsonl",
+    "batch_id": "",
+    "openai_status": ""
+  },
+  {
+    "entry_id": "gpt-5.2__low__zero_shot",
+    "domain": "sdg_c",
+    "file": "data/classifications/batches/gpt-5.2__low__zero_shot/sdg_c_part0009.jsonl",
+    "batch_id": "",
+    "openai_status": ""
+  },
+  {
+    "entry_id": "gpt-5.2__low__zero_shot",
+    "domain": "sdg_c",
+    "file": "data/classifications/batches/gpt-5.2__low__zero_shot/sdg_c_part0010.jsonl",
+    "batch_id": "",
+    "openai_status": ""
+  },
+  {
+    "entry_id": "gpt-5.2__low__zero_shot",
+    "domain": "sdg_c",
+    "file": "data/classifications/batches/gpt-5.2__low__zero_shot/sdg_c_part0011.jsonl",
+    "batch_id": "",
+    "openai_status": ""
+  },
+  {
+    "entry_id": "gpt-5.2__low__zero_shot",
+    "domain": "sdg_c",
+    "file": "data/classifications/batches/gpt-5.2__low__zero_shot/sdg_c_part0012.jsonl",
+    "batch_id": "",
+    "openai_status": ""
+  },
+  {
+    "entry_id": "gpt-5.2__low__zero_shot",
+    "domain": "sdg_c",
+    "file": "data/classifications/batches/gpt-5.2__low__zero_shot/sdg_c_part0013.jsonl",
+    "batch_id": "",
+    "openai_status": ""
+  },
+  {
+    "entry_id": "gpt-5.2__low__zero_shot",
+    "domain": "sdg_c",
+    "file": "data/classifications/batches/gpt-5.2__low__zero_shot/sdg_c_part0014.jsonl",
+    "batch_id": "",
+    "openai_status": ""
+  },
+  {
+    "entry_id": "gpt-5.2__low__zero_shot",
+    "domain": "sdg_c",
+    "file": "data/classifications/batches/gpt-5.2__low__zero_shot/sdg_c_part0015.jsonl",
+    "batch_id": "",
+    "openai_status": ""
+  },
+  {
+    "entry_id": "gpt-5.2__low__zero_shot",
+    "domain": "sdg_c",
+    "file": "data/classifications/batches/gpt-5.2__low__zero_shot/sdg_c_part0016.jsonl",
+    "batch_id": "",
+    "openai_status": ""
+  },
+  {
+    "entry_id": "gpt-5.2__low__zero_shot",
+    "domain": "tech",
+    "file": "data/classifications/batches/gpt-5.2__low__zero_shot/tech_part0001.jsonl",
+    "batch_id": "",
+    "openai_status": ""
+  },
+  {
+    "entry_id": "gpt-5.2__low__zero_shot",
+    "domain": "tech",
+    "file": "data/classifications/batches/gpt-5.2__low__zero_shot/tech_part0002.jsonl",
+    "batch_id": "",
+    "openai_status": ""
+  },
+  {
+    "entry_id": "gpt-5.2__low__zero_shot",
+    "domain": "tech",
+    "file": "data/classifications/batches/gpt-5.2__low__zero_shot/tech_part0003.jsonl",
+    "batch_id": "",
+    "openai_status": ""
+  },
+  {
+    "entry_id": "gpt-5.2__low__zero_shot",
+    "domain": "tech",
+    "file": "data/classifications/batches/gpt-5.2__low__zero_shot/tech_part0004.jsonl",
+    "batch_id": "",
+    "openai_status": ""
+  },
+  {
+    "entry_id": "gpt-5.2__low__zero_shot",
+    "domain": "tech",
+    "file": "data/classifications/batches/gpt-5.2__low__zero_shot/tech_part0005.jsonl",
+    "batch_id": "",
+    "openai_status": ""
+  },
+  {
+    "entry_id": "gpt-5.2__low__zero_shot",
+    "domain": "tech",
+    "file": "data/classifications/batches/gpt-5.2__low__zero_shot/tech_part0006.jsonl",
+    "batch_id": "",
+    "openai_status": ""
+  },
+  {
+    "entry_id": "gpt-5.2__low__zero_shot",
+    "domain": "tech",
+    "file": "data/classifications/batches/gpt-5.2__low__zero_shot/tech_part0007.jsonl",
+    "batch_id": "",
+    "openai_status": ""
+  },
+  {
+    "entry_id": "gpt-5.2__low__zero_shot",
+    "domain": "tech",
+    "file": "data/classifications/batches/gpt-5.2__low__zero_shot/tech_part0008.jsonl",
+    "batch_id": "",
+    "openai_status": ""
+  },
+  {
+    "entry_id": "gpt-5.2__low__zero_shot",
+    "domain": "tech",
+    "file": "data/classifications/batches/gpt-5.2__low__zero_shot/tech_part0009.jsonl",
+    "batch_id": "",
+    "openai_status": ""
+  },
+  {
+    "entry_id": "gpt-5.2__low__zero_shot",
+    "domain": "tech",
+    "file": "data/classifications/batches/gpt-5.2__low__zero_shot/tech_part0010.jsonl",
+    "batch_id": "",
+    "openai_status": ""
+  },
+  {
+    "entry_id": "gpt-5.2__low__zero_shot",
+    "domain": "tech",
+    "file": "data/classifications/batches/gpt-5.2__low__zero_shot/tech_part0011.jsonl",
+    "batch_id": "",
+    "openai_status": ""
+  },
+  {
+    "entry_id": "gpt-5.2__low__zero_shot",
+    "domain": "tech",
+    "file": "data/classifications/batches/gpt-5.2__low__zero_shot/tech_part0012.jsonl",
+    "batch_id": "",
+    "openai_status": ""
+  },
+  {
+    "entry_id": "gpt-5.2__low__zero_shot",
+    "domain": "tech",
+    "file": "data/classifications/batches/gpt-5.2__low__zero_shot/tech_part0013.jsonl",
+    "batch_id": "",
+    "openai_status": ""
+  },
+  {
+    "entry_id": "gpt-5.2__low__zero_shot",
+    "domain": "tech",
+    "file": "data/classifications/batches/gpt-5.2__low__zero_shot/tech_part0014.jsonl",
+    "batch_id": "",
+    "openai_status": ""
+  },
+  {
+    "entry_id": "gpt-5.2__low__zero_shot",
+    "domain": "tech",
+    "file": "data/classifications/batches/gpt-5.2__low__zero_shot/tech_part0015.jsonl",
+    "batch_id": "",
+    "openai_status": ""
+  },
+  {
+    "entry_id": "gpt-5.2__low__zero_shot",
+    "domain": "tech",
+    "file": "data/classifications/batches/gpt-5.2__low__zero_shot/tech_part0016.jsonl",
+    "batch_id": "",
+    "openai_status": ""
+  },
+  {
+    "entry_id": "gpt-5.2__low__zero_shot",
+    "domain": "tech",
+    "file": "data/classifications/batches/gpt-5.2__low__zero_shot/tech_part0017.jsonl",
+    "batch_id": "",
+    "openai_status": ""
+  },
+  {
+    "entry_id": "gpt-5.2__low__zero_shot",
+    "domain": "tech",
+    "file": "data/classifications/batches/gpt-5.2__low__zero_shot/tech_part0018.jsonl",
+    "batch_id": "",
+    "openai_status": ""
+  },
+  {
+    "entry_id": "gpt-5.2__low__zero_shot",
+    "domain": "tech",
+    "file": "data/classifications/batches/gpt-5.2__low__zero_shot/tech_part0019.jsonl",
+    "batch_id": "",
+    "openai_status": ""
+  },
+  {
+    "entry_id": "gpt-5.2__low__zero_shot",
+    "domain": "tech",
+    "file": "data/classifications/batches/gpt-5.2__low__zero_shot/tech_part0020.jsonl",
+    "batch_id": "",
+    "openai_status": ""
+  },
+  {
+    "entry_id": "gpt-5.2__low__zero_shot",
+    "domain": "tech",
+    "file": "data/classifications/batches/gpt-5.2__low__zero_shot/tech_part0021.jsonl",
+    "batch_id": "",
+    "openai_status": ""
+  },
+  {
+    "entry_id": "gpt-5.2__low__zero_shot",
+    "domain": "tech",
+    "file": "data/classifications/batches/gpt-5.2__low__zero_shot/tech_part0022.jsonl",
+    "batch_id": "",
+    "openai_status": ""
+  },
+  {
+    "entry_id": "gpt-5.2__low__zero_shot",
+    "domain": "tech",
+    "file": "data/classifications/batches/gpt-5.2__low__zero_shot/tech_part0023.jsonl",
+    "batch_id": "",
+    "openai_status": ""
+  },
+  {
+    "entry_id": "gpt-5.2__low__zero_shot",
+    "domain": "tech",
+    "file": "data/classifications/batches/gpt-5.2__low__zero_shot/tech_part0024.jsonl",
+    "batch_id": "",
+    "openai_status": ""
+  },
+  {
+    "entry_id": "gpt-5.2__low__zero_shot",
+    "domain": "tech",
+    "file": "data/classifications/batches/gpt-5.2__low__zero_shot/tech_part0025.jsonl",
+    "batch_id": "",
+    "openai_status": ""
+  },
+  {
+    "entry_id": "gpt-5.2__low__zero_shot",
+    "domain": "tech",
+    "file": "data/classifications/batches/gpt-5.2__low__zero_shot/tech_part0026.jsonl",
+    "batch_id": "",
+    "openai_status": ""
+  },
+  {
+    "entry_id": "gpt-5.2__low__zero_shot",
+    "domain": "tech",
+    "file": "data/classifications/batches/gpt-5.2__low__zero_shot/tech_part0027.jsonl",
+    "batch_id": "",
+    "openai_status": ""
+  },
+  {
+    "entry_id": "gpt-5.2__low__zero_shot",
+    "domain": "tech",
+    "file": "data/classifications/batches/gpt-5.2__low__zero_shot/tech_part0028.jsonl",
+    "batch_id": "",
+    "openai_status": ""
+  }
+]
