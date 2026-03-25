@@ -1,30 +1,122 @@
 """
-push_batches.py — Submit JSONL batch files to OpenAI Batch API and update config.json
-with the returned batch IDs.
+push_batches.py — Submit JSONL part files to OpenAI Batch API and update config.json.
 
-Only entries with empty batch_id_sdg / batch_id_tech are submitted.
-Config is updated in-place after each successful submission so progress is not lost
-if the script is interrupted.
+Queue-based workflow (recommended):
+  --build   builds all part files and writes data/classifications/queue.json
+  --push    submits the next pending part; checks all prior batches are completed first
+  --push --file <path>   manual override: submit one specific file
 
-Usage (called from run.py or imported):
-    from src.classifications.push_batches import push_all
-    push_all("src/classifications/config.json")
-    push_all(..., filter_entry="4o-tot", filter_domain="sdg-a")
+Queue item schema:
+  {
+    "entry_id":      "gpt-4o__tot",
+    "domain":        "sdg_a",
+    "file":          "data/classifications/batches/gpt-4o__tot/sdg_a_part0001.jsonl",
+    "batch_id":      "",          # empty = not yet submitted
+    "openai_status": ""           # synced from OpenAI when polled
+  }
+
+Config (config.json) is kept in sync:
+  batch_ids_sdg_a / _b / _c / _tech  →  {file_path: batch_id}
 """
 
+import json
+import glob
 from pathlib import Path
 
 from openai import OpenAI
 
-from src.classifications.batch_builder import load_config, save_config, jsonl_path
+from src.classifications.batch_builder import (
+    load_config,
+    save_config,
+    part_glob,
+    _count_input_tokens,
+    TokenCounter,
+    TOKEN_LIMIT,
+)
 
 COMPLETION_WINDOW = "24h"
 ENDPOINT          = "/v1/chat/completions"
 OUT_BASE          = "data/classifications/batches"
+QUEUE_PATH        = "data/classifications/queue.json"
 
+SDG_DOMAINS = (
+    ("sdg_a", "batch_ids_sdg_a"),
+    ("sdg_b", "batch_ids_sdg_b"),
+    ("sdg_c", "batch_ids_sdg_c"),
+    ("tech",  "batch_ids_tech"),
+)
+
+# Terminal states — a batch in one of these does not block the queue
+_DONE_STATUSES = {"completed", "failed", "expired", "cancelled"}
+
+
+# ── Queue I/O ──────────────────────────────────────────────────────────────────
+
+def load_queue(queue_path: str = QUEUE_PATH) -> list[dict]:
+    p = Path(queue_path)
+    if not p.exists():
+        return []
+    return json.loads(p.read_text(encoding="utf-8"))
+
+
+def save_queue(queue: list[dict], queue_path: str = QUEUE_PATH) -> None:
+    p = Path(queue_path)
+    p.parent.mkdir(parents=True, exist_ok=True)
+    p.write_text(json.dumps(queue, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
+
+
+def rebuild_queue(
+    config_path: str = "src/classifications/config.json",
+    out_base: str    = OUT_BASE,
+    queue_path: str  = QUEUE_PATH,
+) -> None:
+    """
+    Scan disk for all part files, rebuild queue preserving existing batch_ids/statuses.
+    Called automatically after --build.
+    """
+    config   = load_config(config_path)
+    existing = {item["file"]: item for item in load_queue(queue_path)}
+
+    # Also pull batch_ids already recorded in config (for migration / manual pushes)
+    config_batch_map: dict[str, str] = {}
+    for entry in config:
+        for _, id_key in SDG_DOMAINS:
+            for fp, bid in (entry.get(id_key) or {}).items():
+                if bid:
+                    config_batch_map[fp] = bid
+
+    new_queue: list[dict] = []
+    for entry in config:
+        for domain, _ in SDG_DOMAINS:
+            for path in part_glob(out_base, entry["id"], domain):
+                key = str(path)
+                if key in existing:
+                    item = dict(existing[key])
+                    # Sync batch_id from config if queue entry is missing it
+                    if not item.get("batch_id") and config_batch_map.get(key):
+                        item["batch_id"] = config_batch_map[key]
+                else:
+                    bid = config_batch_map.get(key, "")
+                    item = {
+                        "entry_id":      entry["id"],
+                        "domain":        domain,
+                        "file":          key,
+                        "batch_id":      bid,
+                        "openai_status": "",
+                    }
+                new_queue.append(item)
+
+    save_queue(new_queue, queue_path)
+
+    n_pending   = sum(1 for i in new_queue if not i["batch_id"])
+    n_submitted = sum(1 for i in new_queue if i["batch_id"])
+    print(f"[OK] Queue saved → {queue_path}")
+    print(f"     {len(new_queue)} part(s) total  |  {n_pending} pending  |  {n_submitted} submitted")
+
+
+# ── OpenAI helpers ─────────────────────────────────────────────────────────────
 
 def _submit_file(client: OpenAI, path: Path) -> tuple[str, str]:
-    """Upload a JSONL file and create a batch. Returns (file_id, batch_id)."""
     with open(path, "rb") as f:
         file_obj = client.files.create(file=f, purpose="batch")
     batch = client.batches.create(
@@ -35,104 +127,271 @@ def _submit_file(client: OpenAI, path: Path) -> tuple[str, str]:
     return file_obj.id, batch.id
 
 
-SDG_DOMAINS = (
-    ("sdg_a", "batch_id_sdg_a"),
-    ("sdg_b", "batch_id_sdg_b"),
-    ("sdg_c", "batch_id_sdg_c"),
-    ("tech",  "batch_id_tech"),
-)
+def _poll_status(client: OpenAI, batch_id: str) -> str:
+    try:
+        b = client.batches.retrieve(batch_id).model_dump()
+        return (b.get("status") or "").lower()
+    except Exception as e:
+        print(f"  [WARN] Could not poll {batch_id}: {e}")
+        return ""
 
+
+# ── Sync queue item → config ───────────────────────────────────────────────────
+
+def _sync_to_config(file_path: str, batch_id: str, config: list[dict], config_path: str) -> None:
+    """Write batch_id for file_path into config[entry][id_key] and save."""
+    for i, entry in enumerate(config):
+        for domain, id_key in SDG_DOMAINS:
+            parts = part_glob(OUT_BASE, entry["id"], domain)
+            if any(str(p) == file_path for p in parts):
+                submitted = dict(entry.get(id_key) or {})
+                submitted[file_path] = batch_id
+                config[i][id_key]    = submitted
+                save_config(config_path, config)
+                return
+
+
+# ── Queue-based push (next pending) ───────────────────────────────────────────
+
+def push_next(
+    config_path: str = "src/classifications/config.json",
+    out_base: str    = OUT_BASE,
+    queue_path: str  = QUEUE_PATH,
+) -> None:
+    """
+    Submit the next pending part file in the queue.
+
+    Before submitting:
+      1. Polls OpenAI to refresh statuses of any in-progress batches ahead in the queue.
+      2. Checks all prior parts are in a terminal state (completed/failed/expired).
+         - If any are still in_progress → waits and prints status.
+         - If any failed/expired → warns and stops (use --push --file to skip ahead).
+      3. Submits the next pending part and saves queue + config.
+    """
+    queue = load_queue(queue_path)
+    if not queue:
+        print("[INFO] No queue found. Run --build first.")
+        return
+
+    # Index of first pending item
+    first_pending = next((i for i, item in enumerate(queue) if not item["batch_id"]), None)
+
+    if first_pending is None:
+        n_done = sum(1 for item in queue if item.get("openai_status") == "completed")
+        print(f"[INFO] All {len(queue)} part(s) have been submitted ({n_done} completed).")
+        print("       Run --check to monitor status, --collect when all complete.")
+        return
+
+    prior = queue[:first_pending]
+
+    # ── Refresh in-progress batches ────────────────────────────────────────────
+    in_progress = [item for item in prior
+                   if item["batch_id"] and item["openai_status"] not in _DONE_STATUSES]
+
+    if in_progress:
+        client  = OpenAI()
+        changed = False
+        print(f"Refreshing {len(in_progress)} in-progress batch(es)...")
+        for item in in_progress:
+            new_status = _poll_status(client, item["batch_id"])
+            if new_status and new_status != item["openai_status"]:
+                print(f"  {Path(item['file']).name}: {item['openai_status'] or '?'} → {new_status}")
+                item["openai_status"] = new_status
+                changed = True
+            else:
+                print(f"  {Path(item['file']).name}: {item['openai_status'] or new_status or 'unknown'}")
+        if changed:
+            save_queue(queue, queue_path)
+
+    # ── Check blockers ─────────────────────────────────────────────────────────
+    still_running = [item for item in prior
+                     if item["batch_id"] and item["openai_status"] not in _DONE_STATUSES]
+    if still_running:
+        print(f"\n[WAIT] {len(still_running)} batch(es) still in progress:")
+        for item in still_running:
+            print(f"       {Path(item['file']).name}  batch_id={item['batch_id']}  status={item['openai_status'] or 'in_progress'}")
+        print("\nRun --push again once they complete.")
+        return
+
+    bad = [item for item in prior
+           if item["batch_id"] and item["openai_status"] in ("failed", "expired", "cancelled")]
+    if bad:
+        print(f"\n[ERR] {len(bad)} batch(es) did not complete successfully:")
+        for item in bad:
+            print(f"      {Path(item['file']).name}  batch_id={item['batch_id']}  status={item['openai_status']}")
+        print("\nResolve these before continuing.")
+        print("Use --push --file <path> to manually submit a specific part if needed.")
+        return
+
+    # ── Submit next pending ────────────────────────────────────────────────────
+    next_item = queue[first_pending]
+    path      = Path(next_item["file"])
+
+    if not path.exists():
+        print(f"[ERR] Part file not found: {path}")
+        print("      Run --build to recreate it.")
+        return
+
+    client = OpenAI() if not in_progress else client  # reuse if already created above
+    client = OpenAI()
+    file_id, batch_id = _submit_file(client, path)
+
+    next_item["batch_id"]      = batch_id
+    next_item["openai_status"] = "validating"
+    save_queue(queue, queue_path)
+
+    config = load_config(config_path)
+    _sync_to_config(str(path), batch_id, config, config_path)
+
+    remaining = sum(1 for item in queue[first_pending + 1:] if not item["batch_id"])
+    print(f"\n[OK]  Submitted: {path.name}")
+    print(f"      entry={next_item['entry_id']}  domain={next_item['domain']}")
+    print(f"      file_id={file_id}  batch_id={batch_id}")
+    print(f"\n      {remaining} part(s) still pending in queue.")
+    if remaining > 0:
+        print("      Run --push again once this batch completes.")
+
+
+# ── Manual single-file push ────────────────────────────────────────────────────
+
+def push_file(
+    path_str: str,
+    config_path: str = "src/classifications/config.json",
+    out_base: str    = OUT_BASE,
+    queue_path: str  = QUEUE_PATH,
+) -> None:
+    """Submit one specific part file; update both config.json and queue.json."""
+    path = Path(path_str)
+    if not path.exists():
+        print(f"[ERR] File not found: {path}")
+        return
+
+    client         = OpenAI()
+    file_id, batch_id = _submit_file(client, path)
+    print(f"[OK]   {path.name} → file_id={file_id}  batch_id={batch_id}")
+
+    # Update config
+    config = load_config(config_path)
+    _sync_to_config(str(path), batch_id, config, config_path)
+    print(f"[OK]   Config updated: {config_path}")
+
+    # Update queue
+    queue   = load_queue(queue_path)
+    path_str_norm = str(path)
+    for item in queue:
+        if item["file"] == path_str_norm or Path(item["file"]).resolve() == path.resolve():
+            item["batch_id"]      = batch_id
+            item["openai_status"] = "validating"
+            save_queue(queue, queue_path)
+            print(f"[OK]   Queue updated: {queue_path}")
+            break
+
+
+# ── List (from queue) ──────────────────────────────────────────────────────────
+
+def list_batches(
+    config_path: str = "src/classifications/config.json",
+    out_base: str    = OUT_BASE,
+    queue_path: str  = QUEUE_PATH,
+) -> None:
+    """Print the queue in order with token estimates and submission status."""
+    queue = load_queue(queue_path)
+    if not queue:
+        print("[INFO] No queue found. Run --build first.")
+        return
+
+    tc   = TokenCounter()
+    rows = []
+    for pos, item in enumerate(queue, 1):
+        path = Path(item["file"])
+        n_req = n_tok = 0
+        if path.exists():
+            with open(path, encoding="utf-8") as f:
+                for line in f:
+                    line = line.strip()
+                    if not line:
+                        continue
+                    try:
+                        obj = json.loads(line)
+                        n_req += 1
+                        n_tok += _count_input_tokens(obj, tc)
+                    except Exception:
+                        pass
+
+        bid    = item.get("batch_id", "")
+        status = item.get("openai_status", "")
+        if not bid:
+            display = "PENDING"
+        elif status:
+            display = status
+        else:
+            display = f"submitted ({bid[:16]}...)"
+
+        rows.append((pos, item["entry_id"], item["domain"], path.name, n_req, n_tok, display))
+
+    w_entry = max(len(r[1]) for r in rows)
+    w_file  = max(len(r[3]) for r in rows)
+    w_stat  = max(len(r[6]) for r in rows)
+    hdr = (f"{'#':>4}  {'ENTRY':<{w_entry}}  {'DOM':<5}  {'FILE':<{w_file}}"
+           f"  {'REQS':>7}  {'~TOKENS':>10}  STATUS")
+    sep = "-" * len(hdr)
+    print(f"\n{hdr}\n{sep}")
+    for pos, entry_id, domain, fname, n_req, n_tok, status in rows:
+        print(f"{pos:>4}  {entry_id:<{w_entry}}  {domain:<5}  {fname:<{w_file}}"
+              f"  {n_req:>7,}  {n_tok:>10,}  {status}")
+    print(sep)
+
+    n_pending   = sum(1 for item in queue if not item["batch_id"])
+    n_submitted = sum(1 for item in queue if item["batch_id"] and item["openai_status"] not in _DONE_STATUSES)
+    n_done      = sum(1 for item in queue if item.get("openai_status") == "completed")
+    print(f"\n{len(queue)} parts total  |  {n_pending} pending  |  {n_submitted} in-progress  |  {n_done} completed")
+    print(f"Tier 1 batch queue limit: {TOKEN_LIMIT:,} tokens per batch")
+
+
+# ── Legacy: push all at once (kept for --entry / --domain filtering) ───────────
 
 def _norm(s: str) -> str:
-    """Normalise a filter token: lowercase, replace hyphens with underscores."""
     return s.lower().replace("-", "_")
 
+def _entry_matches(entry_id: str, f: str | None) -> bool:
+    return not f or _norm(f) in _norm(entry_id)
 
-def _entry_matches(entry_id: str, filter_entry: str | None) -> bool:
-    """True if filter_entry is a substring of the normalised entry id, or no filter set."""
-    if not filter_entry:
-        return True
-    return _norm(filter_entry) in _norm(entry_id)
-
-
-def _domain_matches(domain: str, filter_domain: str | None) -> bool:
-    """True if filter_domain matches the domain exactly (after normalisation), or no filter set."""
-    if not filter_domain:
-        return True
-    return _norm(filter_domain) == _norm(domain)
-
-
-def push_entry(
-    client: OpenAI,
-    entry: dict,
-    out_base: str         = OUT_BASE,
-    filter_domain: str | None = None,
-) -> dict:
-    """
-    Submit sdg_a.jsonl, sdg_b.jsonl, sdg_c.jsonl, and tech.jsonl for one config entry.
-    Pass filter_domain to submit only that domain.
-    Returns the updated entry dict (with batch_ids filled in).
-    """
-    entry_id = entry["id"]
-
-    for domain, id_key in SDG_DOMAINS:
-        if not _domain_matches(domain, filter_domain):
-            continue
-
-        if entry.get(id_key):
-            print(f"[SKIP] {entry_id}/{domain} — batch_id already set: {entry[id_key]}")
-            continue
-
-        path = jsonl_path(out_base, entry_id, domain)
-        if not path.exists():
-            print(f"[WARN] {entry_id}/{domain} — JSONL not found at {path}. Run --build first.")
-            continue
-
-        file_id, batch_id = _submit_file(client, path)
-        entry[id_key] = batch_id
-        print(f"[OK]   {entry_id}/{domain} → file_id={file_id}  batch_id={batch_id}")
-
-    return entry
-
-
-def _is_pending(entry: dict, filter_domain: str | None = None) -> bool:
-    return any(
-        not entry.get(id_key)
-        for domain, id_key in SDG_DOMAINS
-        if _domain_matches(domain, filter_domain)
-    )
-
+def _domain_matches(domain: str, f: str | None) -> bool:
+    return not f or _norm(f) == _norm(domain)
 
 def push_all(
-    config_path: str      = "src/classifications/config.json",
-    out_base: str         = OUT_BASE,
+    config_path: str          = "src/classifications/config.json",
+    out_base: str             = OUT_BASE,
+    queue_path: str           = QUEUE_PATH,
     filter_entry: str | None  = None,
     filter_domain: str | None = None,
 ) -> None:
-    """
-    Submit pending entries and update config.json with batch IDs.
-
-    filter_entry  — substring match against config entry id (e.g. "4o-tot", "high-cot").
-    filter_domain — exact domain to submit (e.g. "sdg-a", "tech"). Omit to submit all.
-    """
+    """Submit all pending parts at once (filtered). Bypasses queue ordering."""
     config = load_config(config_path)
     client = OpenAI()
-
-    scoped = [e for e in config if _entry_matches(e["id"], filter_entry)]
-    if not scoped:
-        print(f"No config entries matched filter '{filter_entry}'. Available: {[e['id'] for e in config]}")
-        return
-
-    pending = [e for e in scoped if _is_pending(e, filter_domain)]
-    label   = f"entry='{filter_entry or 'all'}'  domain='{filter_domain or 'all'}'"
-    print(f"Filter: {label}")
-    print(f"Entries pending submission: {len(pending)} / {len(scoped)}")
+    queue  = load_queue(queue_path)
+    q_map  = {item["file"]: item for item in queue}
 
     for i, entry in enumerate(config):
         if not _entry_matches(entry["id"], filter_entry):
             continue
-        if _is_pending(entry, filter_domain):
-            config[i] = push_entry(client, entry, out_base, filter_domain)
-            save_config(config_path, config)
+        for domain, id_key in SDG_DOMAINS:
+            if not _domain_matches(domain, filter_domain):
+                continue
+            submitted = dict(entry.get(id_key) or {})
+            for path in part_glob(out_base, entry["id"], domain):
+                key = str(path)
+                if submitted.get(key):
+                    print(f"[SKIP] {path.name} — already submitted")
+                    continue
+                file_id, batch_id = _submit_file(client, path)
+                submitted[key] = batch_id
+                print(f"[OK]   {path.name} → batch_id={batch_id}")
+                if key in q_map:
+                    q_map[key]["batch_id"]      = batch_id
+                    q_map[key]["openai_status"] = "validating"
+            config[i][id_key] = submitted
+        save_config(config_path, config)
 
+    save_queue(list(q_map.values()), queue_path)
     print("\nDone. Run --check to monitor status.")
