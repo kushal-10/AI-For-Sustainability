@@ -242,12 +242,45 @@ def collect_entry(
 # ── Collect all ────────────────────────────────────────────────────────────────
 
 def collect_all(
-    config_path: str  = "src/classifications/config.json",
-    results_base: str = RESULTS_BASE,
-    force: bool       = False,
+    config_path: str     = "src/classifications/config.json",
+    results_base: str    = RESULTS_BASE,
+    force: bool          = False,
+    batch_id: str | None = None,
 ) -> None:
     config = load_config(config_path)
     client = OpenAI()
+
+    if batch_id:
+        # Find which entry + domain owns this batch ID, then re-collect just that domain.
+        domain_keys = (
+            ("sdg_a", "batch_ids_sdg_a"),
+            ("sdg_b", "batch_ids_sdg_b"),
+            ("sdg_c", "batch_ids_sdg_c"),
+            ("tech",  "batch_ids_tech"),
+        )
+        match = None
+        for entry in config:
+            for domain, id_key in domain_keys:
+                if batch_id in (entry.get(id_key) or {}).values():
+                    match = (entry, domain, id_key)
+                    break
+            if match:
+                break
+
+        if not match:
+            print(f"[ERR] Batch ID {batch_id!r} not found in config.")
+            return
+
+        entry, domain, _ = match
+        print(f"Found {batch_id!r} in entry={entry['id']!r}, domain={domain!r} — re-collecting with force=True\n")
+        # Build a single-domain entry view so collect_entry only processes that domain
+        single = {k: entry.get(k) for k in ("id", "batch_ids_sdg_a", "batch_ids_sdg_b", "batch_ids_sdg_c", "batch_ids_tech")}
+        for dk, dkey in domain_keys:
+            if dk != domain:
+                single[dkey] = {}
+        collect_entry(client, single, results_base, force=True)
+        print("\nDone.")
+        return
 
     submitted = [
         e for e in config

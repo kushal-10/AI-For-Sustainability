@@ -1,191 +1,90 @@
 #!/usr/bin/env python3
 """
-run.py — CLI to build, push, check, collect, and cancel JSONL batch files.
+run.py — Build, push, check, and collect OpenAI batch classifications.
 
 Usage:
     python3 src/classifications/run.py --build
-    python3 src/classifications/run.py --push
-    python3 src/classifications/run.py --push --model gpt-4o__tot
-    python3 src/classifications/run.py --push --model gpt-4o__tot --domain sdg-a
-    python3 src/classifications/run.py --push --file data/classifications/batches/entry/sdg_a_part0001.jsonl
-    python3 src/classifications/run.py --list
+    python3 src/classifications/run.py --build  --model gpt-4o__tot
+    python3 src/classifications/run.py --push   --model gpt-4o__tot
     python3 src/classifications/run.py --check
-    python3 src/classifications/run.py --check --watch 30
-    python3 src/classifications/run.py --cancel
-
---push runs an autonomous loop:
-    submit one part → poll every 2 min → collect results → submit next part → ...
-
-    Each unit is one JSONL part file (e.g. sdg_a_part0012.jsonl).
-    State is persisted in data/classifications/queue.json, so Ctrl+C is safe —
-    re-run --push to resume from where you left off.
-
-    --poll-interval  Override the 120 s default check interval.
-    --model ENTRY_ID Filter the loop to a specific config entry (e.g. gpt-4o__tot).
-    --domain DOMAIN  Filter the loop to one domain (sdg-a, sdg-b, sdg-c, tech).
-    --file PATH      Manual override: submit one specific file only (no loop).
-
-Tier 1 limits (900,000 token batch queue):
-    --build splits each domain into numbered part files.
-    --list  shows all parts with token counts and submission status.
+    python3 src/classifications/run.py --check  --batch batch_abc123
+    python3 src/classifications/run.py --collect
+    python3 src/classifications/run.py --collect --batch batch_abc123
+    python3 src/classifications/run.py --collect --model gpt-4o__tot --part sdg_a
 """
 
 import argparse
-from openai import OpenAI
-from src.classifications.batch_builder import build_all, load_config, save_config
-from src.classifications.push_batches import push_all, push_file, list_batches, run_queue_loop
+from src.classifications.batch_builder import build_all
+from src.classifications.push_batches import push_all
 from src.classifications.poll_batches import poll_all
 from src.classifications.collect_results import collect_all
 
-CONFIG   = "src/classifications/config.json"
-SDG_DB   = "data/dbs/sdg_hits.duckdb"
-TECH_DB  = "data/dbs/tech_hits.duckdb"
-OUT_BASE = "data/classifications/batches"
+# ── Paths ──────────────────────────────────────────────────────────────────────
+CONFIG       = "src/classifications/config.json"
+SDG_DB       = "data/dbs/sdg_hits.duckdb"
+TECH_DB      = "data/dbs/tech_hits.duckdb"
+OUT_BASE     = "data/classifications/batches"
+RESULTS_BASE = "data/classifications/results_v2"
 
-CANCELLABLE = {"validating", "in_progress"}
-
-
-def cancel_all(config_path: str = CONFIG) -> None:
-    """Cancel all in-progress/validating batches in config and clear their IDs."""
-    config  = load_config(config_path)
-    client  = OpenAI()
-    cleared = 0
-
-    for i, entry in enumerate(config):
-        for domain, id_key in (
-            ("sdg_a", "batch_ids_sdg_a"),
-            ("sdg_b", "batch_ids_sdg_b"),
-            ("sdg_c", "batch_ids_sdg_c"),
-            ("tech",  "batch_ids_tech"),
-        ):
-            batch_map = entry.get(id_key) or {}
-            for file_path, bid in list(batch_map.items()):
-                if not bid:
-                    continue
-                try:
-                    b      = client.batches.retrieve(bid).model_dump()
-                    status = (b.get("status") or "").lower()
-                except Exception as e:
-                    print(f"[ERR]  {entry['id']}/{domain} — could not retrieve {bid}: {e}")
-                    continue
-
-                import os
-                part_name = os.path.basename(file_path)
-                if status in CANCELLABLE:
-                    try:
-                        client.batches.cancel(bid)
-                        print(f"[CANCELLED] {entry['id']}/{domain}/{part_name} — {bid}  (was: {status})")
-                    except Exception as e:
-                        print(f"[ERR]  {entry['id']}/{domain}/{part_name} — cancel failed: {e}")
-                        continue
-                    batch_map[file_path] = ""
-                    cleared += 1
-                else:
-                    print(f"[SKIP] {entry['id']}/{domain}/{part_name} — {bid}  status={status} (not cancellable)")
-
-            config[i][id_key] = batch_map
-
-    save_config(config_path, config)
-    print(f"\nCancelled {cleared} batch(es). Cleared IDs written to {config_path}.")
+# ── Batch size limits (update when tier changes) ───────────────────────────────
+TOKEN_LIMIT = 50_000_000   # input tokens per part file (queue capacity, not file size)
+REQ_LIMIT   =     10_000  # max requests per part file (~70 MB at ~7 KB/request, under 100 MB limit)
 
 
 def main():
     ap = argparse.ArgumentParser(
-        description="Build, push, list, check, and/or cancel JSONL batch files.",
+        description="Build, push, check, and collect OpenAI batch classifications.",
         formatter_class=argparse.RawDescriptionHelpFormatter,
     )
-    # ── Actions ────────────────────────────────────────────────────────────────
-    ap.add_argument("--build",    action="store_true", help="Build JSONL part files from DuckDB")
-    ap.add_argument("--push",     action="store_true", help="Push JSONL part files to OpenAI Batch API")
-    ap.add_argument("--list",     action="store_true", help="List part files with token counts and submission status")
-    ap.add_argument("--check",    action="store_true", help="Check status of submitted batches")
-    ap.add_argument("--collect",  action="store_true", help="Download completed batch results")
-    ap.add_argument("--cancel",   action="store_true", help="Cancel all in-progress/validating batches")
-    # ── Per-file push ──────────────────────────────────────────────────────────
-    ap.add_argument("--file",         default=None, metavar="PATH",
-                                      help="With --push: submit one specific part file (no loop)")
-    ap.add_argument("--model",        default=None, metavar="ENTRY_ID",
-                                      help="Filter --push loop to one config entry, e.g. gpt-4o__tot")
-    ap.add_argument("--poll-interval", type=int, default=120, metavar="SEC",
-                                      help="Seconds between status checks during --push loop (default: 120)")
-    # ── Filters (--build / --push) ─────────────────────────────────────────────
-    ap.add_argument("--entry",    default=None, metavar="SUBSTR",
-                                  help="Filter by config entry id (substring match)")
-    ap.add_argument("--domain",   default=None, metavar="DOMAIN",
-                                  help="Filter by domain: 'sdg-a', 'sdg-b', 'sdg-c', 'tech'")
-    # ── Misc ───────────────────────────────────────────────────────────────────
-    ap.add_argument("--watch",    type=int, default=0, metavar="SEC",
-                                  help="Auto-refresh --check every SEC seconds (0 = once)")
-    ap.add_argument("--force",    action="store_true",
-                                  help="With --collect: re-download already-collected results")
-    ap.add_argument("--config",   default=CONFIG,   help="Path to config.json")
-    ap.add_argument("--sdg-db",   default=SDG_DB,   help="Path to sdg_hits.duckdb")
-    ap.add_argument("--tech-db",  default=TECH_DB,  help="Path to tech_hits.duckdb")
-    ap.add_argument("--out-base", default=OUT_BASE, help="Base output dir for JSONL files")
-    ap.add_argument("--sdg-table",  default="sdg_hits_classified")
-    ap.add_argument("--tech-table", default="tech_hits_classified")
+    ap.add_argument("--build",   action="store_true", help="Build JSONL part files from DuckDB")
+    ap.add_argument("--push",    action="store_true", help="Submit batches (autonomous loop)")
+    ap.add_argument("--check",   action="store_true", help="Check status of submitted batches")
+    ap.add_argument("--collect", action="store_true", help="Download completed batch results")
+
+    ap.add_argument("--model",  default=None, metavar="ENTRY_ID",
+                                help="Filter to one config entry, e.g. gpt-4o__tot")
+    ap.add_argument("--part",   default=None, metavar="DOMAIN",
+                                help="Filter to one domain: sdg_a, sdg_b, sdg_c, tech")
+    ap.add_argument("--batch",  default=None, metavar="BATCH_ID",
+                                help="Filter --check / --collect to a specific batch ID")
+
     args = ap.parse_args()
 
-    if not any([args.build, args.push, args.list, args.check, args.collect, args.cancel]):
-        ap.error("Specify at least one action: --build, --push, --list, --check, --collect, --cancel")
-
-    if args.file and not args.push:
-        ap.error("--file can only be used with --push")
-    if args.model and not args.push:
-        ap.error("--model can only be used with --push")
+    if not any([args.build, args.push, args.check, args.collect]):
+        ap.error("Specify at least one action: --build, --push, --check, --collect")
 
     if args.build:
         build_all(
-            config_path   = args.config,
-            sdg_db        = args.sdg_db,
-            tech_db       = args.tech_db,
-            out_base      = args.out_base,
-            sdg_table     = args.sdg_table,
-            tech_table    = args.tech_table,
-            filter_entry  = args.entry,
-            filter_domain = args.domain,
+            config_path   = CONFIG,
+            sdg_db        = SDG_DB,
+            tech_db       = TECH_DB,
+            out_base      = OUT_BASE,
+            filter_entry  = args.model,
+            filter_domain = args.part,
+            token_limit   = TOKEN_LIMIT,
+            req_limit     = REQ_LIMIT,
         )
 
     if args.push:
-        if args.file:
-            # Manual single-file submit, no loop
-            push_file(
-                path_str    = args.file,
-                config_path = args.config,
-                out_base    = args.out_base,
-            )
-        else:
-            # Autonomous loop: submit → poll → collect → repeat
-            run_queue_loop(
-                config_path   = args.config,
-                out_base      = args.out_base,
-                results_base  = "data/classifications/results",
-                poll_interval = args.poll_interval,
-                filter_entry  = args.model,
-                filter_domain = args.domain,
-            )
-
-    if args.list:
-        list_batches(
-            config_path = args.config,
-            out_base    = args.out_base,
+        push_all(
+            config_path   = CONFIG,
+            out_base      = OUT_BASE,
+            filter_entry  = args.model,
+            filter_domain = args.part,
         )
 
     if args.check:
         poll_all(
-            config_path = args.config,
-            watch       = args.watch,
+            config_path = CONFIG,
+            batch_id    = args.batch,
         )
 
     if args.collect:
         collect_all(
-            config_path  = args.config,
-            results_base = "data/classifications/results",
-            force        = args.force,
+            config_path  = CONFIG,
+            results_base = RESULTS_BASE,
+            batch_id     = args.batch,
         )
-
-    if args.cancel:
-        cancel_all(config_path = args.config)
 
 
 if __name__ == "__main__":
