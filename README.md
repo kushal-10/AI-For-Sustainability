@@ -13,7 +13,7 @@ python3 -m venv .venv
 source .venv/bin/activate
 pip install -r requirements.txt
 source prepare_path.sh   # sets PYTHONPATH to include repo root
-export OPENAI_API_KEY=your_key
+export OPENAI_API_KEY=your_key # Or alternatively, setup in .env
 ```
 
 ## Versions
