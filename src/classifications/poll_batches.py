@@ -110,12 +110,14 @@ def _fetch_rows(client: OpenAI, config: list[dict]) -> list[dict]:
 # ── Public API ─────────────────────────────────────────────────────────────────
 
 def poll_all(
-    config_path: str = "src/classifications/config.json",
-    watch: int       = 0,
+    config_path: str    = "src/classifications/config.json",
+    watch: int          = 0,
+    batch_id: str | None = None,
 ) -> None:
     """
     Print a status table for all submitted batches in config.
     If watch > 0, auto-refresh every `watch` seconds (Ctrl+C to stop).
+    If batch_id is given, only show that one batch.
     """
     config = load_config(config_path)
     client = OpenAI()
@@ -129,16 +131,22 @@ def poll_all(
         print("No batch IDs found in config. Run --push first.")
         return
 
+    def _filtered_rows():
+        rows = _fetch_rows(client, config)
+        if batch_id:
+            rows = [r for r in rows if r["batch_id"] == batch_id]
+            if not rows:
+                print(f"[WARN] Batch ID {batch_id!r} not found in config.")
+        return rows
+
     if watch > 0:
         try:
             while True:
                 os.system("clear" if os.name != "nt" else "cls")
-                rows = _fetch_rows(client, config)
-                _print_table(rows)
+                _print_table(_filtered_rows())
                 print(f"Watching — refresh every {watch}s. Ctrl+C to exit.")
                 time.sleep(watch)
         except KeyboardInterrupt:
             return
     else:
-        rows = _fetch_rows(client, config)
-        _print_table(rows)
+        _print_table(_filtered_rows())

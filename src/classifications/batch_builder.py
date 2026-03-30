@@ -289,6 +289,8 @@ def build_for_entry(
     sdg_table: str            = "sdg_hits_classified",
     tech_table: str           = "tech_hits_classified",
     filter_domain: str | None = None,
+    token_limit: int          = TOKEN_LIMIT,
+    req_limit: int            = REQ_LIMIT,
 ) -> None:
     """
     Build sdg_a, sdg_b, sdg_c, and tech part files for one config entry.
@@ -325,7 +327,8 @@ def build_for_entry(
                 continue
             filtered = [c for c in cols if c in available_cols]
             parts = build_jsonl(df_sdg, filtered, id_col, passage_col,
-                                lbl, sdg_sys_prompt, model, reasoning_effort, out_dir)
+                                lbl, sdg_sys_prompt, model, reasoning_effort, out_dir,
+                                token_limit=token_limit, req_limit=req_limit)
             total = sum(1 for _ in open(parts[0]) if _.strip()) if parts else 0
             print(f"[OK]   {entry_id}/{lbl} ({span}) — {len(parts)} part(s)")
             for p in parts:
@@ -342,7 +345,8 @@ def build_for_entry(
             df_tech, id_col_t, passage_col_t = _load_db(tech_db, tech_table)
             tech_cols = [c for c in df_tech.columns if c in TECH_HIT_COLS]
             parts = build_jsonl(df_tech, tech_cols, id_col_t, passage_col_t,
-                                "tech", tech_sys_prompt, model, reasoning_effort, out_dir)
+                                "tech", tech_sys_prompt, model, reasoning_effort, out_dir,
+                                token_limit=token_limit, req_limit=req_limit)
             print(f"[OK]   {entry_id}/tech — {len(parts)} part(s)")
             for p in parts:
                 n = sum(1 for _ in open(p) if _.strip())
@@ -364,6 +368,8 @@ def build_all(
     tech_table: str           = "tech_hits_classified",
     filter_entry: str | None  = None,
     filter_domain: str | None = None,
+    token_limit: int          = TOKEN_LIMIT,
+    req_limit: int            = REQ_LIMIT,
 ) -> None:
     config = load_config(config_path)
     scoped = [e for e in config if not filter_entry or _norm(filter_entry) in _norm(e["id"])]
@@ -373,8 +379,8 @@ def build_all(
 
     label = f"entry='{filter_entry or 'all'}'  domain='{filter_domain or 'all'}'"
     print(f"Config: {len(scoped)} / {len(config)} entries  (filter: {label})")
-    print(f"Limits: {TOKEN_LIMIT:,} tokens / {REQ_LIMIT:,} requests per part file\n")
+    print(f"Limits: {token_limit:,} tokens / {req_limit:,} requests per part file\n")
     for entry in scoped:
         build_for_entry(entry, sdg_db, tech_db, out_base, sdg_table, tech_table,
-                        filter_domain=filter_domain)
+                        filter_domain=filter_domain, token_limit=token_limit, req_limit=req_limit)
     print("\nDone. Run --push to submit to OpenAI (one part file at a time recommended).")
