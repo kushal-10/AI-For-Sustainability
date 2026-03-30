@@ -6,8 +6,9 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 End-to-end LLM pipeline to classify corporate sustainability disclosures (passages from German firm reports) as **Symbolic** vs **Substantive** mentions of SDGs and AI/Tech topics, grounded in legitimacy theory (Ashforth & Gibbs 1990, Suchman 1995).
 
-**v2.0.0** (current `main` branch): Starts from pre-computed SDG/Tech keyword hits in DuckDB. Focuses on classification, post-processing, evaluation, and analysis.
-**v1.0.0** (`v1-full-pipeline` branch): Full pipeline from raw PDFs through OCR/splitting to DuckDB. Legacy source code lives in `src_legacy/`.
+**v2.2.0** (current `main` branch): New `src/classifications/` module with autonomous batch loop. `src_legacy/` fully removed.
+**v2.0.0** (`v2.0.0` tag): Starts from pre-computed SDG/Tech keyword hits in DuckDB. Focuses on classification, post-processing, evaluation, and analysis.
+**v1.0.0** (`v1-full-pipeline` branch): Full pipeline from raw PDFs through OCR/splitting to DuckDB.
 
 **Dataset:** 153 German companies, 1,420 sustainability reports (multi-year). Passages split at semantic boundaries. Languages: German (`de`), English (`en`).
 
@@ -24,35 +25,39 @@ export OPENAI_API_KEY=your_key
 ## Repository Structure
 
 ```
-├── kw_data/              # Keyword JSON files for SDG and Tech categories
 ├── data/
-│   ├── dbs/              # DuckDB files (hits + classified)
-│   ├── batches/          # JSONL batch files and OpenAI results
-│   └── exports/          # Final CSV outputs
-├── src/                  # v2.0.0 new code (analysis utilities)
+│   ├── dbs/                    # DuckDB files (hits + classified)
+│   ├── classifications/
+│   │   ├── batches/            # JSONL batch part files per model/domain
+│   │   └── results_v2/         # Collected classification results
+│   └── exports/                # Final CSV outputs
+├── src/
+│   ├── classifications/        # v2.2.0 — batch classification pipeline
+│   │   ├── run.py              # Unified CLI (--build/--push/--check/--collect)
+│   │   ├── batch_builder.py    # DuckDB → JSONL part files
+│   │   ├── push_batches.py     # Autonomous submit loop
+│   │   ├── poll_batches.py     # Batch status polling
+│   │   ├── collect_results.py  # Result collection
+│   │   ├── prompts.py          # Prompt definitions
+│   │   └── analyze_results.py  # Result analysis utilities
 │   └── analysis/
-│       └── explore_dbs.py
-├── src_legacy/           # Full pipeline code (used in both v1 and v2)
-│   ├── preprocessing/    # PDF → text → passages (v1.0 only)
-│   ├── filtering/        # Keyword matching → DuckDB (v1.0 only)
-│   ├── gpt_classifier/   # OpenAI Batch API classification
-│   ├── postprocessing/   # Result merging and aggregation
-│   ├── analysis/         # Cost estimation, filtering stats
-│   └── utils/            # File I/O, firm metadata, token utilities
+│       └── explore_dbs.py      # Explore classified DuckDBs
 └── tests/
-    └── prompts/          # Prompt strategy evaluation
+    └── prompts/                # Prompt strategy evaluation
 ```
 
 ## Pipeline Commands
 
 ### 1. Classification (Batch Submission)
 ```bash
-python3 src_legacy/gpt_classifier/batches.py -- build    # DuckDB → JSONL batch files
-python3 src_legacy/gpt_classifier/batches.py -- submit   # submit to OpenAI Batch API (24h window)
-python3 src_legacy/gpt_classifier/poll_batches.py        # monitor batch status
-python3 src_legacy/gpt_classifier/collect_results.py     # collect completed results → results_all_map.json
-python3 src_legacy/gpt_classifier/fix_results.py         # fix JSON parse errors in results (if needed)
+python3 src/classifications/run.py --build                          # DuckDB → JSONL batch part files
+python3 src/classifications/run.py --push [--model <id>]            # autonomous submit → poll → collect loop
+python3 src/classifications/run.py --check [--batch <id>]           # check batch status
+python3 src/classifications/run.py --collect [--model <id> --part <domain>]  # collect results
 ```
+
+Config: `src/classifications/config.json` (gitignored)
+Queue state: `data/classifications/queue.json` (gitignored)
 
 ### 2. Post-Processing
 ```bash
@@ -81,13 +86,8 @@ python3 tests/prompts/analysis.py                        # compute accuracy vs g
 ```
 
 ### Legacy: Full Pipeline from PDFs (v1.0.0 — `v1-full-pipeline` branch)
-```bash
-python3 src_legacy/preprocessing/pdf2text.py      # PDF → text
-python3 src_legacy/preprocessing/splitter.py      # text → passages
-python3 src_legacy/filtering/sdg_filter.py        # passages → sdg_hits.duckdb
-python3 src_legacy/filtering/tech_filter.py       # passages → tech_hits.duckdb
-# then follow classification + post-processing steps above
-```
+Checkout the `v1-full-pipeline` branch for the full PDF → DuckDB preprocessing pipeline.
+The `src_legacy/` directory has been removed from `main` as of v2.2.0.
 
 ## Architecture
 
@@ -95,12 +95,11 @@ python3 src_legacy/filtering/tech_filter.py       # passages → tech_hits.duckd
 ```
 data/dbs/sdg_hits.duckdb
 data/dbs/tech_hits.duckdb
-  → batches.py: DuckDB → JSONL (10k items/file, data/batches/{sdgs,tech}/)
-  → OpenAI Batch API (gpt-4.1-mini, 24h window)
-  → collect_results.py: → data/batches/results/results_all_map.json
-  → fix_results.py: (if needed) → results_fixed_map.json
-  → apply_classifications.py: → data/dbs/{sdg,tech}_hits_classified.duckdb
-  → build_company_year_summary.py + merge_kw_filter.py: → data/exports/*.csv
+  → batch_builder.py: DuckDB → JSONL part files (data/classifications/batches/<model>/<domain>_partNNNN.jsonl)
+  → push_batches.py: autonomous loop → OpenAI Batch API (configured model, 24h window)
+  → collect_results.py: → data/classifications/results_v2/<model>/<domain>/
+  → (post-processing TBD) → data/dbs/{sdg,tech}_hits_classified.duckdb
+  → data/exports/*.csv
 ```
 
 ### Database Schema
@@ -121,26 +120,14 @@ data/dbs/tech_hits.duckdb
 
 ### Key Modules
 
-**`src_legacy/filtering/`** — Keyword filtering pipeline (v1.0 only)
-- `base_filter.py`: Abstract base — DuckDB Appender pattern, wildcard regex expansion (`*` → `\w*` suffix, `.*` span), language detection via pycld3/langdetect
-- `sdg_filter.py` / `tech_filter.py`: Concrete filters for SDG (17 categories) and Tech (4 categories)
-- Keywords: `kw_data/keywords_{sdg,tech}_{en,de}.json`
-
-**`src_legacy/gpt_classifier/`** — OpenAI batch classification
-- `objects.py`: `SYS_PROMPT_SDG`, `SYS_PROMPT_TECH`, `create_batch_object_sdg()`, `create_batch_object_tech()`
-- `batches.py`: Orchestrates DuckDB → JSONL → OpenAI Batch API (model: `gpt-4.1-mini`, temperature=0, max_tokens=150)
-- `fix_results.py`: Detects and salvages JSON parse errors in batch responses
-- Custom IDs: `sdg||<global_id>` or `tech||<global_id>`
-
-**`src_legacy/postprocessing/`** — Result aggregation and cleanup
-- Produces `{sdg,tech}_hits_classified.duckdb` and firm-year CSV summaries (`data/exports/`)
-
-**`src_legacy/analysis/`** — Metrics and cost estimation
-- `cost.py`: Token cost estimation using tiktoken `o200k_base` encoding
-
-**`src_legacy/utils/`** — Shared utilities
-- `firms.py`: Metadata for 153 companies, 1,420 report files
-- `tokens.py`: Token counting with tiktoken (`o200k_base` → `cl100k_base` → heuristic fallback)
+**`src/classifications/`** — OpenAI batch classification pipeline (v2.2.0)
+- `run.py`: Unified CLI entry point (`--build`, `--push`, `--check`, `--collect`); optional `--model` / `--part` / `--batch` filters
+- `batch_builder.py`: DuckDB → JSONL part files, split by Tier 1 limits (50M tokens, 10k requests per part)
+- `push_batches.py`: Autonomous submit loop — submits, polls, collects, and repeats per batch part
+- `poll_batches.py`: Polls OpenAI Batch API status for pending batches
+- `collect_results.py`: Downloads completed batch results to `data/classifications/results_v2/`
+- `prompts.py`: Prompt definitions (system prompts for SDG and Tech classification)
+- `config.json` / `queue.json`: Runtime state (gitignored — local only)
 
 **`src/analysis/explore_dbs.py`** — Explore classified DBs
 - Prints column names, row counts, company/year/language breakdown, classification counts per category, sample passages
