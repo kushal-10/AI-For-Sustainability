@@ -3,8 +3,8 @@
     "entry_id": "gpt-4o__tot",
     "domain": "sdg_a",
     "file": "data/classifications/batches/gpt-4o__tot/sdg_a_part0001.jsonl",
-    "batch_id": "",
-    "openai_status": ""
+    "batch_id": "batch_69c9ec1cfa1081909b6349b466a33836",
+    "openai_status": "validating"
   },
   {
     "entry_id": "gpt-4o__tot",
@@ -122,8 +122,8 @@
     "entry_id": "gpt-4o__tot",
     "domain": "sdg_b",
     "file": "data/classifications/batches/gpt-4o__tot/sdg_b_part0001.jsonl",
-    "batch_id": "",
-    "openai_status": ""
+    "batch_id": "batch_69c9d7b403f081909fdb33f1c7139e42",
+    "openai_status": "validating"
   },
   {
     "entry_id": "gpt-4o__tot",

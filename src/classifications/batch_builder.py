@@ -276,6 +276,11 @@ def _load_db(db_path: str, table: str) -> tuple[pd.DataFrame, str, str]:
     passage_col = next((c for c in ("passage", "sentence", "text", "content") if c in cols), None)
     if passage_col is None:
         raise ValueError(f"No passage column found in {db_path} ({table})")
+    before = len(df)
+    df = df.drop_duplicates(subset=[id_col], keep="first")
+    dropped = before - len(df)
+    if dropped:
+        print(f"[WARN] {db_path} ({table}): dropped {dropped} duplicate {id_col} row(s)")
     return df, id_col, passage_col
 
 

@@ -14,9 +14,8 @@ Usage:
 """
 
 import argparse
-from openai import OpenAI
-from src.classifications.batch_builder import build_all, load_config
-from src.classifications.push_batches import run_queue_loop
+from src.classifications.batch_builder import build_all
+from src.classifications.push_batches import push_all
 from src.classifications.poll_batches import poll_all
 from src.classifications.collect_results import collect_all
 
@@ -28,8 +27,8 @@ OUT_BASE     = "data/classifications/batches"
 RESULTS_BASE = "data/classifications/results_v2"
 
 # ── Batch size limits (update when tier changes) ───────────────────────────────
-TOKEN_LIMIT = 4_500_000   # input tokens per part file
-REQ_LIMIT   = 50_000      # max requests per part file
+TOKEN_LIMIT = 50_000_000   # input tokens per part file (queue capacity, not file size)
+REQ_LIMIT   =     10_000  # max requests per part file (~70 MB at ~7 KB/request, under 100 MB limit)
 
 
 def main():
@@ -67,10 +66,9 @@ def main():
         )
 
     if args.push:
-        run_queue_loop(
+        push_all(
             config_path   = CONFIG,
             out_base      = OUT_BASE,
-            results_base  = RESULTS_BASE,
             filter_entry  = args.model,
             filter_domain = args.part,
         )
