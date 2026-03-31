@@ -24,7 +24,7 @@ CONFIG       = "src/classifications/config.json"
 SDG_DB       = "data/dbs/sdg_hits.duckdb"
 TECH_DB      = "data/dbs/tech_hits.duckdb"
 OUT_BASE     = "data/classifications/batches"
-RESULTS_BASE = "data/classifications/results_v2"
+RESULTS_BASE = "data/classifications/results"
 
 # ── Batch size limits (update when tier changes) ───────────────────────────────
 TOKEN_LIMIT = 50_000_000   # input tokens per part file (queue capacity, not file size)
