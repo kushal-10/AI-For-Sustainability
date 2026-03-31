@@ -27,7 +27,8 @@ export OPENAI_API_KEY=your_key
 | v1.0.0 | `v1-full-pipeline` | Full pipeline from raw PDFs → OCR → splitting → DuckDB → classification |
 | v2.0.0 | `v2.0.0` | Starts from pre-computed SDG/Tech keyword hits; new prompts and evaluation |
 | v2.1.0 | `v2.1.0` | gpt-5.2 classification results and prompt evaluation |
-| v2.2.0 | `main` | New `src/classifications/` module with autonomous batch loop; `src_legacy/` removed |
+| v2.2.0 | `v2.2.0` | New `src/classifications/` module with autonomous batch loop; `src_legacy/` removed |
+| v2.3.0 | `main` | New `src/postprocessing/` module: fix results, generate classified DBs, aggregate to CSV |
 
 To reproduce the full PDF → DuckDB preprocessing, checkout the `v1-full-pipeline` branch.
 
