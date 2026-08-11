@@ -9,16 +9,22 @@ in order to preserve their legitimacy and license to operate (Suchman 1995; Dowl
 Pfeffer 1975). Ashforth and Gibbs (1990) identify two distinct approaches by which firms
 manage this legitimacy:
 
-- SYMBOLIC: The firm appears to conform to social norms without actually transforming
-  its organizational activities. Disclosures are impression-managing signals — vague,
-  aspirational, or policy-framed — that project commitment without evidence of concrete
-  operational change.
+- SYMBOLIC: Disclosure that expresses general aspirations, values, policies, commitments,
+  intentions, or positive claims concerning an SDG without providing specific and
+  potentially verifiable evidence of implementation, resource commitment,
+  operational change, measurable progress, or achieved outcomes. Its informational
+  content therefore remains primarily declarative or impression-oriented.
 
-- SUBSTANTIVE: The firm makes actual, concrete changes in organizational actions to
-  conform to prevailing social norms. Disclosures reflect genuine "role performance" —
-  adapting operations and activities to reach the performance level expected by
-  stakeholders, evidenced by measurable outcomes, KPIs, budgets, timelines, named
-  projects, or third-party assurance.
+- SUBSTANTIVE: Disclosure that provides specific and potentially verifiable evidence of a firm's
+  SDG-related implementation, resource commitment, operational change, measurable
+  target, progress, or achieved outcome. Such disclosure goes beyond general
+  statements of intent by describing what the firm has done, is doing, or has
+  measurably achieved in relation to the relevant SDG.
+
+  Potential indicators include implemented actions, quantified KPIs, allocated
+  budgets or resources, specific timelines, measurable targets, progress against
+  a baseline, achieved outcomes, named projects accompanied by implementation
+  evidence, and third-party certification, audit, or assurance.
 
 Input:
 - Passage (plain text).
@@ -43,16 +49,22 @@ in order to preserve their legitimacy and license to operate (Suchman 1995; Dowl
 Pfeffer 1975). Ashforth and Gibbs (1990) identify two distinct approaches by which firms
 manage this legitimacy:
 
-- SYMBOLIC: The firm appears to conform to social norms without actually transforming
-  its organizational activities. Disclosures are impression-managing signals — vague,
-  aspirational, or policy-framed — that project commitment without evidence of concrete
-  operational change.
+- SYMBOLIC: Disclosure that expresses general aspirations, values, policies, commitments,
+  intentions, or positive claims concerning an SDG without providing specific and
+  potentially verifiable evidence of implementation, resource commitment,
+  operational change, measurable progress, or achieved outcomes. Its informational
+  content therefore remains primarily declarative or impression-oriented.
 
-- SUBSTANTIVE: The firm makes actual, concrete changes in organizational actions to
-  conform to prevailing social norms. Disclosures reflect genuine "role performance" —
-  adapting operations and activities to reach the performance level expected by
-  stakeholders, evidenced by measurable outcomes, KPIs, budgets, timelines, named
-  projects, or third-party assurance.
+- SUBSTANTIVE: Disclosure that provides specific and potentially verifiable evidence of a firm's
+  SDG-related implementation, resource commitment, operational change, measurable
+  target, progress, or achieved outcome. Such disclosure goes beyond general
+  statements of intent by describing what the firm has done, is doing, or has
+  measurably achieved in relation to the relevant SDG.
+
+  Potential indicators include implemented actions, quantified KPIs, allocated
+  budgets or resources, specific timelines, measurable targets, progress against
+  a baseline, achieved outcomes, named projects accompanied by implementation
+  evidence, and third-party certification, audit, or assurance.
 
 Input:
 - Passage (plain text).
@@ -107,17 +119,22 @@ in order to preserve their legitimacy and license to operate (Suchman 1995; Dowl
 Pfeffer 1975). Ashforth and Gibbs (1990) identify two distinct approaches by which firms
 manage this legitimacy:
 
-- SYMBOLIC: The firm appears to conform to social norms without actually transforming
-  its organizational activities. Disclosures are impression-managing signals — vague,
-  aspirational, or policy-framed — that project commitment without evidence of concrete
-  operational change.
+- SYMBOLIC: Disclosure that expresses general aspirations, values, policies, commitments,
+  intentions, or positive claims concerning an SDG without providing specific and
+  potentially verifiable evidence of implementation, resource commitment,
+  operational change, measurable progress, or achieved outcomes. Its informational
+  content therefore remains primarily declarative or impression-oriented.
 
-- SUBSTANTIVE: The firm makes actual, concrete changes in organizational actions to
-  conform to prevailing social norms. Disclosures reflect genuine "role performance" —
-  adapting operations and activities to reach the performance level expected by
-  stakeholders, evidenced by measurable outcomes, KPIs, budgets, timelines, named
-  projects, or third-party assurance.
+- SUBSTANTIVE: Disclosure that provides specific and potentially verifiable evidence of a firm's
+  SDG-related implementation, resource commitment, operational change, measurable
+  target, progress, or achieved outcome. Such disclosure goes beyond general
+  statements of intent by describing what the firm has done, is doing, or has
+  measurably achieved in relation to the relevant SDG.
 
+  Potential indicators include implemented actions, quantified KPIs, allocated
+  budgets or resources, specific timelines, measurable targets, progress against
+  a baseline, achieved outcomes, named projects accompanied by implementation
+  evidence, and third-party certification, audit, or assurance.
 Input:
 - Passage (plain text).
 - SDG_HITS: JSON with regex patterns that ALREADY MATCHED the passage. Do NOT re-match yourself.
@@ -170,17 +187,22 @@ in order to preserve their legitimacy and license to operate (Suchman 1995; Dowl
 Pfeffer 1975). Ashforth and Gibbs (1990) identify two distinct approaches by which firms
 manage this legitimacy:
 
-- SYMBOLIC: The firm appears to conform to social norms without actually transforming
-  its organizational activities. Disclosures are impression-managing signals — vague,
-  aspirational, or policy-framed — that project commitment without evidence of concrete
-  operational change.
+- SYMBOLIC: Disclosure that expresses general aspirations, values, policies, commitments,
+  intentions, or positive claims concerning an SDG without providing specific and
+  potentially verifiable evidence of implementation, resource commitment,
+  operational change, measurable progress, or achieved outcomes. Its informational
+  content therefore remains primarily declarative or impression-oriented.
+  
+- SUBSTANTIVE: Disclosure that provides specific and potentially verifiable evidence of a firm's
+  SDG-related implementation, resource commitment, operational change, measurable
+  target, progress, or achieved outcome. Such disclosure goes beyond general
+  statements of intent by describing what the firm has done, is doing, or has
+  measurably achieved in relation to the relevant SDG.
 
-- SUBSTANTIVE: The firm makes actual, concrete changes in organizational actions to
-  conform to prevailing social norms. Disclosures reflect genuine "role performance" —
-  adapting operations and activities to reach the performance level expected by
-  stakeholders, evidenced by measurable outcomes, KPIs, budgets, timelines, named
-  projects, or third-party assurance.
-
+  Potential indicators include implemented actions, quantified KPIs, allocated
+  budgets or resources, specific timelines, measurable targets, progress against
+  a baseline, achieved outcomes, named projects accompanied by implementation
+  evidence, and third-party certification, audit, or assurance.
 Input:
 - Passage (plain text).
 - SDG_HITS: JSON with regex patterns that ALREADY MATCHED the passage. Do NOT re-match yourself.
